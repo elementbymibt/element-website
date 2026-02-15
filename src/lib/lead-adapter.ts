@@ -1,8 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { Pool } from "pg";
-
 type LeadSource = "newsletter" | "guide" | "documentation";
 
 export type LeadPayload = {
@@ -101,16 +99,21 @@ class JsonLeadAdapter implements LeadAdapter {
   }
 }
 
+type QueryablePool = {
+  query: (text: string, values?: unknown[]) => Promise<unknown>;
+};
+
 declare global {
-  var __elementPgPool: Pool | undefined;
+  var __elementPgPool: QueryablePool | undefined;
+  var __elementPgAdapter: PostgresLeadAdapter | undefined;
 }
 
 class PostgresLeadAdapter implements LeadAdapter {
   private initialized = false;
 
-  constructor(private readonly pool: Pool) {}
+  constructor(private readonly pool: QueryablePool) {}
 
-  static fromEnv() {
+  static async fromEnv() {
     const connectionString =
       process.env.DATABASE_URL?.trim() || process.env.POSTGRES_URL?.trim();
 
@@ -118,7 +121,12 @@ class PostgresLeadAdapter implements LeadAdapter {
       return null;
     }
 
+    if (globalThis.__elementPgAdapter) {
+      return globalThis.__elementPgAdapter;
+    }
+
     if (!globalThis.__elementPgPool) {
+      const { Pool } = await import("pg");
       globalThis.__elementPgPool = new Pool({
         connectionString,
         ssl: connectionString.includes("localhost")
@@ -127,7 +135,9 @@ class PostgresLeadAdapter implements LeadAdapter {
       });
     }
 
-    return new PostgresLeadAdapter(globalThis.__elementPgPool);
+    globalThis.__elementPgAdapter = new PostgresLeadAdapter(globalThis.__elementPgPool);
+
+    return globalThis.__elementPgAdapter;
   }
 
   async saveLead(payload: LeadPayload) {
@@ -285,13 +295,28 @@ class CompositeAdapter implements LeadAdapter {
   }
 }
 
-const primaryAdapter = PostgresLeadAdapter.fromEnv() ?? new JsonLeadAdapter();
+const jsonAdapter = new JsonLeadAdapter();
 const resendAdapter = ResendAdapter.fromEnv();
 
-const adapters: LeadAdapter[] = [primaryAdapter];
+async function buildCompositeAdapter() {
+  const postgresAdapter = await PostgresLeadAdapter.fromEnv();
 
-if (resendAdapter) {
-  adapters.push(resendAdapter);
+  const adapters: LeadAdapter[] = [postgresAdapter ?? jsonAdapter];
+
+  if (resendAdapter) {
+    adapters.push(resendAdapter);
+  }
+
+  return new CompositeAdapter(adapters);
 }
 
-export const leadAdapter: LeadAdapter = new CompositeAdapter(adapters);
+export const leadAdapter: LeadAdapter = {
+  async saveLead(payload) {
+    const adapter = await buildCompositeAdapter();
+    await adapter.saveLead(payload);
+  },
+  async saveContact(payload) {
+    const adapter = await buildCompositeAdapter();
+    await adapter.saveContact(payload);
+  },
+};
