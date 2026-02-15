@@ -27,8 +27,9 @@ export function ContactForm() {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
 
     const payload = {
       name: String(formData.get("name") ?? ""),
@@ -64,7 +65,7 @@ export function ContactForm() {
       setStatus("success");
       setMessage(result.message || "Hvala. Vaša poruka je uspešno poslata.");
       trackEvent("contact_submit");
-      event.currentTarget.reset();
+      form.reset();
       router.push("/thank-you?type=contact");
     } catch {
       setStatus("error");

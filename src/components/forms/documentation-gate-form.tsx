@@ -18,8 +18,9 @@ export function DocumentationGateForm() {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const email = String(formData.get("email") ?? "");
     const website = String(formData.get("website") ?? "");
 
@@ -52,7 +53,7 @@ export function DocumentationGateForm() {
       setMessage(result.message || "Pristup je odobren.");
       setDownloadUrl(result.downloadUrl);
       trackEvent("lead_submit", { source: "documentation" });
-      event.currentTarget.reset();
+      form.reset();
     } catch {
       setStatus("error");
       setMessage("Došlo je do greške. Pokušajte ponovo.");

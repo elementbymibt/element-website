@@ -33,8 +33,9 @@ export function NewsletterForm({
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const email = String(formData.get("email") ?? "");
     const website = String(formData.get("website") ?? "");
 
@@ -66,7 +67,7 @@ export function NewsletterForm({
       setStatus("success");
       setMessage(result.message || "Hvala. Vaša prijava je uspešno poslata.");
       trackEvent("lead_submit", { source });
-      event.currentTarget.reset();
+      form.reset();
 
       if (redirectOnSuccess) {
         router.push("/thank-you?type=lead");
