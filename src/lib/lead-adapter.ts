@@ -36,7 +36,9 @@ interface LeadAdapter {
   saveContact(payload: ContactPayload): Promise<void>;
 }
 
-const STORE_PATH = path.join(process.cwd(), "data", "leads.json");
+const STORE_PATH = process.env.VERCEL
+  ? "/tmp/element-leads.json"
+  : path.join(process.cwd(), "data", "leads.json");
 
 const defaultStore: LeadStore = {
   newsletter: [],
