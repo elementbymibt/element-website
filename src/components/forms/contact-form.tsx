@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 import { trackEvent } from "@/src/lib/analytics";
 
@@ -20,7 +19,6 @@ type ContactApiResponse = {
 };
 
 export function ContactForm() {
-  const router = useRouter();
   const [pending, setPending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -66,7 +64,9 @@ export function ContactForm() {
       setMessage(result.message || "Hvala. Vaša poruka je uspešno poslata.");
       trackEvent("contact_submit");
       form.reset();
-      router.push("/thank-you?type=contact");
+      if (typeof window !== "undefined") {
+        window.location.assign("/thank-you?type=contact");
+      }
     } catch {
       setStatus("error");
       setMessage("Došlo je do greške. Pokušajte ponovo.");

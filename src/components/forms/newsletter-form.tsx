@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 import { trackEvent } from "@/src/lib/analytics";
 import { cn } from "@/src/lib/utils";
@@ -26,7 +25,6 @@ export function NewsletterForm({
   className,
   redirectOnSuccess = false,
 }: NewsletterFormProps) {
-  const router = useRouter();
   const [pending, setPending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -70,7 +68,9 @@ export function NewsletterForm({
       form.reset();
 
       if (redirectOnSuccess) {
-        router.push("/thank-you?type=lead");
+        if (typeof window !== "undefined") {
+          window.location.assign("/thank-you?type=lead");
+        }
       }
     } catch {
       setStatus("error");
