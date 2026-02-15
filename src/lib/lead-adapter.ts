@@ -303,7 +303,11 @@ const resendAdapter = ResendAdapter.fromEnv();
 async function buildCompositeAdapter() {
   const postgresAdapter = await PostgresLeadAdapter.fromEnv();
 
-  const adapters: LeadAdapter[] = [postgresAdapter ?? jsonAdapter];
+  const adapters: LeadAdapter[] = [jsonAdapter];
+
+  if (postgresAdapter) {
+    adapters.unshift(postgresAdapter);
+  }
 
   if (resendAdapter) {
     adapters.push(resendAdapter);
