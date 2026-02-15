@@ -234,7 +234,7 @@ class ResendAdapter implements LeadAdapter {
   }
 
   async saveLead(payload: LeadPayload) {
-    await fetch("https://api.resend.com/emails", {
+    const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -243,14 +243,21 @@ class ResendAdapter implements LeadAdapter {
       body: JSON.stringify({
         from: "ÉLÉMENT Leads <onboarding@resend.dev>",
         to: this.to,
+        reply_to: payload.email,
         subject: `[Lead] ${payload.source}`,
         text: `Novi lead: ${payload.email} (${payload.source})`,
       }),
     });
+
+    if (!response.ok) {
+      const details = await response.text().catch(() => "resend_error");
+      console.error("[resend] lead email failed", details);
+      throw new Error(`Resend lead email failed: ${details}`);
+    }
   }
 
   async saveContact(payload: ContactPayload) {
-    await fetch("https://api.resend.com/emails", {
+    const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -259,6 +266,7 @@ class ResendAdapter implements LeadAdapter {
       body: JSON.stringify({
         from: "ÉLÉMENT Contact <onboarding@resend.dev>",
         to: this.to,
+        reply_to: payload.email,
         subject: `[Kontakt] ${payload.name}`,
         text: [
           `Ime: ${payload.name}`,
@@ -270,6 +278,12 @@ class ResendAdapter implements LeadAdapter {
         ].join("\n"),
       }),
     });
+
+    if (!response.ok) {
+      const details = await response.text().catch(() => "resend_error");
+      console.error("[resend] contact email failed", details);
+      throw new Error(`Resend contact email failed: ${details}`);
+    }
   }
 }
 

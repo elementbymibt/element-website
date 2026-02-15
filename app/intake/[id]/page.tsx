@@ -13,9 +13,9 @@ export async function generateMetadata(props: PageProps) {
   const params = await props.params;
 
   return buildMetadata({
-    title: `Intake ${params.id}`,
+    title: `Upitnik ${params.id}`,
     description:
-      "Ultimate Client Intake Wizard - kompletan dizajn brief sa hard i soft preferencijama.",
+      "Nastavite klijentski upitnik i završite projektni brief.",
     path: `/intake/${params.id}`,
   });
 }

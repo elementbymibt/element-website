@@ -67,8 +67,8 @@ export async function POST(
         intake: result.intake,
         projectId,
       });
-    } catch {
-      // ignore
+    } catch (error) {
+      console.error("[intake] notifyIntakeSubmitted failed", error);
     }
 
     return NextResponse.json({

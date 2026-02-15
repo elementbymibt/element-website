@@ -17,6 +17,9 @@ export const metadata = buildMetadata({
 
 export default async function ContactPage() {
   const locale = await getCurrentLocale();
+  const instagramHandle = siteConfig.instagram
+    .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
+    .replace(/\/$/, "");
 
   return (
     <Container className="py-16 md:py-20">
@@ -45,7 +48,7 @@ export default async function ContactPage() {
                 rel="noreferrer noopener"
                 className="decoration-brand-gold underline underline-offset-4"
               >
-                @element.by.mibt
+                @{instagramHandle}
               </a>
             </li>
             <li>
@@ -55,6 +58,15 @@ export default async function ContactPage() {
                 className="decoration-brand-gold underline underline-offset-4"
               >
                 {siteConfig.email}
+              </a>
+            </li>
+            <li>
+              Telefon:{" "}
+              <a
+                href={`tel:${siteConfig.phone}`}
+                className="decoration-brand-gold underline underline-offset-4"
+              >
+                {siteConfig.phone}
               </a>
             </li>
             <li>

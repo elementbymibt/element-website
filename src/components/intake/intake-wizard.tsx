@@ -766,19 +766,21 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
         const result = (await response.json()) as SaveResponse | ApiError;
 
         if (!response.ok || result.status === "error") {
-          throw new Error(result.status === "error" ? result.message : "Autosave error.");
+          throw new Error(
+            result.status === "error"
+              ? result.message
+              : tx("Greška pri snimanju.", "Save error."),
+          );
         }
 
         setSaveState("saved");
         setLastSavedAt(result.savedAt);
       } catch (error) {
         setSaveState("error");
-        setSaveError(
-          error instanceof Error ? error.message : "Autosave trenutno nije uspeo.",
-        );
+        setSaveError(error instanceof Error ? error.message : tx("Snimanje nije uspelo.", "Save failed."));
       }
     },
-    [draft.id],
+    [draft.id, tx],
   );
 
   useEffect(() => {
@@ -985,7 +987,9 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
       <section className="border-brand-neutral-500/60 bg-brand-neutral-100 sticky top-20 z-40 rounded-3xl border p-5 shadow-sm md:p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-brand-gold text-xs tracking-[0.24em] uppercase">Ultimate Intake Wizard</p>
+            <p className="text-brand-gold text-xs tracking-[0.24em] uppercase">
+              {tx("Klijentski upitnik", "Client intake")}
+            </p>
             <h1 className="font-display text-brand-burgundy mt-2 text-2xl md:text-3xl">
               {stepTitles[step]}
             </h1>
@@ -1007,12 +1011,12 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
               )}
             >
               {saveState === "saved"
-                ? `${tx("Sačuvano u", "Saved at")} ${formatDateTime(lastSavedAt, locale)}`
+                ? `${tx("Sačuvano:", "Saved:")} ${formatDateTime(lastSavedAt, locale)}`
                 : saveState === "saving"
-                  ? tx("Autosave u toku...", "Autosaving...")
+                  ? tx("Snimanje...", "Saving...")
                   : saveState === "error"
-                    ? tx("Autosave greška", "Autosave error")
-                    : tx("Autosave spreman", "Autosave ready")}
+                    ? tx("Greška pri snimanju", "Save error")
+                    : tx("Spremno", "Ready")}
             </p>
             {saveError ? <p className="mt-1 text-red-700">{saveError}</p> : null}
           </div>
@@ -1029,40 +1033,46 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
             <StepTitle
               eyebrow={tx("Korak 0", "Step 0")}
               title={tx(
-                "Za 10-12 minuta do kompletnog design brief-a.",
-                "You are 10-12 minutes away from a complete design brief.",
+                "Za 10-12 minuta do jasnog brief-a.",
+                "In 10-12 minutes: a clear design brief.",
               )}
               description={tx(
-                "Sistem automatski čuva napredak, možete stati i nastaviti kasnije bez gubitka podataka.",
-                "Progress is saved automatically, and you can continue later without data loss.",
+                "Odgovorite na nekoliko pitanja o prostoru i preferencijama. Ako niste sigurni, uvek možete izabrati „Ne znam“.",
+                "Answer a few questions about your space and preferences. If unsure, you can always choose “I don’t know”.",
               )}
             />
 
             <div className="grid gap-4 md:grid-cols-3">
               <div className="border-brand-neutral-500/60 rounded-2xl border bg-brand-neutral-100 p-4">
-                <p className="text-brand-burgundy text-sm font-semibold">Hard data</p>
+                <p className="text-brand-burgundy text-sm font-semibold">
+                  {tx("Osnove projekta", "Project basics")}
+                </p>
                 <p className="text-brand-earth mt-2 text-xs">
                   {tx(
-                    "Dimenzije, budžet, prostorije i funkcionalni zahtevi.",
-                    "Dimensions, budget, room scope and functional requirements.",
+                    "Obim, dimenzije i ključna ograničenja, da sve postavimo na čvrste temelje.",
+                    "Scope, measurements and key constraints to set a solid foundation.",
                   )}
                 </p>
               </div>
               <div className="border-brand-neutral-500/60 rounded-2xl border bg-brand-neutral-100 p-4">
-                <p className="text-brand-burgundy text-sm font-semibold">Soft preferences</p>
+                <p className="text-brand-burgundy text-sm font-semibold">
+                  {tx("Stil i atmosfera", "Style & mood")}
+                </p>
                 <p className="text-brand-earth mt-2 text-xs">
                   {tx(
-                    "Stil, atmosfera, boje i rasveta kroz vizuelne kartice.",
-                    "Style, mood, palette and lighting through visual cards.",
+                    "Vizuelne kartice za stil, boje i rasvetu, uz diskretno vođenje.",
+                    "Visual cards for style, palette and lighting, with gentle guidance.",
                   )}
                 </p>
               </div>
               <div className="border-brand-neutral-500/60 rounded-2xl border bg-brand-neutral-100 p-4">
-                <p className="text-brand-burgundy text-sm font-semibold">Final confirmation</p>
+                <p className="text-brand-burgundy text-sm font-semibold">
+                  {tx("Finalni pregled", "Final review")}
+                </p>
                 <p className="text-brand-earth mt-2 text-xs">
                   {tx(
-                    "Pre submit-a dobijate pregled i detekciju mogućih kontradikcija.",
-                    "Before submit you get a full preview and contradiction checks.",
+                    "Pre slanja dobijate pregled svih izbora, uz proveru potencijalnih neslaganja.",
+                    "Before submit you get a full review of choices, plus a quick inconsistency check.",
                   )}
                 </p>
               </div>
@@ -1073,7 +1083,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
               onClick={() => void changeStep(1)}
               className="btn-primary inline-flex min-h-12 items-center justify-center rounded-full px-8 text-sm font-semibold"
             >
-              {tx("Pokreni wizard", "Start wizard")}
+              {tx("Krenimo", "Let’s begin")}
             </button>
           </div>
         ) : null}

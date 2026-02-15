@@ -102,7 +102,7 @@ export async function PATCH(
     return NextResponse.json(
       {
         status: "error",
-        message: "Autosave trenutno nije uspeo.",
+        message: "Snimanje trenutno nije uspelo.",
         fallback,
       },
       { status: 500 },

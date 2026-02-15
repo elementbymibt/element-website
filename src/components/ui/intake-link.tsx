@@ -25,7 +25,7 @@ export function IntakeLink({
       href="/intake/start"
       className={cn(
         "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition",
-        variant === "primary" ? "btn-primary" : "btn-secondary",
+        variant === "primary" ? "btn-primary" : "btn-secondary text-brand-burgundy",
         className,
       )}
       onClick={() => trackEvent("intake_click", { location: "cta" })}

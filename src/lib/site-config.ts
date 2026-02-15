@@ -25,8 +25,8 @@ export const siteConfig = {
   baseUrl,
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "https://calendly.com",
   email: "studio@element-design.rs",
-  phone: "+381 60 123 4567",
-  instagram: "https://instagram.com/element.by.mibt",
+  phone: "0659080995",
+  instagram: "https://www.instagram.com/element_by_mibt/",
   website: baseUrl,
   location: "Beograd, Srbija",
 };

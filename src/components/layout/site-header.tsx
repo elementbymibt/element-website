@@ -33,7 +33,7 @@ export function SiteHeader() {
       : [
           { href: "/", label: "Početna" },
           { href: "/portfolio", label: "Projekti" },
-          { href: "/intake/start", label: "Intake" },
+          { href: "/intake/start", label: "Upitnik" },
           { href: "/services", label: "Usluge" },
           { href: "/process", label: "Proces" },
           { href: "/about", label: "O nama" },
@@ -120,6 +120,7 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <IntakeLink
+            label={locale === "en" ? "Intake" : "Upitnik"}
             variant={transparentOnTop ? "secondary" : "secondary"}
             className={cn(
               "px-5 py-2.5 text-xs",

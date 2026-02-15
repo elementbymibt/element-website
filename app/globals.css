@@ -89,8 +89,8 @@ textarea {
 
 .btn-secondary {
   border: 1px solid color-mix(in oklab, var(--brand-gold) 45%, var(--brand-burgundy) 20%);
-  color: var(--brand-burgundy);
   background: transparent;
+  color: inherit;
 }
 
 .btn-secondary:hover {

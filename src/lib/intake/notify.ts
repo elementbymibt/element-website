@@ -1,19 +1,5 @@
 import type { IntakeDraft } from "@/src/lib/intake/types";
-
-function normalizeBaseUrl(input?: string) {
-  if (!input) {
-    return "https://element-website-seven.vercel.app";
-  }
-
-  const trimmed = input.trim();
-  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
-
-  try {
-    return new URL(withProtocol).toString().replace(/\/$/, "");
-  } catch {
-    return "https://element-website-seven.vercel.app";
-  }
-}
+import { siteConfig } from "@/src/lib/site-config";
 
 function formatMoney(value: number | null) {
   if (typeof value !== "number") {
@@ -34,7 +20,7 @@ export async function notifyIntakeSubmitted(input: {
     return { sent: false, reason: "missing_env" as const };
   }
 
-  const baseUrl = normalizeBaseUrl(process.env.NEXT_PUBLIC_SITE_URL);
+  const baseUrl = siteConfig.baseUrl;
   const projectUrl = `${baseUrl}/projects/${input.projectId}`;
   const intakeUrl = `${baseUrl}/intake/${input.intake.id}`;
   const subjectCity = input.intake.basics.city || "bez-grada";

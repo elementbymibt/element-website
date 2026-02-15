@@ -62,23 +62,24 @@ export default async function HomePage() {
               })}
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/portfolio"
-                className="btn-primary rounded-full px-7 py-3 text-sm font-semibold"
-              >
-                {textByLocale(locale, { sr: "Pogledajte projekte", en: "View projects" })}
-              </Link>
               <IntakeLink
                 label={textByLocale(locale, {
                   sr: "Popunite upitnik",
                   en: "Start intake",
                 })}
+                variant="primary"
                 className="rounded-full px-7 py-3 text-sm font-semibold"
               />
               <BookingLink
                 variant="secondary"
-                className="text-brand-neutral-100 hover:text-brand-neutral-100 rounded-full px-7 py-3 text-sm font-semibold"
+                className="text-brand-neutral-100 hover:text-brand-neutral-100 border-white/50 hover:bg-white/10 rounded-full px-7 py-3 text-sm font-semibold"
               />
+              <Link
+                href="/portfolio"
+                className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"
+              >
+                {textByLocale(locale, { sr: "Pogledajte projekte", en: "View projects" })}
+              </Link>
             </div>
           </FadeIn>
         </Container>

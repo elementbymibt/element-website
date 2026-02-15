@@ -69,7 +69,8 @@ export async function POST(request: Request) {
       status: "success",
       message: "Hvala. Vaša poruka je uspešno poslata.",
     });
-  } catch {
+  } catch (error) {
+    console.error("[contact] submit failed", error);
     return NextResponse.json(
       {
         status: "error",

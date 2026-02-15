@@ -26,7 +26,7 @@ export function BookingLink({
       rel="noreferrer noopener"
       className={cn(
         "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition",
-        variant === "primary" ? "btn-primary" : "btn-secondary",
+        variant === "primary" ? "btn-primary" : "btn-secondary text-brand-burgundy",
         className,
       )}
       onClick={() => trackEvent("booking_click", { location: "cta" })}
