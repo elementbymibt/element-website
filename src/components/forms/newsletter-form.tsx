@@ -1,13 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import {
-  initialLeadActionState,
-  submitGuideLead,
-  submitNewsletterLead,
-} from "@/src/actions/leads";
 import { trackEvent } from "@/src/lib/analytics";
 import { cn } from "@/src/lib/utils";
 
@@ -19,6 +14,11 @@ type NewsletterFormProps = {
   redirectOnSuccess?: boolean;
 };
 
+type LeadApiResponse = {
+  status: "success" | "error";
+  message: string;
+};
+
 export function NewsletterForm({
   source = "newsletter",
   buttonLabel = "Prijavite se",
@@ -27,24 +27,61 @@ export function NewsletterForm({
   redirectOnSuccess = false,
 }: NewsletterFormProps) {
   const router = useRouter();
-  const trackingRef = useRef(false);
-  const action = source === "guide" ? submitGuideLead : submitNewsletterLead;
-  const [state, formAction, pending] = useActionState(action, initialLeadActionState);
+  const [pending, setPending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (state.status === "success" && !trackingRef.current) {
-      trackingRef.current = true;
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") ?? "");
+    const website = String(formData.get("website") ?? "");
+
+    setPending(true);
+    setStatus("idle");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          website,
+          source,
+        }),
+      });
+
+      const result = (await response.json()) as LeadApiResponse;
+
+      if (!response.ok || result.status === "error") {
+        setStatus("error");
+        setMessage(result.message || "Došlo je do greške. Pokušajte ponovo.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(result.message || "Hvala. Vaša prijava je uspešno poslata.");
       trackEvent("lead_submit", { source });
+      event.currentTarget.reset();
 
       if (redirectOnSuccess) {
         router.push("/thank-you?type=lead");
       }
+    } catch {
+      setStatus("error");
+      setMessage("Došlo je do greške. Pokušajte ponovo.");
+    } finally {
+      setPending(false);
     }
-  }, [redirectOnSuccess, router, source, state.status]);
+  };
 
   return (
     <form
-      action={formAction}
+      onSubmit={onSubmit}
       className={cn("space-y-3", className)}
       aria-label="Lead forma"
     >
@@ -82,14 +119,14 @@ export function NewsletterForm({
         />
       </div>
 
-      {state.status === "error" ? (
+      {status === "error" ? (
         <p className="text-sm text-red-700" role="status">
-          {state.message}
+          {message}
         </p>
       ) : null}
-      {state.status === "success" && !redirectOnSuccess ? (
+      {status === "success" && !redirectOnSuccess ? (
         <p className="text-brand-green text-sm" role="status">
-          {state.message}
+          {message}
         </p>
       ) : null}
     </form>

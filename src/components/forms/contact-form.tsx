@@ -1,9 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { initialContactActionState, submitContactForm } from "@/src/actions/contact";
 import { trackEvent } from "@/src/lib/analytics";
 
 const budgetOptions = [
@@ -15,24 +14,68 @@ const budgetOptions = [
 
 const spaceTypeOptions = ["Stan", "Kuća", "Poslovni prostor", "Drugo"];
 
+type ContactApiResponse = {
+  status: "success" | "error";
+  message: string;
+};
+
 export function ContactForm() {
   const router = useRouter();
-  const trackingRef = useRef(false);
-  const [state, formAction, pending] = useActionState(
-    submitContactForm,
-    initialContactActionState,
-  );
+  const [pending, setPending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (state.status === "success" && !trackingRef.current) {
-      trackingRef.current = true;
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      message: String(formData.get("message") ?? ""),
+      budgetRange: String(formData.get("budgetRange") ?? ""),
+      spaceType: String(formData.get("spaceType") ?? ""),
+      website: String(formData.get("website") ?? ""),
+    };
+
+    setPending(true);
+    setStatus("idle");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as ContactApiResponse;
+
+      if (!response.ok || result.status === "error") {
+        setStatus("error");
+        setMessage(result.message || "Došlo je do greške. Pokušajte ponovo.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(result.message || "Hvala. Vaša poruka je uspešno poslata.");
       trackEvent("contact_submit");
+      event.currentTarget.reset();
       router.push("/thank-you?type=contact");
+    } catch {
+      setStatus("error");
+      setMessage("Došlo je do greške. Pokušajte ponovo.");
+    } finally {
+      setPending(false);
     }
-  }, [router, state.status]);
+  };
 
   return (
-    <form action={formAction} className="space-y-5" aria-label="Kontakt forma">
+    <form onSubmit={onSubmit} className="space-y-5" aria-label="Kontakt forma">
       <div className="grid gap-4 md:grid-cols-2">
         <div>
           <label
@@ -148,9 +191,9 @@ export function ContactForm() {
         />
       </div>
 
-      {state.status === "error" ? (
+      {status === "error" ? (
         <p className="text-sm text-red-700" role="status">
-          {state.message}
+          {message}
         </p>
       ) : null}
 

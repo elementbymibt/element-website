@@ -1,27 +1,69 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useState } from "react";
 
-import { initialLeadActionState, submitDocumentationLead } from "@/src/actions/leads";
 import { trackEvent } from "@/src/lib/analytics";
 
-export function DocumentationGateForm() {
-  const trackedRef = useRef(false);
-  const [state, formAction, pending] = useActionState(
-    submitDocumentationLead,
-    initialLeadActionState,
-  );
+type DocumentationApiResponse = {
+  status: "success" | "error";
+  message: string;
+  downloadUrl?: string;
+};
 
-  useEffect(() => {
-    if (state.status === "success" && !trackedRef.current) {
-      trackedRef.current = true;
+export function DocumentationGateForm() {
+  const [pending, setPending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const [downloadUrl, setDownloadUrl] = useState<string | undefined>(undefined);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") ?? "");
+    const website = String(formData.get("website") ?? "");
+
+    setPending(true);
+    setStatus("idle");
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          website,
+          source: "documentation",
+        }),
+      });
+
+      const result = (await response.json()) as DocumentationApiResponse;
+
+      if (!response.ok || result.status === "error") {
+        setStatus("error");
+        setMessage(result.message || "Došlo je do greške. Pokušajte ponovo.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(result.message || "Pristup je odobren.");
+      setDownloadUrl(result.downloadUrl);
       trackEvent("lead_submit", { source: "documentation" });
+      event.currentTarget.reset();
+    } catch {
+      setStatus("error");
+      setMessage("Došlo je do greške. Pokušajte ponovo.");
+    } finally {
+      setPending(false);
     }
-  }, [state.status]);
+  };
 
   return (
     <div className="border-brand-neutral-500 bg-brand-neutral-100 space-y-4 rounded-3xl border p-6 md:p-8">
-      <form action={formAction} className="space-y-3" aria-label="Forma za dokumentaciju">
+      <form onSubmit={onSubmit} className="space-y-3" aria-label="Forma za dokumentaciju">
         <label htmlFor="documentation-email" className="text-brand-earth text-sm">
           Email adresa
         </label>
@@ -56,17 +98,17 @@ export function DocumentationGateForm() {
         </div>
       </form>
 
-      {state.status === "error" ? (
+      {status === "error" ? (
         <p className="text-sm text-red-700" role="status">
-          {state.message}
+          {message}
         </p>
       ) : null}
 
-      {state.status === "success" && state.downloadUrl ? (
+      {status === "success" && downloadUrl ? (
         <div className="border-brand-gold/40 bg-brand-neutral-200 rounded-2xl border p-4">
-          <p className="text-brand-ink text-sm">{state.message}</p>
+          <p className="text-brand-ink text-sm">{message}</p>
           <a
-            href={state.downloadUrl}
+            href={downloadUrl}
             className="text-brand-burgundy decoration-brand-gold mt-3 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4"
             onClick={() => trackEvent("documentation_download", { file: "sample.pdf" })}
           >
