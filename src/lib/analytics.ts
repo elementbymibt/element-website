@@ -23,12 +23,16 @@ export function trackEvent(
     return;
   }
 
-  track(eventName, params);
+  try {
+    track(eventName, params);
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: eventName, ...params });
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: eventName, ...params });
 
-  if (typeof window.gtag === "function") {
-    window.gtag("event", eventName, params);
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
+    }
+  } catch {
+    // Analytics errors must never block primary UX flows.
   }
 }
