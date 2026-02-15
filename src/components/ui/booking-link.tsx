@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
 import { siteConfig } from "@/src/lib/site-config";
 import { cn } from "@/src/lib/utils";
@@ -11,10 +12,13 @@ type BookingLinkProps = {
 };
 
 export function BookingLink({
-  label = "Zakažite konsultacije",
+  label,
   className,
   variant = "primary",
 }: BookingLinkProps) {
+  const { locale } = useLocale();
+  const buttonLabel = label ?? (locale === "en" ? "Schedule consultation" : "Zakažite konsultacije");
+
   return (
     <a
       href={siteConfig.bookingUrl}
@@ -26,9 +30,9 @@ export function BookingLink({
         className,
       )}
       onClick={() => trackEvent("booking_click", { location: "cta" })}
-      aria-label="Otvorite eksterni booking link"
+      aria-label={locale === "en" ? "Open external booking link" : "Otvorite eksterni booking link"}
     >
-      {label}
+      {buttonLabel}
     </a>
   );
 }

@@ -6,6 +6,7 @@ import { ProjectCarousel } from "@/src/components/portfolio/project-carousel";
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { getProjectBySlug, projects } from "@/src/data/projects";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 type ProjectDetailPageProps = {
@@ -43,6 +44,7 @@ export async function generateMetadata({
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
+  const locale = await getCurrentLocale();
 
   if (!project) {
     notFound();
@@ -54,7 +56,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         href="/portfolio"
         className="text-brand-earth decoration-brand-gold text-sm underline underline-offset-4"
       >
-        ← Nazad na portfolio
+        {textByLocale(locale, { sr: "← Nazad na portfolio", en: "← Back to portfolio" })}
       </Link>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
@@ -75,7 +77,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
           <div>
             <h2 className="text-brand-gold text-sm tracking-[0.18em] uppercase">
-              Šta smo radili
+              {textByLocale(locale, { sr: "Šta smo radili", en: "What we delivered" })}
             </h2>
             <ul className="text-brand-ink mt-3 space-y-2 text-sm">
               {project.whatWeDid.map((item) => (
@@ -93,7 +95,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               href="/contact"
               className="btn-secondary inline-flex items-center rounded-full px-5 py-2.5 text-xs font-semibold"
             >
-              Pošaljite upit
+              {textByLocale(locale, { sr: "Pošaljite upit", en: "Send inquiry" })}
             </Link>
           </div>
         </aside>

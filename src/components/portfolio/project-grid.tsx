@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import { useLocale } from "@/src/components/i18n/locale-provider";
 import {
   projectCategories,
   type Project,
@@ -18,15 +19,43 @@ type ProjectGridProps = {
 };
 
 export function ProjectGrid({ projects, enableFilter = true }: ProjectGridProps) {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory | "Sve">("Sve");
+  const { locale } = useLocale();
+  const allLabel = locale === "en" ? "All" : "Sve";
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory | "Sve" | "All">(
+    allLabel,
+  );
 
   const filteredProjects = useMemo(() => {
-    if (activeCategory === "Sve") {
+    if (activeCategory === "Sve" || activeCategory === "All") {
       return projects;
     }
 
     return projects.filter((project) => project.category === activeCategory);
   }, [activeCategory, projects]);
+
+  const displayCategory = (category: ProjectCategory | "Sve" | "All") => {
+    if (locale !== "en") {
+      return category;
+    }
+
+    if (category === "Sve") {
+      return "All";
+    }
+
+    if (category === "Stan") {
+      return "Apartment";
+    }
+
+    if (category === "Kuća") {
+      return "House";
+    }
+
+    if (category === "Poslovni prostor") {
+      return "Business space";
+    }
+
+    return category;
+  };
 
   return (
     <div className="space-y-8">
@@ -34,13 +63,14 @@ export function ProjectGrid({ projects, enableFilter = true }: ProjectGridProps)
         <div
           className="flex flex-wrap gap-3"
           role="tablist"
-          aria-label="Filter projekata"
+          aria-label={locale === "en" ? "Project filters" : "Filter projekata"}
         >
-          {projectCategories.map((category) => (
+          {(locale === "en" ? ["All", ...projectCategories] : projectCategories).map(
+            (category) => (
             <button
               key={category}
               type="button"
-              onClick={() => setActiveCategory(category)}
+              onClick={() => setActiveCategory(category as ProjectCategory | "Sve" | "All")}
               className={cn(
                 "rounded-full border px-4 py-2 text-xs tracking-[0.2em] uppercase transition",
                 activeCategory === category
@@ -50,9 +80,10 @@ export function ProjectGrid({ projects, enableFilter = true }: ProjectGridProps)
               aria-selected={activeCategory === category}
               role="tab"
             >
-              {category}
+              {displayCategory(category as ProjectCategory | "Sve" | "All")}
             </button>
-          ))}
+            ),
+          )}
         </div>
       ) : null}
 
@@ -75,7 +106,11 @@ export function ProjectGrid({ projects, enableFilter = true }: ProjectGridProps)
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src={project.coverImage}
-                  alt={`${project.title} naslovna fotografija`}
+                  alt={
+                    locale === "en"
+                      ? `${project.title} cover image`
+                      : `${project.title} naslovna fotografija`
+                  }
                   fill
                   className="object-cover transition duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -83,7 +118,7 @@ export function ProjectGrid({ projects, enableFilter = true }: ProjectGridProps)
               </div>
               <div className="space-y-3 p-5">
                 <div className="text-brand-earth flex items-center justify-between text-[11px] tracking-[0.2em] uppercase">
-                  <span>{project.category}</span>
+                  <span>{displayCategory(project.category)}</span>
                   <span>{project.year}</span>
                 </div>
                 <h3 className="font-display text-brand-burgundy text-2xl">

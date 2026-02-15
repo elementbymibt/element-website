@@ -10,6 +10,7 @@ import {
   packageComparisonRows,
   servicePackages,
 } from "@/src/data/site-content";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
@@ -27,15 +28,20 @@ const documentationDeliverables = [
   "3D vizuali ključnih prostora za sigurnu realizaciju",
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const locale = await getCurrentLocale();
+
   return (
     <div className="space-y-20 py-16 md:py-20">
       <Container>
         <FadeIn>
           <SectionHeading
             eyebrow="Services"
-            title="Usluge, paketi i cene"
-            description="Svaki paket ima jasan scope, transparentne faze i isporuke koje omogućavaju sigurnu realizaciju."
+            title={textByLocale(locale, { sr: "Usluge, paketi i cene", en: "Services, packages and pricing" })}
+            description={textByLocale(locale, {
+              sr: "Svaki paket ima jasan scope, transparentne faze i isporuke koje omogućavaju sigurnu realizaciju.",
+              en: "Each package has a clear scope, transparent phases and reliable deliverables.",
+            })}
           />
         </FadeIn>
 
@@ -72,15 +78,20 @@ export default function ServicesPage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Comparison"
-            title="Uporedni pregled paketa"
-            description="Orijentacioni pregled. Tačan scope se definiše nakon brief-a i analize prostora."
+            title={textByLocale(locale, { sr: "Uporedni pregled paketa", en: "Package comparison" })}
+            description={textByLocale(locale, {
+              sr: "Orijentacioni pregled. Tačan scope se definiše nakon brief-a i analize prostora.",
+              en: "Indicative overview. Final scope is defined after briefing and spatial analysis.",
+            })}
           />
         </FadeIn>
         <div className="border-brand-neutral-500/70 mt-8 overflow-x-auto rounded-3xl border bg-white">
           <table className="min-w-full text-left text-sm">
             <thead className="bg-brand-neutral-200 text-brand-burgundy">
               <tr>
-                <th className="px-4 py-4 font-semibold">Karakteristika</th>
+                <th className="px-4 py-4 font-semibold">
+                  {textByLocale(locale, { sr: "Karakteristika", en: "Feature" })}
+                </th>
                 {servicePackages.map((item) => (
                   <th key={item.id} className="px-4 py-4 font-semibold">
                     {item.name}
@@ -111,8 +122,11 @@ export default function ServicesPage() {
         <FadeIn className="border-brand-neutral-500/70 bg-brand-neutral-100 rounded-3xl border p-8 md:p-10">
           <SectionHeading
             eyebrow="Završna dokumentacija"
-            title="Šta dobijate na kraju projekta"
-            description="Dokumentacija je projektovana da izvođenju ukloni nejasnoće i ubrza donošenje odluka."
+            title={textByLocale(locale, { sr: "Šta dobijate na kraju projekta", en: "What you receive at project end" })}
+            description={textByLocale(locale, {
+              sr: "Dokumentacija je projektovana da izvođenju ukloni nejasnoće i ubrza donošenje odluka.",
+              en: "Documentation is designed to remove ambiguity in execution and speed up decisions.",
+            })}
           />
           <ul className="mt-6 grid gap-3 md:grid-cols-2">
             {documentationDeliverables.map((item) => (
@@ -128,7 +142,10 @@ export default function ServicesPage() {
             href="/documentation"
             className="text-brand-burgundy decoration-brand-gold mt-6 inline-flex text-sm font-semibold underline underline-offset-4"
           >
-            Pogledajte primer završne dokumentacije
+            {textByLocale(locale, {
+              sr: "Pogledajte primer završne dokumentacije",
+              en: "View a sample final documentation package",
+            })}
           </Link>
         </FadeIn>
       </Container>
@@ -137,8 +154,11 @@ export default function ServicesPage() {
         <FadeIn>
           <SectionHeading
             eyebrow="FAQ"
-            title="Česta pitanja"
-            description="Osam ključnih pitanja koje klijenti najčešće postavljaju pre početka saradnje."
+            title={textByLocale(locale, { sr: "Česta pitanja", en: "Frequently asked questions" })}
+            description={textByLocale(locale, {
+              sr: "Osam ključnih pitanja koje klijenti najčešće postavljaju pre početka saradnje.",
+              en: "Eight key questions clients most often ask before starting collaboration.",
+            })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -161,8 +181,11 @@ export default function ServicesPage() {
         <FadeIn className="border-brand-burgundy/20 rounded-3xl border bg-white p-8 md:p-10">
           <SectionHeading
             eyebrow="Start"
-            title="Rezervišite termin ili pošaljite upit"
-            description="Uvodni razgovor definiše obim, budžet i najefikasniji paket za vaš projekat."
+            title={textByLocale(locale, { sr: "Rezervišite termin ili pošaljite upit", en: "Book a slot or send an inquiry" })}
+            description={textByLocale(locale, {
+              sr: "Uvodni razgovor definiše obim, budžet i najefikasniji paket za vaš projekat.",
+              en: "An intro call defines scope, budget and the most effective package for your project.",
+            })}
           />
           <div className="mt-6 flex flex-wrap gap-3">
             <BookingLink className="px-7 py-3 text-sm font-semibold" />
@@ -170,7 +193,7 @@ export default function ServicesPage() {
               href="#kontakt-forma"
               className="btn-secondary inline-flex rounded-full px-7 py-3 text-sm font-semibold"
             >
-              Kontakt forma
+              {textByLocale(locale, { sr: "Kontakt forma", en: "Contact form" })}
             </a>
           </div>
 

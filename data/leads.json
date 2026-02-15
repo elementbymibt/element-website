@@ -2,5 +2,16 @@
   "newsletter": [],
   "guide": [],
   "documentation": [],
-  "contacts": []
+  "contacts": [
+    {
+      "name": "milos",
+      "email": "milosdimitrijevic991@gmail.com",
+      "phone": "+381612049611",
+      "message": "dasdasd",
+      "budgetRange": "70.000€+",
+      "spaceType": "Drugo",
+      "id": "1421a257-0cd3-4d58-ad9c-66026e21f17f",
+      "createdAt": "2026-02-15T17:22:49.673Z"
+    }
+  ]
 }

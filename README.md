@@ -16,6 +16,10 @@ Premium, editorial Next.js website za studio dizajna enterijera.
 - `/`
 - `/portfolio`
 - `/portfolio/[slug]`
+- `/intake/start`
+- `/intake/new`
+- `/intake/[id]`
+- `/projects/[id]`
 - `/services`
 - `/process`
 - `/about`
@@ -24,6 +28,38 @@ Premium, editorial Next.js website za studio dizajna enterijera.
 - `/contact`
 - `/privacy`
 - `/thank-you`
+
+## Ultimate Client Intake Wizard
+
+Implementiran je kompletan intake flow sa autosave i final confirmation mehanizmom:
+
+- 14 ekrana (Step 0-13) kroz `/intake/[id]`.
+- Start flow preko `/intake/start` i kreiranje draft-a preko `/intake/new`.
+- Final submit kreira/azurira projekat i vodi na `/projects/[id]`.
+- Jedan source of truth: `intake_json` validiran kroz Zod schema.
+- Normalizacija podataka:
+  - dimenzije kao integer mm
+  - enum vrednosti
+  - budzeti kao numeric EUR
+  - tradeoff i budget alokacije normalizovane na zbir 100
+- Kontradikcije:
+  - sistem detektuje konflikte (stil/mood/budzet) i trazi potvrdu.
+- Upload assets:
+  - planovi, keep-item fotografije, inspiration i avoid slike
+  - thumbnail fajlovi se kreiraju i vezuju za intake
+- Autosave:
+  - debounce autosave na promenama
+  - save pri promeni koraka
+  - indikator stanja cuvanja
+
+## Intake API
+
+- `POST /api/intake/start` - kreira novi draft intake
+- `GET /api/intake/[id]` - ucitava draft
+- `PATCH /api/intake/[id]` - autosave draft
+- `POST /api/intake/[id]/submit` - final validation + submit
+- `POST /api/intake/upload` - upload assets
+- `GET /api/intake/file/[...path]` - runtime serving upload fajlova (Vercel /tmp fallback)
 
 ## How to run
 
@@ -53,6 +89,15 @@ Aplikacija radi i bez env var-ova zahvaljujući fallback vrednostima.
 
 - Dev: zapis u `data/leads.json` (fallback).
 - Produkcija: Postgres preko `DATABASE_URL` + opcioni Resend adapter.
+
+## Intake storage
+
+- Dev fallback: `data/intakes.json`
+- Produkcija: Postgres (`DATABASE_URL` ili `POSTGRES_URL`)
+- Tabele se kreiraju automatski pri prvom upisu:
+  - `intakes`
+  - `intake_assets`
+  - `projects`
 
 ## Deploy
 

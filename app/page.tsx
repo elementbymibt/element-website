@@ -6,6 +6,7 @@ import { ProjectGrid } from "@/src/components/portfolio/project-grid";
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
+import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { featuredProjects } from "@/src/data/projects";
 import {
@@ -15,6 +16,7 @@ import {
   signaturePoints,
   testimonials,
 } from "@/src/data/site-content";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
@@ -24,7 +26,9 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const locale = await getCurrentLocale();
+
   return (
     <div className="space-y-24 pb-10">
       <section className="bg-brand-burgundy text-brand-neutral-100 relative overflow-hidden">
@@ -46,19 +50,31 @@ export default function HomePage() {
               ÉLÉMENT (by M·I·B·T)
             </p>
             <h1 className="font-display text-brand-neutral-100 mt-5 text-5xl leading-tight md:text-7xl">
-              Enterijeri koji zrače tihim luksuzom.
+              {textByLocale(locale, {
+                sr: "Enterijeri koji zrače tihim luksuzom.",
+                en: "Interiors with a quiet luxury signature.",
+              })}
             </h1>
             <p className="text-brand-neutral-200 mt-6 max-w-2xl text-base md:text-lg">
-              Projektujemo prostore koji izgledaju reprezentativno, funkcionišu precizno i
-              ostaju relevantni kroz vreme.
+              {textByLocale(locale, {
+                sr: "Projektujemo prostore koji izgledaju reprezentativno, funkcionišu precizno i ostaju relevantni kroz vreme.",
+                en: "We design spaces that look representative, perform precisely and stay relevant over time.",
+              })}
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/portfolio"
                 className="btn-primary rounded-full px-7 py-3 text-sm font-semibold"
               >
-                Pogledajte projekte
+                {textByLocale(locale, { sr: "Pogledajte projekte", en: "View projects" })}
               </Link>
+              <IntakeLink
+                label={textByLocale(locale, {
+                  sr: "Popunite upitnik",
+                  en: "Start intake",
+                })}
+                className="rounded-full px-7 py-3 text-sm font-semibold"
+              />
               <BookingLink
                 variant="secondary"
                 className="text-brand-neutral-100 hover:text-brand-neutral-100 rounded-full px-7 py-3 text-sm font-semibold"
@@ -72,8 +88,11 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Selected Works"
-            title="Izdvojeni projekti"
-            description="Šest prostora koji prikazuju naš standard razrade, materijalne kulture i estetske discipline."
+            title={textByLocale(locale, { sr: "Izdvojeni projekti", en: "Featured projects" })}
+            description={textByLocale(locale, {
+              sr: "Šest prostora koji prikazuju naš standard razrade, materijalne kulture i estetske discipline.",
+              en: "Six spaces that represent our standard of detailing, material culture and aesthetics.",
+            })}
           />
         </FadeIn>
         <div className="mt-10">
@@ -85,8 +104,11 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Signature"
-            title="Naš potpis"
-            description="Dizajn odluke donosimo sa istim fokusom na atmosferu, ergonomiju i dugoročnu vrednost prostora."
+            title={textByLocale(locale, { sr: "Naš potpis", en: "Our signature" })}
+            description={textByLocale(locale, {
+              sr: "Dizajn odluke donosimo sa istim fokusom na atmosferu, ergonomiju i dugoročnu vrednost prostora.",
+              en: "We make design decisions with equal focus on atmosphere, ergonomics and long-term value.",
+            })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -106,8 +128,11 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Services"
-            title="Paketi usluga"
-            description="Izaberite nivo podrške u skladu sa obimom projekta i stepenom uključenosti koji želite."
+            title={textByLocale(locale, { sr: "Paketi usluga", en: "Service packages" })}
+            description={textByLocale(locale, {
+              sr: "Izaberite nivo podrške u skladu sa obimom projekta i stepenom uključenosti koji želite.",
+              en: "Choose support level according to project scope and your desired involvement.",
+            })}
           />
         </FadeIn>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -139,7 +164,10 @@ export default function HomePage() {
           href="/services"
           className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
         >
-          Pogledajte kompletne pakete i cene
+          {textByLocale(locale, {
+            sr: "Pogledajte kompletne pakete i cene",
+            en: "Explore full packages and pricing",
+          })}
         </Link>
       </Container>
 
@@ -147,8 +175,11 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Process"
-            title="Kako radimo"
-            description="Proces od pet koraka koji smanjuje neizvesnost i drži kvalitet pod kontrolom."
+            title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
+            description={textByLocale(locale, {
+              sr: "Proces od pet koraka koji smanjuje neizvesnost i drži kvalitet pod kontrolom.",
+              en: "A five-step process that reduces uncertainty and keeps quality under control.",
+            })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-4 md:grid-cols-5">
@@ -174,12 +205,18 @@ export default function HomePage() {
         <FadeIn className="border-brand-neutral-500/60 rounded-3xl border bg-white p-8 md:p-10">
           <SectionHeading
             eyebrow="Lead Magnet"
-            title="Preuzmite vodič: 10 grešaka u uređenju"
-            description="Kratak vodič sa ključnim greškama koje najčešće povećavaju trošak i produžavaju rokove."
+            title={textByLocale(locale, {
+              sr: "Preuzmite vodič: 10 grešaka u uređenju",
+              en: "Download the guide: 10 costly interior mistakes",
+            })}
+            description={textByLocale(locale, {
+              sr: "Kratak vodič sa ključnim greškama koje najčešće povećavaju trošak i produžavaju rokove.",
+              en: "A short guide covering mistakes that most often increase cost and delay timelines.",
+            })}
           />
           <NewsletterForm
             source="guide"
-            buttonLabel="Preuzmi vodič"
+            buttonLabel={locale === "en" ? "Get the guide" : "Preuzmi vodič"}
             redirectOnSuccess
             className="mt-6 max-w-xl"
           />
@@ -190,8 +227,14 @@ export default function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Testimonials"
-            title="Povratne informacije klijenata"
-            description="Diskretna potvrda kvaliteta dolazi iz iskustva onih koji su prošli ceo proces sa nama."
+            title={textByLocale(locale, {
+              sr: "Povratne informacije klijenata",
+              en: "Client testimonials",
+            })}
+            description={textByLocale(locale, {
+              sr: "Diskretna potvrda kvaliteta dolazi iz iskustva onih koji su prošli ceo proces sa nama.",
+              en: "The strongest proof of quality comes from clients who completed the full process with us.",
+            })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -217,7 +260,10 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Case Study"
             title={caseStudy.title}
-            description="Format rada: Problem → Rešenje → Rezultat"
+            description={textByLocale(locale, {
+              sr: "Format rada: Problem → Rešenje → Rezultat",
+              en: "Working format: Problem → Solution → Result",
+            })}
           />
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <article className="border-brand-neutral-500/70 rounded-2xl border bg-white p-5">
@@ -250,20 +296,29 @@ export default function HomePage() {
                 Final CTA
               </p>
               <h2 className="font-display mt-2 text-4xl">
-                Spremni za prostor nove kategorije?
+                {textByLocale(locale, {
+                  sr: "Spremni za prostor nove kategorije?",
+                  en: "Ready for a next-category space?",
+                })}
               </h2>
               <p className="text-brand-neutral-200 mt-3 max-w-2xl">
-                Rezervišite uvodne konsultacije ili nam pošaljite upit. Vraćamo se sa
-                jasnim predlogom sledećeg koraka.
+                {textByLocale(locale, {
+                  sr: "Rezervišite uvodne konsultacije ili nam pošaljite upit. Vraćamo se sa jasnim predlogom sledećeg koraka.",
+                  en: "Book an intro consultation or send an inquiry. We return with a clear next-step proposal.",
+                })}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
+              <IntakeLink
+                label={textByLocale(locale, { sr: "Krenite kroz upitnik", en: "Go to intake" })}
+                className="rounded-full px-7 py-3 text-sm font-semibold"
+              />
               <BookingLink className="rounded-full px-7 py-3 text-sm font-semibold" />
               <Link
                 href="/contact"
                 className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"
               >
-                Kontaktirajte nas
+                {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us" })}
               </Link>
             </div>
           </div>

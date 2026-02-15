@@ -11,6 +11,7 @@ declare global {
 
 export type AnalyticsEventName =
   | "booking_click"
+  | "intake_click"
   | "lead_submit"
   | "contact_submit"
   | "documentation_download";

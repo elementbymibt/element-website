@@ -1,20 +1,28 @@
 import Link from "next/link";
 
 import { Container } from "@/src/components/ui/container";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 
-export default function NotFoundPage() {
+export default async function NotFoundPage() {
+  const locale = await getCurrentLocale();
+
   return (
     <Container className="py-24 text-center">
       <p className="text-brand-gold text-xs tracking-[0.3em] uppercase">404</p>
       <h1 className="font-display text-brand-burgundy mt-3 text-5xl">
-        Stranica nije pronađena
+        {textByLocale(locale, { sr: "Stranica nije pronađena", en: "Page not found" })}
       </h1>
-      <p className="text-brand-earth mt-4">Traženi sadržaj trenutno nije dostupan.</p>
+      <p className="text-brand-earth mt-4">
+        {textByLocale(locale, {
+          sr: "Traženi sadržaj trenutno nije dostupan.",
+          en: "The requested content is currently unavailable.",
+        })}
+      </p>
       <Link
         href="/"
         className="btn-primary mt-8 inline-flex rounded-full px-6 py-3 text-sm font-semibold"
       >
-        Vratite se na početnu
+        {textByLocale(locale, { sr: "Vratite se na početnu", en: "Return to home" })}
       </Link>
     </Container>
   );

@@ -3,6 +3,7 @@ import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
@@ -12,30 +13,67 @@ export const metadata = buildMetadata({
   path: "/documentation",
 });
 
-export default function DocumentationPage() {
+export default async function DocumentationPage() {
+  const locale = await getCurrentLocale();
+
   return (
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
           eyebrow="Gated Content"
-          title="Primer završne dokumentacije"
-          description="Unesite email adresu i otključajte PDF primer dokumentacije koju klijent dobija na kraju projekta."
+          title={textByLocale(locale, {
+            sr: "Primer završne dokumentacije",
+            en: "Final documentation sample",
+          })}
+          description={textByLocale(locale, {
+            sr: "Unesite email adresu i otključajte PDF primer dokumentacije koju klijent dobija na kraju projekta.",
+            en: "Enter your email to unlock a PDF sample of the final documentation package.",
+          })}
         />
       </FadeIn>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <FadeIn className="border-brand-neutral-500/70 rounded-3xl border bg-white p-8">
-          <h2 className="font-display text-brand-burgundy text-3xl">Šta sadrži paket</h2>
+          <h2 className="font-display text-brand-burgundy text-3xl">
+            {textByLocale(locale, { sr: "Šta sadrži paket", en: "What is included" })}
+          </h2>
           <ul className="text-brand-earth mt-5 space-y-3 text-sm">
-            <li>PDF tehnički paket (osnove, preseci, pozicije opreme)</li>
-            <li>DWG fajlovi spremni za izvođače</li>
-            <li>Specifikacije materijala i završnih obrada</li>
-            <li>Shopping lista sa referencama proizvoda</li>
-            <li>3D prikazi ključnih prostora i detalja</li>
+            <li>
+              {textByLocale(locale, {
+                sr: "PDF tehnički paket (osnove, preseci, pozicije opreme)",
+                en: "PDF technical package (plans, sections, equipment positions)",
+              })}
+            </li>
+            <li>
+              {textByLocale(locale, {
+                sr: "DWG fajlovi spremni za izvođače",
+                en: "DWG files ready for execution teams",
+              })}
+            </li>
+            <li>
+              {textByLocale(locale, {
+                sr: "Specifikacije materijala i završnih obrada",
+                en: "Material and finish specifications",
+              })}
+            </li>
+            <li>
+              {textByLocale(locale, {
+                sr: "Shopping lista sa referencama proizvoda",
+                en: "Shopping list with product references",
+              })}
+            </li>
+            <li>
+              {textByLocale(locale, {
+                sr: "3D prikazi ključnih prostora i detalja",
+                en: "3D visuals of key spaces and details",
+              })}
+            </li>
           </ul>
           <p className="text-brand-ink mt-6 text-sm">
-            Ovaj sample je skraćena verzija, namenjena da pokaže standard razrade i nivo
-            detaljnosti koji dobijate.
+            {textByLocale(locale, {
+              sr: "Ovaj sample je skraćena verzija, namenjena da pokaže standard razrade i nivo detaljnosti koji dobijate.",
+              en: "This sample is a shortened version showing our documentation quality and level of detail.",
+            })}
           </p>
         </FadeIn>
 
@@ -43,8 +81,10 @@ export default function DocumentationPage() {
           <DocumentationGateForm />
           <div className="border-brand-neutral-500/70 bg-brand-neutral-100 mt-6 rounded-2xl border p-5">
             <p className="text-brand-earth text-sm">
-              Za dodatna pitanja o dokumentaciji i opsegu isporuka, rezervišite kratke
-              konsultacije.
+              {textByLocale(locale, {
+                sr: "Za dodatna pitanja o dokumentaciji i opsegu isporuka, rezervišite kratke konsultacije.",
+                en: "For extra questions about documentation and deliverables, book a short consultation.",
+              })}
             </p>
             <BookingLink className="mt-4 px-6 py-3 text-sm font-semibold" />
           </div>

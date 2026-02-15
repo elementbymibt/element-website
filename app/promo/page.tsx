@@ -4,6 +4,7 @@ import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { promoOffers } from "@/src/data/site-content";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
@@ -12,14 +13,19 @@ export const metadata = buildMetadata({
   path: "/promo",
 });
 
-export default function PromoPage() {
+export default async function PromoPage() {
+  const locale = await getCurrentLocale();
+
   return (
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
           eyebrow="Promo"
-          title="Aktuelne ponude"
-          description="Ograničene ponude za klijente koji žele da rezervišu termin u tekućem periodu."
+          title={textByLocale(locale, { sr: "Aktuelne ponude", en: "Current offers" })}
+          description={textByLocale(locale, {
+            sr: "Ograničene ponude za klijente koji žele da rezervišu termin u tekućem periodu.",
+            en: "Limited offers for clients booking consultation slots in the current period.",
+          })}
         />
       </FadeIn>
 
@@ -44,7 +50,7 @@ export default function PromoPage() {
             <p className="text-brand-ink mt-4 text-sm">{offer.details}</p>
             <BookingLink
               className="mt-6 px-5 py-2.5 text-xs"
-              label="Rezervišite termin"
+              label={locale === "en" ? "Book a slot" : "Rezervišite termin"}
             />
           </FadeIn>
         ))}

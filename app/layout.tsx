@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 
 import { AnalyticsProviders } from "@/src/components/analytics/analytics-providers";
+import { LocaleProvider } from "@/src/components/i18n/locale-provider";
 import { SiteFooter } from "@/src/components/layout/site-footer";
 import { SiteHeader } from "@/src/components/layout/site-header";
+import { getCurrentLocale } from "@/src/lib/i18n/server";
 import { siteConfig } from "@/src/lib/site-config";
 
 import "./globals.css";
@@ -49,26 +51,30 @@ export const metadata: Metadata = {
 
 export const runtime = "nodejs";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getCurrentLocale();
+
   return (
-    <html lang="sr">
+    <html lang={locale}>
       <body className={`${cormorant.variable} ${montserrat.variable} antialiased`}>
-        <a
-          href="#main-content"
-          className="focus:bg-brand-burgundy sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:px-4 focus:py-2 focus:text-white"
-        >
-          Preskoči na sadržaj
-        </a>
-        <SiteHeader />
-        <main id="main-content" className="pt-20">
-          {children}
-        </main>
-        <SiteFooter />
-        <AnalyticsProviders />
+        <LocaleProvider initialLocale={locale}>
+          <a
+            href="#main-content"
+            className="focus:bg-brand-burgundy sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:px-4 focus:py-2 focus:text-white"
+          >
+            {locale === "en" ? "Skip to content" : "Preskoči na sadržaj"}
+          </a>
+          <SiteHeader />
+          <main id="main-content" className="pt-20">
+            {children}
+          </main>
+          <SiteFooter />
+          <AnalyticsProviders />
+        </LocaleProvider>
       </body>
     </html>
   );

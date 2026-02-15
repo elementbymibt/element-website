@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
 
 type DocumentationApiResponse = {
@@ -11,6 +12,7 @@ type DocumentationApiResponse = {
 };
 
 export function DocumentationGateForm() {
+  const { locale } = useLocale();
   const [pending, setPending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -45,18 +47,27 @@ export function DocumentationGateForm() {
 
       if (!response.ok || result.status === "error") {
         setStatus("error");
-        setMessage(result.message || "Došlo je do greške. Pokušajte ponovo.");
+        setMessage(
+          result.message ||
+            (locale === "en"
+              ? "Something went wrong. Please try again."
+              : "Došlo je do greške. Pokušajte ponovo."),
+        );
         return;
       }
 
       setStatus("success");
-      setMessage(result.message || "Pristup je odobren.");
+      setMessage(result.message || (locale === "en" ? "Access granted." : "Pristup je odobren."));
       setDownloadUrl(result.downloadUrl);
       trackEvent("lead_submit", { source: "documentation" });
       form.reset();
     } catch {
       setStatus("error");
-      setMessage("Došlo je do greške. Pokušajte ponovo.");
+      setMessage(
+        locale === "en"
+          ? "Something went wrong. Please try again."
+          : "Došlo je do greške. Pokušajte ponovo.",
+      );
     } finally {
       setPending(false);
     }
@@ -64,9 +75,13 @@ export function DocumentationGateForm() {
 
   return (
     <div className="border-brand-neutral-500 bg-brand-neutral-100 space-y-4 rounded-3xl border p-6 md:p-8">
-      <form onSubmit={onSubmit} className="space-y-3" aria-label="Forma za dokumentaciju">
+      <form
+        onSubmit={onSubmit}
+        className="space-y-3"
+        aria-label={locale === "en" ? "Documentation gate form" : "Forma za dokumentaciju"}
+      >
         <label htmlFor="documentation-email" className="text-brand-earth text-sm">
-          Email adresa
+          {locale === "en" ? "Email address" : "Email adresa"}
         </label>
         <div className="flex flex-col gap-3 sm:flex-row">
           <input
@@ -75,7 +90,11 @@ export function DocumentationGateForm() {
             type="email"
             required
             autoComplete="email"
-            placeholder="Unesite email za pristup dokumentaciji"
+            placeholder={
+              locale === "en"
+                ? "Enter email to unlock documentation"
+                : "Unesite email za pristup dokumentaciji"
+            }
             className="border-brand-neutral-500 text-brand-ink placeholder:text-brand-earth/70 focus-visible:ring-brand-gold w-full rounded-full border bg-white px-5 py-3 text-sm transition outline-none focus-visible:ring-2"
           />
           <button
@@ -83,7 +102,13 @@ export function DocumentationGateForm() {
             disabled={pending}
             className="btn-primary inline-flex shrink-0 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {pending ? "Provera..." : "Otključaj pristup"}
+            {pending
+              ? locale === "en"
+                ? "Verifying..."
+                : "Provera..."
+              : locale === "en"
+                ? "Unlock access"
+                : "Otključaj pristup"}
           </button>
         </div>
 
@@ -113,7 +138,9 @@ export function DocumentationGateForm() {
             className="text-brand-burgundy decoration-brand-gold mt-3 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4"
             onClick={() => trackEvent("documentation_download", { file: "sample.pdf" })}
           >
-            Preuzmite sample dokumentaciju (PDF)
+            {locale === "en"
+              ? "Download sample documentation (PDF)"
+              : "Preuzmite sample dokumentaciju (PDF)"}
           </a>
         </div>
       ) : null}

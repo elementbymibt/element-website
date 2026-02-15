@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
 import { cn } from "@/src/lib/utils";
 
@@ -20,14 +21,19 @@ type LeadApiResponse = {
 
 export function NewsletterForm({
   source = "newsletter",
-  buttonLabel = "Prijavite se",
-  placeholder = "Unesite email adresu",
+  buttonLabel,
+  placeholder,
   className,
   redirectOnSuccess = false,
 }: NewsletterFormProps) {
+  const { locale } = useLocale();
   const [pending, setPending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+
+  const submitLabel = buttonLabel ?? (locale === "en" ? "Subscribe" : "Prijavite se");
+  const inputPlaceholder =
+    placeholder ?? (locale === "en" ? "Enter your email" : "Unesite email adresu");
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,12 +64,22 @@ export function NewsletterForm({
 
       if (!response.ok || result.status === "error") {
         setStatus("error");
-        setMessage(result.message || "Došlo je do greške. Pokušajte ponovo.");
+        setMessage(
+          result.message ||
+            (locale === "en"
+              ? "Something went wrong. Please try again."
+              : "Došlo je do greške. Pokušajte ponovo."),
+        );
         return;
       }
 
       setStatus("success");
-      setMessage(result.message || "Hvala. Vaša prijava je uspešno poslata.");
+      setMessage(
+        result.message ||
+          (locale === "en"
+            ? "Thank you. Your subscription has been received."
+            : "Hvala. Vaša prijava je uspešno poslata."),
+      );
       trackEvent("lead_submit", { source });
       form.reset();
 
@@ -74,7 +90,11 @@ export function NewsletterForm({
       }
     } catch {
       setStatus("error");
-      setMessage("Došlo je do greške. Pokušajte ponovo.");
+      setMessage(
+        locale === "en"
+          ? "Something went wrong. Please try again."
+          : "Došlo je do greške. Pokušajte ponovo.",
+      );
     } finally {
       setPending(false);
     }
@@ -87,7 +107,7 @@ export function NewsletterForm({
       aria-label="Lead forma"
     >
       <label className="sr-only" htmlFor={`${source}-email`}>
-        Email adresa
+        {locale === "en" ? "Email address" : "Email adresa"}
       </label>
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
@@ -96,16 +116,16 @@ export function NewsletterForm({
           type="email"
           required
           autoComplete="email"
-          placeholder={placeholder}
+          placeholder={inputPlaceholder}
           className="border-brand-neutral-500 text-brand-ink placeholder:text-brand-earth/70 focus-visible:ring-brand-gold w-full rounded-full border bg-white px-5 py-3 text-sm transition outline-none focus-visible:ring-2"
-          aria-label="Email adresa"
+          aria-label={locale === "en" ? "Email address" : "Email adresa"}
         />
         <button
           type="submit"
           disabled={pending}
           className="btn-primary inline-flex shrink-0 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {pending ? "Slanje..." : buttonLabel}
+          {pending ? (locale === "en" ? "Sending..." : "Slanje...") : submitLabel}
         </button>
       </div>
 

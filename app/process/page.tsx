@@ -5,6 +5,7 @@ import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { processSteps } from "@/src/data/site-content";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
@@ -14,14 +15,19 @@ export const metadata = buildMetadata({
   path: "/process",
 });
 
-export default function ProcessPage() {
+export default async function ProcessPage() {
+  const locale = await getCurrentLocale();
+
   return (
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
           eyebrow="Process"
-          title="Kako radimo"
-          description="Naš metod je linearan, transparentan i vođen kvalitetom. Svaka etapa ima jasne isporuke."
+          title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
+          description={textByLocale(locale, {
+            sr: "Naš metod je linearan, transparentan i vođen kvalitetom. Svaka etapa ima jasne isporuke.",
+            en: "Our method is linear, transparent and quality-driven. Each stage has clear deliverables.",
+          })}
         />
       </FadeIn>
 
@@ -33,7 +39,10 @@ export default function ProcessPage() {
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="max-w-xl">
                   <p className="text-brand-gold text-xs tracking-[0.26em] uppercase">
-                    Korak 0{index + 1}
+                    {textByLocale(locale, {
+                      sr: `Korak 0${index + 1}`,
+                      en: `Step 0${index + 1}`,
+                    })}
                   </p>
                   <h2 className="font-display text-brand-burgundy mt-2 text-4xl">
                     {step.title}
@@ -42,7 +51,10 @@ export default function ProcessPage() {
                 </div>
                 <div className="border-brand-neutral-500/70 bg-brand-neutral-100 rounded-2xl border p-4 md:w-[45%]">
                   <h3 className="text-brand-burgundy text-xs tracking-[0.2em] uppercase">
-                    Šta dobijate u ovom koraku
+                    {textByLocale(locale, {
+                      sr: "Šta dobijate u ovom koraku",
+                      en: "What you get in this step",
+                    })}
                   </h3>
                   <ul className="text-brand-ink mt-3 space-y-2 text-sm">
                     {step.deliverables.map((item) => (
@@ -61,11 +73,16 @@ export default function ProcessPage() {
 
       <FadeIn className="bg-brand-burgundy text-brand-neutral-100 mt-12 rounded-3xl p-8 md:p-10">
         <h3 className="font-display text-4xl">
-          Želite da prođemo kroz vaš projekat korak po korak?
+          {textByLocale(locale, {
+            sr: "Želite da prođemo kroz vaš projekat korak po korak?",
+            en: "Want to go through your project step by step?",
+          })}
         </h3>
         <p className="text-brand-neutral-200 mt-3 max-w-2xl">
-          Rezervišite termin i dobijte jasan predlog procesa, vremenskog okvira i
-          isporuka.
+          {textByLocale(locale, {
+            sr: "Rezervišite termin i dobijte jasan predlog procesa, vremenskog okvira i isporuka.",
+            en: "Book a slot and get a clear proposal for process, timeline and deliverables.",
+          })}
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <BookingLink className="px-7 py-3 text-sm font-semibold" />
@@ -73,7 +90,7 @@ export default function ProcessPage() {
             href="/contact"
             className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"
           >
-            Kontakt
+            {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
           </Link>
         </div>
       </FadeIn>

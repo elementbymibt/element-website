@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
 
 const budgetOptions = [
@@ -19,6 +20,7 @@ type ContactApiResponse = {
 };
 
 export function ContactForm() {
+  const { locale } = useLocale();
   const [pending, setPending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -56,12 +58,22 @@ export function ContactForm() {
 
       if (!response.ok || result.status === "error") {
         setStatus("error");
-        setMessage(result.message || "Došlo je do greške. Pokušajte ponovo.");
+        setMessage(
+          result.message ||
+            (locale === "en"
+              ? "Something went wrong. Please try again."
+              : "Došlo je do greške. Pokušajte ponovo."),
+        );
         return;
       }
 
       setStatus("success");
-      setMessage(result.message || "Hvala. Vaša poruka je uspešno poslata.");
+      setMessage(
+        result.message ||
+          (locale === "en"
+            ? "Thank you. Your message has been sent."
+            : "Hvala. Vaša poruka je uspešno poslata."),
+      );
       trackEvent("contact_submit");
       form.reset();
       if (typeof window !== "undefined") {
@@ -69,21 +81,29 @@ export function ContactForm() {
       }
     } catch {
       setStatus("error");
-      setMessage("Došlo je do greške. Pokušajte ponovo.");
+      setMessage(
+        locale === "en"
+          ? "Something went wrong. Please try again."
+          : "Došlo je do greške. Pokušajte ponovo.",
+      );
     } finally {
       setPending(false);
     }
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5" aria-label="Kontakt forma">
+    <form
+      onSubmit={onSubmit}
+      className="space-y-5"
+      aria-label={locale === "en" ? "Contact form" : "Kontakt forma"}
+    >
       <div className="grid gap-4 md:grid-cols-2">
         <div>
           <label
             htmlFor="name"
             className="text-brand-earth mb-2 block text-sm font-medium"
           >
-            Ime i prezime
+            {locale === "en" ? "Full name" : "Ime i prezime"}
           </label>
           <input
             id="name"
@@ -118,7 +138,7 @@ export function ContactForm() {
             htmlFor="phone"
             className="text-brand-earth mb-2 block text-sm font-medium"
           >
-            Telefon
+            {locale === "en" ? "Phone" : "Telefon"}
           </label>
           <input
             id="phone"
@@ -134,13 +154,21 @@ export function ContactForm() {
             htmlFor="spaceType"
             className="text-brand-earth mb-2 block text-sm font-medium"
           >
-            Tip prostora
+            {locale === "en" ? "Space type" : "Tip prostora"}
           </label>
           <select id="spaceType" name="spaceType" required className="input-field">
-            <option value="">Izaberite</option>
+            <option value="">{locale === "en" ? "Select" : "Izaberite"}</option>
             {spaceTypeOptions.map((option) => (
               <option key={option} value={option}>
-                {option}
+                {locale === "en"
+                  ? option === "Stan"
+                    ? "Apartment"
+                    : option === "Kuća"
+                      ? "House"
+                      : option === "Poslovni prostor"
+                        ? "Business space"
+                        : "Other"
+                  : option}
               </option>
             ))}
           </select>
@@ -152,10 +180,12 @@ export function ContactForm() {
           htmlFor="budgetRange"
           className="text-brand-earth mb-2 block text-sm font-medium"
         >
-          Budžet range
+          {locale === "en" ? "Budget range" : "Budžet range"}
         </label>
         <select id="budgetRange" name="budgetRange" required className="input-field">
-          <option value="">Izaberite okvirni budžet</option>
+          <option value="">
+            {locale === "en" ? "Select your approximate budget" : "Izaberite okvirni budžet"}
+          </option>
           {budgetOptions.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -169,7 +199,7 @@ export function ContactForm() {
           htmlFor="message"
           className="text-brand-earth mb-2 block text-sm font-medium"
         >
-          Poruka
+          {locale === "en" ? "Message" : "Poruka"}
         </label>
         <textarea
           id="message"
@@ -177,7 +207,11 @@ export function ContactForm() {
           required
           rows={5}
           className="input-field min-h-36 rounded-3xl"
-          placeholder="Ukratko opišite šta želite da postignete u prostoru."
+          placeholder={
+            locale === "en"
+              ? "Briefly describe what you want to achieve in the space."
+              : "Ukratko opišite šta želite da postignete u prostoru."
+          }
         />
       </div>
 
@@ -203,7 +237,13 @@ export function ContactForm() {
         disabled={pending}
         className="btn-primary inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {pending ? "Slanje..." : "Pošaljite upit"}
+        {pending
+          ? locale === "en"
+            ? "Sending..."
+            : "Slanje..."
+          : locale === "en"
+            ? "Send inquiry"
+            : "Pošaljite upit"}
       </button>
     </form>
   );

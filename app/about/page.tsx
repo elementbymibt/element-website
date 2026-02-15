@@ -5,6 +5,7 @@ import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { aboutValues, pressMentions, teamMembers } from "@/src/data/site-content";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
@@ -14,26 +15,38 @@ export const metadata = buildMetadata({
   path: "/about",
 });
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const locale = await getCurrentLocale();
+
   return (
     <div className="space-y-20 py-16 md:py-20">
       <Container>
         <FadeIn>
           <SectionHeading
             eyebrow="About"
-            title="Studio sa jasnim autorskim potpisom"
-            description="ÉLÉMENT (by M·I·B·T) razvija enterijere koji komuniciraju smiren luksuz, preciznu funkciju i dugotrajnu vrednost."
+            title={textByLocale(locale, {
+              sr: "Studio sa jasnim autorskim potpisom",
+              en: "A studio with a clear authorial signature",
+            })}
+            description={textByLocale(locale, {
+              sr: "ÉLÉMENT (by M·I·B·T) razvija enterijere koji komuniciraju smiren luksuz, preciznu funkciju i dugotrajnu vrednost.",
+              en: "ÉLÉMENT (by M·I·B·T) creates interiors that communicate calm luxury, precise function and long-term value.",
+            })}
           />
         </FadeIn>
 
         <FadeIn className="border-brand-neutral-500/70 mt-8 rounded-3xl border bg-white p-8 md:p-10">
           <p className="font-display text-brand-burgundy text-3xl leading-relaxed md:text-4xl">
-            Verujemo da vrhunski enterijer ne treba da bude glasan. Treba da bude tačan.
+            {textByLocale(locale, {
+              sr: "Verujemo da vrhunski enterijer ne treba da bude glasan. Treba da bude tačan.",
+              en: "We believe a premium interior should not be loud. It should be precise.",
+            })}
           </p>
           <p className="text-brand-earth mt-6 max-w-3xl text-sm leading-7">
-            Naš rad se zasniva na disciplini detalja, promišljenoj upotrebi materijala i
-            procesu koji klijentu vraća sigurnost. Dizajn posmatramo kao stratešku odluku:
-            kako prostor izgleda, kako radi i kakvu emociju ostavlja kroz vreme.
+            {textByLocale(locale, {
+              sr: "Naš rad se zasniva na disciplini detalja, promišljenoj upotrebi materijala i procesu koji klijentu vraća sigurnost. Dizajn posmatramo kao stratešku odluku: kako prostor izgleda, kako radi i kakvu emociju ostavlja kroz vreme.",
+              en: "Our work is based on detail discipline, intentional material curation and a process that restores confidence to the client. We view design as a strategic decision: how the space looks, performs and feels over time.",
+            })}
           </p>
         </FadeIn>
       </Container>
@@ -42,8 +55,11 @@ export default function AboutPage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Values"
-            title="Principi koji nas vode"
-            description="Svaka odluka u projektu proverava se kroz ova četiri kriterijuma."
+            title={textByLocale(locale, { sr: "Principi koji nas vode", en: "Principles we follow" })}
+            description={textByLocale(locale, {
+              sr: "Svaka odluka u projektu proverava se kroz ova četiri kriterijuma.",
+              en: "Every project decision is checked against these four criteria.",
+            })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -63,8 +79,11 @@ export default function AboutPage() {
         <FadeIn>
           <SectionHeading
             eyebrow="Team"
-            title="Tim"
-            description="Multidisciplinarni profil koji kombinuje kreativnu viziju i operativnu pouzdanost."
+            title={textByLocale(locale, { sr: "Tim", en: "Team" })}
+            description={textByLocale(locale, {
+              sr: "Multidisciplinarni profil koji kombinuje kreativnu viziju i operativnu pouzdanost.",
+              en: "A multidisciplinary profile combining creative vision and operational reliability.",
+            })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -89,7 +108,10 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Press"
             title="Featured / Press"
-            description="Objave i editorijali u kojima je studio predstavljen."
+            description={textByLocale(locale, {
+              sr: "Objave i editorijali u kojima je studio predstavljen.",
+              en: "Features and editorials where the studio has been presented.",
+            })}
           />
           <ul className="text-brand-earth mt-6 space-y-3 text-sm">
             {pressMentions.map((item) => (
@@ -106,10 +128,14 @@ export default function AboutPage() {
 
       <Container>
         <FadeIn className="bg-brand-burgundy text-brand-neutral-100 rounded-3xl p-8 md:p-10">
-          <h2 className="font-display text-4xl">Upoznajmo vaš prostor.</h2>
+          <h2 className="font-display text-4xl">
+            {textByLocale(locale, { sr: "Upoznajmo vaš prostor.", en: "Let's review your space." })}
+          </h2>
           <p className="text-brand-neutral-200 mt-3 max-w-2xl">
-            Pošaljite osnovne informacije i dobijte predlog odgovarajućeg paketa i toka
-            realizacije.
+            {textByLocale(locale, {
+              sr: "Pošaljite osnovne informacije i dobijte predlog odgovarajućeg paketa i toka realizacije.",
+              en: "Share the core details and receive a proposal for the right package and execution flow.",
+            })}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <BookingLink className="px-7 py-3 text-sm font-semibold" />
@@ -117,7 +143,7 @@ export default function AboutPage() {
               href="/contact"
               className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"
             >
-              Kontakt forma
+              {textByLocale(locale, { sr: "Kontakt forma", en: "Contact form" })}
             </Link>
           </div>
         </FadeIn>

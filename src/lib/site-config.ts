@@ -1,4 +1,4 @@
-const defaultBaseUrl = "https://element-website-seven.vercel.app";
+const defaultBaseUrl = "https://elementbymibt.com";
 
 function normalizeBaseUrl(input?: string) {
   if (!input) {

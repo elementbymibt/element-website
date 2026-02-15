@@ -5,24 +5,42 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { LanguageSwitcher } from "@/src/components/i18n/language-switcher";
+import { useLocale } from "@/src/components/i18n/locale-provider";
 import { BookingLink } from "@/src/components/ui/booking-link";
+import { IntakeLink } from "@/src/components/ui/intake-link";
 import { cn } from "@/src/lib/utils";
-
-const navItems = [
-  { href: "/", label: "Početna" },
-  { href: "/portfolio", label: "Projekti" },
-  { href: "/services", label: "Usluge" },
-  { href: "/process", label: "Proces" },
-  { href: "/about", label: "O nama" },
-  { href: "/documentation", label: "Dokumentacija" },
-  { href: "/promo", label: "Promo" },
-  { href: "/contact", label: "Kontakt" },
-];
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { locale } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navItems =
+    locale === "en"
+      ? [
+          { href: "/", label: "Home" },
+          { href: "/portfolio", label: "Projects" },
+          { href: "/intake/start", label: "Intake" },
+          { href: "/services", label: "Services" },
+          { href: "/process", label: "Process" },
+          { href: "/about", label: "About" },
+          { href: "/documentation", label: "Docs" },
+          { href: "/promo", label: "Offers" },
+          { href: "/contact", label: "Contact" },
+        ]
+      : [
+          { href: "/", label: "Početna" },
+          { href: "/portfolio", label: "Projekti" },
+          { href: "/intake/start", label: "Intake" },
+          { href: "/services", label: "Usluge" },
+          { href: "/process", label: "Proces" },
+          { href: "/about", label: "O nama" },
+          { href: "/documentation", label: "Dokumentacija" },
+          { href: "/promo", label: "Promo" },
+          { href: "/contact", label: "Kontakt" },
+        ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -50,7 +68,7 @@ export function SiteHeader() {
         <Link
           href="/"
           className="group inline-flex items-center gap-2"
-          aria-label="Početna stranica"
+          aria-label={locale === "en" ? "Homepage" : "Početna stranica"}
           onClick={() => setMenuOpen(false)}
         >
           <span
@@ -71,7 +89,10 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Glavna navigacija">
+        <nav
+          className="hidden items-center gap-7 lg:flex"
+          aria-label={locale === "en" ? "Main navigation" : "Glavna navigacija"}
+        >
           {navItems.map((item) => {
             const active = pathname === item.href;
 
@@ -98,6 +119,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <IntakeLink
+            variant={transparentOnTop ? "secondary" : "secondary"}
+            className={cn(
+              "px-5 py-2.5 text-xs",
+              transparentOnTop &&
+                "border-brand-neutral-100/65 text-brand-neutral-100 hover:bg-brand-neutral-100/10 hover:text-brand-neutral-100",
+            )}
+          />
+          <LanguageSwitcher />
           <BookingLink
             variant={transparentOnTop ? "secondary" : "primary"}
             className={cn(
@@ -117,11 +147,11 @@ export function SiteHeader() {
               : "border-brand-earth/30 text-brand-burgundy border",
           )}
           onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Otvori meni"
+          aria-label={locale === "en" ? "Open menu" : "Otvori meni"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
-          Meni
+          {locale === "en" ? "Menu" : "Meni"}
         </button>
       </div>
 
@@ -135,7 +165,10 @@ export function SiteHeader() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="border-brand-neutral-300/60 bg-brand-neutral-100/95 overflow-hidden border-t px-6 py-4 backdrop-blur-xl lg:hidden"
           >
-            <nav className="flex flex-col gap-2" aria-label="Mobilna navigacija">
+            <nav
+              className="flex flex-col gap-2"
+              aria-label={locale === "en" ? "Mobile navigation" : "Mobilna navigacija"}
+            >
               {navItems.map((item) => {
                 const active = pathname === item.href;
 
@@ -156,6 +189,8 @@ export function SiteHeader() {
                 );
               })}
             </nav>
+            <LanguageSwitcher className="mt-4" />
+            <IntakeLink className="mt-4 w-full" />
             <BookingLink className="mt-4 w-full" />
           </motion.div>
         ) : null}

@@ -1,0 +1,71 @@
+import { createDefaultIntakeDraft } from "@/src/lib/intake/schema";
+
+export const demoIntake = createDefaultIntakeDraft({
+  id: "11111111-1111-4111-8111-111111111111",
+  currentStep: 12,
+  status: "submitted",
+  basics: {
+    propertyType: "apartment",
+    city: "Beograd",
+    total_m2: 92,
+    roomsInScope: ["living_room", "kitchen", "bedroom", "bathroom"],
+    roomQuantities: {
+      living_room: 1,
+      kitchen: 1,
+      bedroom: 2,
+      bathroom: 2,
+    },
+    deadline: "3m",
+  },
+  style: {
+    selectedStyles: ["warm_luxury", "contemporary_classic"],
+    usedQuiz: false,
+    quizAnswers: {},
+  },
+  mood: {
+    selectedMoods: ["cozy_warm", "dramatic_elegant"],
+    usedQuiz: false,
+    quizAnswers: {},
+  },
+  color: {
+    brightness: "mid",
+    temperature: "warm",
+    palette: "cream_gold",
+    wallPreference: "greige_walls",
+  },
+  lighting: {
+    scenarios: ["layered_lighting", "indirect_led", "pendants_dining"],
+    dayNightPriority: "balanced",
+    warmth: "warm",
+    dramaLevel: 6,
+    presetSuggestion: "AFTERNOON_WARM",
+  },
+  furniture: {
+    qualityTier: "premium",
+    mixedPremiumFocus: ["kitchen", "lighting"],
+    restrictions: ["kid_proof"],
+    usedQuiz: false,
+    quizAnswers: {},
+  },
+  budget: {
+    currency: "EUR",
+    minTotal: 58000,
+    maxTotal: 89000,
+    flexibleBy10: true,
+    allocation: {
+      kitchen: 24,
+      living: 16,
+      bedrooms: 16,
+      bathroom: 12,
+      lighting: 10,
+      decor: 8,
+      appliances: 8,
+      seating: 6,
+    },
+    unknownBudget: false,
+    comfortableMonthlyPayment: 0,
+    maxLimit: 90000,
+    tier: "premium",
+  },
+  notes: "Demo intake zapis za proveru dashboard prikaza.",
+});
