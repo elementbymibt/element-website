@@ -44,14 +44,15 @@ NEXT_PUBLIC_GA_ID=
 RESEND_API_KEY=
 CONTACT_EMAIL_TO=
 NEXT_PUBLIC_SITE_URL=
+DATABASE_URL=
 ```
 
 Aplikacija radi i bez env var-ova zahvaljujući fallback vrednostima.
 
 ## Lead capture storage
 
-- Dev: zapis u `data/leads.json`.
-- Produkcija: opcioni Resend adapter (ako su `RESEND_API_KEY` i `CONTACT_EMAIL_TO` podešeni).
+- Dev: zapis u `data/leads.json` (fallback).
+- Produkcija: Postgres preko `DATABASE_URL` + opcioni Resend adapter.
 
 ## Deploy
 

@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { Pool } from "pg";
+
 type LeadSource = "newsletter" | "guide" | "documentation";
 
 export type LeadPayload = {
@@ -99,19 +101,127 @@ class JsonLeadAdapter implements LeadAdapter {
   }
 }
 
-class ResendAdapter implements LeadAdapter {
-  private apiKey = process.env.RESEND_API_KEY;
-  private to = process.env.CONTACT_EMAIL_TO;
+declare global {
+  var __elementPgPool: Pool | undefined;
+}
 
-  private isReady() {
-    return Boolean(this.apiKey && this.to);
+class PostgresLeadAdapter implements LeadAdapter {
+  private initialized = false;
+
+  constructor(private readonly pool: Pool) {}
+
+  static fromEnv() {
+    const connectionString =
+      process.env.DATABASE_URL?.trim() || process.env.POSTGRES_URL?.trim();
+
+    if (!connectionString) {
+      return null;
+    }
+
+    if (!globalThis.__elementPgPool) {
+      globalThis.__elementPgPool = new Pool({
+        connectionString,
+        ssl: connectionString.includes("localhost")
+          ? false
+          : { rejectUnauthorized: false },
+      });
+    }
+
+    return new PostgresLeadAdapter(globalThis.__elementPgPool);
   }
 
   async saveLead(payload: LeadPayload) {
-    if (!this.isReady()) {
+    await this.ensureSchema();
+
+    await this.pool.query(
+      `
+        INSERT INTO leads (id, email, source, full_name, phone, created_at)
+        VALUES ($1, $2, $3, $4, $5, NOW())
+      `,
+      [
+        crypto.randomUUID(),
+        payload.email,
+        payload.source,
+        payload.fullName ?? null,
+        payload.phone ?? null,
+      ],
+    );
+  }
+
+  async saveContact(payload: ContactPayload) {
+    await this.ensureSchema();
+
+    await this.pool.query(
+      `
+        INSERT INTO contacts (id, name, email, phone, message, budget_range, space_type, created_at)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())
+      `,
+      [
+        crypto.randomUUID(),
+        payload.name,
+        payload.email,
+        payload.phone,
+        payload.message,
+        payload.budgetRange,
+        payload.spaceType,
+      ],
+    );
+  }
+
+  private async ensureSchema() {
+    if (this.initialized) {
       return;
     }
 
+    await this.pool.query(`
+      CREATE TABLE IF NOT EXISTS leads (
+        id UUID PRIMARY KEY,
+        email TEXT NOT NULL,
+        source TEXT NOT NULL,
+        full_name TEXT,
+        phone TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    await this.pool.query(`
+      CREATE TABLE IF NOT EXISTS contacts (
+        id UUID PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT NOT NULL,
+        message TEXT NOT NULL,
+        budget_range TEXT NOT NULL,
+        space_type TEXT NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    this.initialized = true;
+  }
+}
+
+class ResendAdapter implements LeadAdapter {
+  private apiKey: string;
+  private to: string;
+
+  constructor(apiKey: string, to: string) {
+    this.apiKey = apiKey;
+    this.to = to;
+  }
+
+  static fromEnv() {
+    const apiKey = process.env.RESEND_API_KEY?.trim();
+    const to = process.env.CONTACT_EMAIL_TO?.trim();
+
+    if (!apiKey || !to) {
+      return null;
+    }
+
+    return new ResendAdapter(apiKey, to);
+  }
+
+  async saveLead(payload: LeadPayload) {
     await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -128,10 +238,6 @@ class ResendAdapter implements LeadAdapter {
   }
 
   async saveContact(payload: ContactPayload) {
-    if (!this.isReady()) {
-      return;
-    }
-
     await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -159,20 +265,33 @@ class CompositeAdapter implements LeadAdapter {
   constructor(private readonly adapters: LeadAdapter[]) {}
 
   async saveLead(payload: LeadPayload) {
-    await Promise.allSettled(this.adapters.map((adapter) => adapter.saveLead(payload)));
+    const results = await Promise.allSettled(
+      this.adapters.map((adapter) => adapter.saveLead(payload)),
+    );
+
+    if (results.every((result) => result.status === "rejected")) {
+      throw new Error("Nijedan adapter nije uspeo da sačuva lead.");
+    }
   }
 
   async saveContact(payload: ContactPayload) {
-    await Promise.allSettled(
+    const results = await Promise.allSettled(
       this.adapters.map((adapter) => adapter.saveContact(payload)),
     );
+
+    if (results.every((result) => result.status === "rejected")) {
+      throw new Error("Nijedan adapter nije uspeo da sačuva kontakt upit.");
+    }
   }
 }
 
-const jsonAdapter = new JsonLeadAdapter();
-const resendAdapter = new ResendAdapter();
+const primaryAdapter = PostgresLeadAdapter.fromEnv() ?? new JsonLeadAdapter();
+const resendAdapter = ResendAdapter.fromEnv();
 
-export const leadAdapter: LeadAdapter = new CompositeAdapter([
-  jsonAdapter,
-  resendAdapter,
-]);
+const adapters: LeadAdapter[] = [primaryAdapter];
+
+if (resendAdapter) {
+  adapters.push(resendAdapter);
+}
+
+export const leadAdapter: LeadAdapter = new CompositeAdapter(adapters);
