@@ -1,5 +1,7 @@
 "use client";
 
+import { track } from "@vercel/analytics";
+
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
@@ -20,6 +22,8 @@ export function trackEvent(
   if (typeof window === "undefined") {
     return;
   }
+
+  track(eventName, params);
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: eventName, ...params });
