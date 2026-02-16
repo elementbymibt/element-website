@@ -2,9 +2,9 @@ import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
+import { TrackedPhoneLink } from "@/src/components/ui/tracked-phone-link";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
-import { siteConfig } from "@/src/lib/site-config";
 
 export const metadata = buildMetadata({
   title: "Kontakt",
@@ -45,12 +45,10 @@ export default async function ContactPage() {
         <ul className="text-brand-ink mt-6 space-y-3 text-base">
           <li>
             {textByLocale(locale, { sr: "Telefon:", en: "Phone:", de: "Telefon:" })}{" "}
-            <a
-              href={`tel:${siteConfig.phone}`}
+            <TrackedPhoneLink
+              trackingLocation="contact_page_phone"
               className="decoration-brand-gold underline underline-offset-4"
-            >
-              {siteConfig.phone}
-            </a>
+            />
           </li>
         </ul>
 

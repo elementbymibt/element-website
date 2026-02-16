@@ -13,6 +13,7 @@ export type AnalyticsEventName =
   | "email_popup_submit"
   | "email_popup_skip"
   | "booking_click"
+  | "phone_click"
   | "intake_start"
   | "intake_submit"
   | "newsletter_submit"

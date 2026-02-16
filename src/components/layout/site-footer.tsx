@@ -6,6 +6,7 @@ import { useLocale } from "@/src/components/i18n/locale-provider";
 import { NewsletterForm } from "@/src/components/forms/newsletter-form";
 import { Container } from "@/src/components/ui/container";
 import { pickLocaleText } from "@/src/lib/i18n/config";
+import { trackEvent } from "@/src/lib/analytics";
 import { siteConfig } from "@/src/lib/site-config";
 
 const legalLinks = [
@@ -82,6 +83,7 @@ export function SiteFooter() {
                   <a
                     href={`tel:${siteConfig.phone}`}
                     className="hover:text-brand-burgundy"
+                    onClick={() => trackEvent("phone_click", { location: "footer_phone" })}
                   >
                     {siteConfig.phone}
                   </a>
