@@ -16,6 +16,7 @@ export function SiteHeader() {
   const { locale } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const hideCtasOnPage = pathname === "/contact";
 
   const navItems =
     locale === "en"
@@ -120,23 +121,27 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
-          <BookingLink
-            variant="primary"
-            trackingLocation="header"
-            className={cn(
-              "px-5 py-2.5 text-xs",
-            )}
-          />
-          <IntakeLink
-            label={locale === "en" ? "Client intake" : "Popunite upitnik"}
-            variant="secondary"
-            trackingLocation="header"
-            className={cn(
-              "px-5 py-2.5 text-xs",
-              transparentOnTop &&
-                "border-brand-neutral-100/65 text-brand-neutral-100 hover:bg-brand-neutral-100/10 hover:text-brand-neutral-100",
-            )}
-          />
+          {!hideCtasOnPage ? (
+            <>
+              <BookingLink
+                variant="primary"
+                trackingLocation="header"
+                className={cn(
+                  "px-5 py-2.5 text-xs",
+                )}
+              />
+              <IntakeLink
+                label={locale === "en" ? "Client intake" : "Popunite upitnik"}
+                variant="secondary"
+                trackingLocation="header"
+                className={cn(
+                  "px-5 py-2.5 text-xs",
+                  transparentOnTop &&
+                    "border-brand-neutral-100/65 text-brand-neutral-100 hover:bg-brand-neutral-100/10 hover:text-brand-neutral-100",
+                )}
+              />
+            </>
+          ) : null}
         </div>
 
         <button
@@ -191,8 +196,12 @@ export function SiteHeader() {
               })}
             </nav>
             <LanguageSwitcher className="mt-4" />
-            <BookingLink trackingLocation="mobile_menu" className="mt-4 w-full" />
-            <IntakeLink trackingLocation="mobile_menu" className="mt-4 w-full" />
+            {!hideCtasOnPage ? (
+              <>
+                <BookingLink trackingLocation="mobile_menu" className="mt-4 w-full" />
+                <IntakeLink trackingLocation="mobile_menu" className="mt-4 w-full" />
+              </>
+            ) : null}
           </motion.div>
         ) : null}
       </AnimatePresence>
