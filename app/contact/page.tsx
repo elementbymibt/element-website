@@ -2,7 +2,6 @@ import { ContactForm } from "@/src/components/forms/contact-form";
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
@@ -11,7 +10,7 @@ import { siteConfig } from "@/src/lib/site-config";
 export const metadata = buildMetadata({
   title: "Kontakt",
   description:
-    "Kontaktirajte ÉLÉMENT studio i pošaljite detalje projekta. Zakazivanje konsultacija dostupno kroz booking link.",
+    "Kontaktirajte ÉLÉMENT studio i pošaljite detalje projekta. Zakazivanje konsultacija i direktan kontakt telefonom.",
   path: "/contact",
 });
 
@@ -85,17 +84,12 @@ export default async function ContactPage() {
           <div className="border-brand-neutral-500/70 mt-8 rounded-2xl border bg-white p-5">
             <p className="text-brand-earth text-sm">
               {textByLocale(locale, {
-                sr: "Za brži početak izaberite jedan od dva koraka ispod.",
-                en: "For a faster start, choose one of the two options below.",
+                sr: "Za najbrži početak, zakažite konsultacije ili nas pozovite direktno.",
+                en: "For the fastest start, schedule a consultation or call us directly.",
               })}
             </p>
-            <div className="mt-4 space-y-2">
+            <div className="mt-4">
               <BookingLink
-                className="w-full justify-center px-6 py-3 text-sm font-semibold"
-                trackingLocation="contact_panel"
-              />
-              <IntakeLink
-                label={textByLocale(locale, { sr: "Popunite upitnik", en: "Start intake" })}
                 className="w-full justify-center px-6 py-3 text-sm font-semibold"
                 trackingLocation="contact_panel"
               />
