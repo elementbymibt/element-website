@@ -195,13 +195,13 @@ export function ProjectDashboard({ intake, project }: ProjectDashboardProps) {
             <div className="mt-3 flex flex-wrap gap-2">
               <Link
                 href={`/intake/${intake.id}`}
-                className="btn-secondary inline-flex rounded-full px-4 py-2 text-xs font-semibold"
+                className="btn-secondary text-brand-burgundy inline-flex rounded-full px-4 py-2 text-xs font-semibold"
               >
                 {tx("Izmeni intake", "Edit intake")}
               </Link>
               <Link
                 href="/contact"
-                className="btn-secondary inline-flex rounded-full px-4 py-2 text-xs font-semibold"
+                className="btn-secondary text-brand-burgundy inline-flex rounded-full px-4 py-2 text-xs font-semibold"
               >
                 {tx("Kontakt", "Contact")}
               </Link>

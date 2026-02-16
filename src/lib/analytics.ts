@@ -10,8 +10,13 @@ declare global {
 }
 
 export type AnalyticsEventName =
+  | "email_popup_submit"
+  | "email_popup_skip"
   | "booking_click"
   | "intake_click"
+  | "intake_start"
+  | "intake_submit"
+  | "newsletter_submit"
   | "lead_submit"
   | "contact_submit"
   | "documentation_download";

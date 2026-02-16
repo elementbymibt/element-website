@@ -18,7 +18,7 @@ export async function POST() {
     return NextResponse.json(
       {
         status: "error",
-        message: "Nismo uspeli da pokrenemo intake wizard. Pokušajte ponovo.",
+        message: "Nismo uspeli da pokrenemo upitnik. Pokušajte ponovo.",
       },
       { status: 500 },
     );

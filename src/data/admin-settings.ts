@@ -30,6 +30,7 @@ export const styleOptions = [
   "mediterranean_warm",
   "dark_elegant",
   "natural_organic",
+  "boho",
   "boutique_hotel",
 ] as const;
 

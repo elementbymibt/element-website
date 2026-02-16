@@ -23,7 +23,7 @@ export default async function AboutPage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="About"
+            eyebrow={textByLocale(locale, { sr: "O nama", en: "About" })}
             title={textByLocale(locale, {
               sr: "Studio sa jasnim autorskim potpisom",
               en: "A studio with a clear authorial signature",
@@ -54,7 +54,7 @@ export default async function AboutPage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Values"
+            eyebrow={textByLocale(locale, { sr: "Vrednosti", en: "Values" })}
             title={textByLocale(locale, { sr: "Principi koji nas vode", en: "Principles we follow" })}
             description={textByLocale(locale, {
               sr: "Svaka odluka u projektu proverava se kroz ova četiri kriterijuma.",
@@ -78,7 +78,7 @@ export default async function AboutPage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Team"
+            eyebrow={textByLocale(locale, { sr: "Tim", en: "Team" })}
             title={textByLocale(locale, { sr: "Tim", en: "Team" })}
             description={textByLocale(locale, {
               sr: "Multidisciplinarni profil koji kombinuje kreativnu viziju i operativnu pouzdanost.",
@@ -106,8 +106,8 @@ export default async function AboutPage() {
       <Container>
         <FadeIn className="border-brand-neutral-500/70 rounded-3xl border bg-white p-8 md:p-10">
           <SectionHeading
-            eyebrow="Press"
-            title="Featured / Press"
+            eyebrow={textByLocale(locale, { sr: "Objave", en: "Press" })}
+            title={textByLocale(locale, { sr: "Objave / Press", en: "Featured / Press" })}
             description={textByLocale(locale, {
               sr: "Objave i editorijali u kojima je studio predstavljen.",
               en: "Features and editorials where the studio has been presented.",

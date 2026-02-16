@@ -41,23 +41,12 @@ export async function POST(
     if (body.draft) {
       await intakeStore.saveDraft(id, {
         ...body.draft,
-        currentStep: 12,
+        currentStep: 3,
       });
     }
 
-    const result = await intakeStore.submitDraft(id, Boolean(body.confirmContradictions));
-
-    if (result.status === "needs_confirmation") {
-      return NextResponse.json(
-        {
-          status: "needs_confirmation",
-          message: "Pre potvrde proverite potencijalne kontradikcije.",
-          contradictions: result.contradictions,
-          intake: result.intake,
-        },
-        { status: 409 },
-      );
-    }
+    // Intake flow must not block the user: contradictions are handled internally.
+    const result = await intakeStore.submitDraft(id, true);
 
     const projectId = result.project?.id ?? id;
 
@@ -73,11 +62,11 @@ export async function POST(
 
     return NextResponse.json({
       status: "success",
-      message: "Intake je uspešno završen.",
+      message: "Upitnik je uspešno poslat.",
       projectId,
       intake: result.intake,
       contradictions: result.contradictions,
-      redirectTo: `/projects/${projectId}`,
+      redirectTo: `/thank-you?type=intake`,
     });
   } catch {
     return NextResponse.json(

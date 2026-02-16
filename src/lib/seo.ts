@@ -47,7 +47,7 @@ export function buildMetadata({
       images: [image],
     },
     alternates: {
-      canonical: path,
+      canonical: url,
     },
     icons: {
       icon: "/favicon.ico",

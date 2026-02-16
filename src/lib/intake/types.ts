@@ -275,6 +275,16 @@ export type IntakeDraft = {
   id: string;
   status: IntakeStatusOption;
   currentStep: number;
+  client: {
+    fullName: string;
+    email: string;
+  };
+  agreements: {
+    hasExactMeasurements: boolean | null;
+    understandsConceptConceptualOnly: boolean;
+    understandsTwoRevisionsIncluded: boolean;
+    privacyConsent: boolean;
+  };
   basics: {
     propertyType: PropertyTypeOption;
     city: string;

@@ -22,7 +22,7 @@ export default async function ProcessPage() {
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow="Process"
+          eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
           title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
           description={textByLocale(locale, {
             sr: "Naš metod je linearan, transparentan i vođen kvalitetom. Svaka etapa ima jasne isporuke.",

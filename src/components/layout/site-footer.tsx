@@ -8,7 +8,7 @@ import { Container } from "@/src/components/ui/container";
 import { siteConfig } from "@/src/lib/site-config";
 
 const legalLinks = [
-  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/privacy", label: "Politika privatnosti" },
   { href: "/documentation", label: "Dokumentacija" },
   { href: "/contact", label: "Kontakt" },
 ];

@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-type LeadSource = "newsletter" | "guide" | "documentation";
+type LeadSource = "newsletter" | "guide" | "documentation" | "popup";
 
 export type LeadPayload = {
   email: string;
@@ -28,6 +28,7 @@ type LeadStore = {
   newsletter: Array<PersistedRecord<LeadPayload>>;
   guide: Array<PersistedRecord<LeadPayload>>;
   documentation: Array<PersistedRecord<LeadPayload>>;
+  popup: Array<PersistedRecord<LeadPayload>>;
   contacts: Array<PersistedRecord<ContactPayload>>;
 };
 
@@ -44,6 +45,7 @@ const defaultStore: LeadStore = {
   newsletter: [],
   guide: [],
   documentation: [],
+  popup: [],
   contacts: [],
 };
 
@@ -81,6 +83,7 @@ class JsonLeadAdapter implements LeadAdapter {
         newsletter: parsed.newsletter ?? [],
         guide: parsed.guide ?? [],
         documentation: parsed.documentation ?? [],
+        popup: parsed.popup ?? [],
         contacts: parsed.contacts ?? [],
       };
     } catch {

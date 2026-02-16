@@ -1,18 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
-
-const budgetOptions = [
-  "Do 15.000€",
-  "15.000€ - 35.000€",
-  "35.000€ - 70.000€",
-  "70.000€+",
-];
-
-const spaceTypeOptions = ["Stan", "Kuća", "Poslovni prostor", "Drugo"];
 
 type ContactApiResponse = {
   status: "success" | "error";
@@ -36,8 +28,6 @@ export function ContactForm() {
       email: String(formData.get("email") ?? ""),
       phone: String(formData.get("phone") ?? ""),
       message: String(formData.get("message") ?? ""),
-      budgetRange: String(formData.get("budgetRange") ?? ""),
-      spaceType: String(formData.get("spaceType") ?? ""),
       website: String(formData.get("website") ?? ""),
     };
 
@@ -132,7 +122,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4">
         <div>
           <label
             htmlFor="phone"
@@ -149,49 +139,6 @@ export function ContactForm() {
             autoComplete="tel"
           />
         </div>
-        <div>
-          <label
-            htmlFor="spaceType"
-            className="text-brand-earth mb-2 block text-sm font-medium"
-          >
-            {locale === "en" ? "Space type" : "Tip prostora"}
-          </label>
-          <select id="spaceType" name="spaceType" required className="input-field">
-            <option value="">{locale === "en" ? "Select" : "Izaberite"}</option>
-            {spaceTypeOptions.map((option) => (
-              <option key={option} value={option}>
-                {locale === "en"
-                  ? option === "Stan"
-                    ? "Apartment"
-                    : option === "Kuća"
-                      ? "House"
-                      : option === "Poslovni prostor"
-                        ? "Business space"
-                        : "Other"
-                  : option}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label
-          htmlFor="budgetRange"
-          className="text-brand-earth mb-2 block text-sm font-medium"
-        >
-          {locale === "en" ? "Budget range" : "Budžet range"}
-        </label>
-        <select id="budgetRange" name="budgetRange" required className="input-field">
-          <option value="">
-            {locale === "en" ? "Select your approximate budget" : "Izaberite okvirni budžet"}
-          </option>
-          {budgetOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
       </div>
 
       <div>
@@ -209,8 +156,8 @@ export function ContactForm() {
           className="input-field min-h-36 rounded-3xl"
           placeholder={
             locale === "en"
-              ? "Briefly describe what you want to achieve in the space."
-              : "Ukratko opišite šta želite da postignete u prostoru."
+              ? "Briefly describe what you want to achieve."
+              : "Ukratko opišite šta želite da postignete."
           }
         />
       </div>
@@ -231,6 +178,25 @@ export function ContactForm() {
           {message}
         </p>
       ) : null}
+
+      <label className="text-brand-earth flex items-start gap-3 text-xs leading-relaxed">
+        <input
+          type="checkbox"
+          name="consent"
+          required
+          className="border-brand-neutral-500 mt-0.5 h-4 w-4 rounded accent-[var(--brand-gold)]"
+        />
+        <span>
+          {locale === "en" ? "I agree to the " : "Saglasan/na sam sa "}
+          <Link
+            href="/privacy"
+            className="text-brand-burgundy decoration-brand-gold font-semibold underline underline-offset-4"
+          >
+            {locale === "en" ? "Privacy Policy" : "Politikom privatnosti"}
+          </Link>
+          .
+        </span>
+      </label>
 
       <button
         type="submit"

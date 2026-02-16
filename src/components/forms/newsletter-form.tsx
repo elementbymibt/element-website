@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
@@ -80,7 +81,11 @@ export function NewsletterForm({
             ? "Thank you. Your subscription has been received."
             : "Hvala. Vaša prijava je uspešno poslata."),
       );
-      trackEvent("lead_submit", { source });
+      if (source === "newsletter") {
+        trackEvent("newsletter_submit", { source });
+      } else {
+        trackEvent("lead_submit", { source });
+      }
       form.reset();
 
       if (redirectOnSuccess) {
@@ -104,7 +109,7 @@ export function NewsletterForm({
     <form
       onSubmit={onSubmit}
       className={cn("space-y-3", className)}
-      aria-label="Lead forma"
+      aria-label={locale === "en" ? "Newsletter form" : "Newsletter forma"}
     >
       <label className="sr-only" htmlFor={`${source}-email`}>
         {locale === "en" ? "Email address" : "Email adresa"}
@@ -139,6 +144,25 @@ export function NewsletterForm({
           autoComplete="off"
         />
       </div>
+
+      <label className="text-brand-earth flex items-start gap-3 text-xs leading-relaxed">
+        <input
+          type="checkbox"
+          name="consent"
+          required
+          className="border-brand-neutral-500 mt-0.5 h-4 w-4 rounded accent-[var(--brand-gold)]"
+        />
+        <span>
+          {locale === "en" ? "I agree to the " : "Saglasan/na sam sa "}
+          <Link
+            href="/privacy"
+            className="text-brand-burgundy decoration-brand-gold font-semibold underline underline-offset-4"
+          >
+            {locale === "en" ? "Privacy Policy" : "Politikom privatnosti"}
+          </Link>
+          .
+        </span>
+      </label>
 
       {status === "error" ? (
         <p className="text-sm text-red-700" role="status">

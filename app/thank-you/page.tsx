@@ -18,21 +18,23 @@ export default async function ThankYouPage() {
   return (
     <Container className="py-24">
       <FadeIn className="border-brand-neutral-500/70 mx-auto max-w-3xl rounded-3xl border bg-white p-10 text-center">
-        <p className="text-brand-gold text-xs tracking-[0.3em] uppercase">Thank You</p>
+        <p className="text-brand-gold text-xs tracking-[0.3em] uppercase">
+          {textByLocale(locale, { sr: "Hvala", en: "Thank you" })}
+        </p>
         <h1 className="font-display text-brand-burgundy mt-3 text-5xl">
-          {textByLocale(locale, { sr: "Hvala na prijavi.", en: "Thank you for your submission." })}
+          {textByLocale(locale, { sr: "Hvala!", en: "Thank you!" })}
         </h1>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
-            sr: "Vaš zahtev je evidentiran. Uskoro vam šaljemo sledeće korake ili potvrdu konsultacija.",
-            en: "Your request has been recorded. We will send the next steps or consultation confirmation shortly.",
+            sr: "Analiziraćemo vaše podatke i kontaktirati vas sa personalizovanom ponudom.",
+            en: "We’ll review your details and get back with a personalized proposal.",
           })}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <BookingLink className="px-7 py-3 text-sm font-semibold" />
           <Link
             href="/"
-            className="btn-secondary inline-flex rounded-full px-7 py-3 text-sm font-semibold"
+            className="btn-secondary text-brand-burgundy inline-flex rounded-full px-7 py-3 text-sm font-semibold"
           >
             {textByLocale(locale, { sr: "Nazad na početnu", en: "Back to home" })}
           </Link>

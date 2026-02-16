@@ -9,12 +9,14 @@ type BookingLinkProps = {
   label?: string;
   className?: string;
   variant?: "primary" | "secondary";
+  trackingLocation?: string;
 };
 
 export function BookingLink({
   label,
   className,
   variant = "primary",
+  trackingLocation = "cta",
 }: BookingLinkProps) {
   const { locale } = useLocale();
   const buttonLabel = label ?? (locale === "en" ? "Schedule consultation" : "Zakažite konsultacije");
@@ -29,7 +31,7 @@ export function BookingLink({
         variant === "primary" ? "btn-primary" : "btn-secondary text-brand-burgundy",
         className,
       )}
-      onClick={() => trackEvent("booking_click", { location: "cta" })}
+      onClick={() => trackEvent("booking_click", { location: trackingLocation })}
       aria-label={locale === "en" ? "Open external booking link" : "Otvorite eksterni booking link"}
     >
       {buttonLabel}

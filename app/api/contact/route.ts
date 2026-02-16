@@ -33,10 +33,11 @@ export async function POST(request: Request) {
     const email = (body.email ?? "").toString().trim().toLowerCase();
     const phone = (body.phone ?? "").toString().trim();
     const message = (body.message ?? "").toString().trim();
-    const budgetRange = (body.budgetRange ?? "").toString().trim();
-    const spaceType = (body.spaceType ?? "").toString().trim();
+    const budgetRange =
+      (body.budgetRange ?? "").toString().trim() || "Nije navedeno";
+    const spaceType = (body.spaceType ?? "").toString().trim() || "Nije navedeno";
 
-    if (!name || !email || !phone || !message || !budgetRange || !spaceType) {
+    if (!name || !email || !phone || !message) {
       return NextResponse.json(
         {
           status: "error",

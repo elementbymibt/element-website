@@ -3,8 +3,11 @@ import { Cormorant_Garamond, Montserrat } from "next/font/google";
 
 import { AnalyticsProviders } from "@/src/components/analytics/analytics-providers";
 import { LocaleProvider } from "@/src/components/i18n/locale-provider";
+import { EmailEntryPopup } from "@/src/components/leads/email-entry-popup";
+import { MobileStickyCta } from "@/src/components/layout/mobile-sticky-cta";
 import { SiteFooter } from "@/src/components/layout/site-footer";
 import { SiteHeader } from "@/src/components/layout/site-header";
+import { StructuredData } from "@/src/components/seo/structured-data";
 import { getCurrentLocale } from "@/src/lib/i18n/server";
 import { siteConfig } from "@/src/lib/site-config";
 
@@ -62,6 +65,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${cormorant.variable} ${montserrat.variable} antialiased`}>
         <LocaleProvider initialLocale={locale}>
+          <StructuredData />
           <a
             href="#main-content"
             className="focus:bg-brand-burgundy sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:px-4 focus:py-2 focus:text-white"
@@ -69,10 +73,12 @@ export default async function RootLayout({
             {locale === "en" ? "Skip to content" : "Preskoči na sadržaj"}
           </a>
           <SiteHeader />
-          <main id="main-content" className="pt-20">
+          <main id="main-content" className="pt-20 pb-24 lg:pb-0">
             {children}
           </main>
           <SiteFooter />
+          <MobileStickyCta />
+          <EmailEntryPopup />
           <AnalyticsProviders />
         </LocaleProvider>
       </body>

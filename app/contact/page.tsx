@@ -25,7 +25,7 @@ export default async function ContactPage() {
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow="Contact"
+          eyebrow={textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
           title={textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
           description={textByLocale(locale, {
             sr: "Pošaljite osnovne informacije o projektu. Vraćamo se sa predlogom narednih koraka.",

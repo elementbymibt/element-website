@@ -4,7 +4,7 @@ import { leadAdapter } from "@/src/lib/lead-adapter";
 
 export const runtime = "nodejs";
 
-type LeadSource = "newsletter" | "guide" | "documentation";
+type LeadSource = "newsletter" | "guide" | "documentation" | "popup";
 
 type LeadRequestBody = {
   email?: string;

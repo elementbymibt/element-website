@@ -34,8 +34,8 @@ export default async function HomePage() {
       <section className="bg-brand-burgundy text-brand-neutral-100 relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <Image
-            src="/projects/p1-1.jpg"
-            alt="Luksuzni enterijer"
+            src="/hero/home-hero.jpg"
+            alt="Luksuzni enterijer dnevne zone – ÉLÉMENT"
             fill
             priority
             className="object-cover"
@@ -88,7 +88,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Selected Works"
+            eyebrow={textByLocale(locale, { sr: "Odabrani radovi", en: "Selected works" })}
             title={textByLocale(locale, { sr: "Izdvojeni projekti", en: "Featured projects" })}
             description={textByLocale(locale, {
               sr: "Šest prostora koji prikazuju naš standard razrade, materijalne kulture i estetske discipline.",
@@ -104,7 +104,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Signature"
+            eyebrow={textByLocale(locale, { sr: "Potpis", en: "Signature" })}
             title={textByLocale(locale, { sr: "Naš potpis", en: "Our signature" })}
             description={textByLocale(locale, {
               sr: "Dizajn odluke donosimo sa istim fokusom na atmosferu, ergonomiju i dugoročnu vrednost prostora.",
@@ -128,7 +128,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Services"
+            eyebrow={textByLocale(locale, { sr: "Usluge", en: "Services" })}
             title={textByLocale(locale, { sr: "Paketi usluga", en: "Service packages" })}
             description={textByLocale(locale, {
               sr: "Izaberite nivo podrške u skladu sa obimom projekta i stepenom uključenosti koji želite.",
@@ -149,7 +149,6 @@ export default async function HomePage() {
               <h3 className="font-display text-brand-burgundy mt-3 text-3xl">
                 {item.name}
               </h3>
-              <p className="text-brand-earth mt-2 text-sm">{item.priceFrom}</p>
               <ul className="text-brand-ink mt-5 space-y-2 text-sm">
                 {item.includes.slice(0, 3).map((line) => (
                   <li key={line} className="flex gap-2">
@@ -166,8 +165,8 @@ export default async function HomePage() {
           className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
         >
           {textByLocale(locale, {
-            sr: "Pogledajte kompletne pakete i cene",
-            en: "Explore full packages and pricing",
+            sr: "Pogledajte usluge i faze saradnje",
+            en: "Explore services and collaboration phases",
           })}
         </Link>
       </Container>
@@ -175,7 +174,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Process"
+            eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
             title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
             description={textByLocale(locale, {
               sr: "Proces od pet koraka koji smanjuje neizvesnost i drži kvalitet pod kontrolom.",
@@ -205,7 +204,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn className="border-brand-neutral-500/60 rounded-3xl border bg-white p-8 md:p-10">
           <SectionHeading
-            eyebrow="Lead Magnet"
+            eyebrow={textByLocale(locale, { sr: "Vodič", en: "Guide" })}
             title={textByLocale(locale, {
               sr: "Preuzmite vodič: 10 grešaka u uređenju",
               en: "Download the guide: 10 costly interior mistakes",
@@ -227,7 +226,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="Testimonials"
+            eyebrow={textByLocale(locale, { sr: "Utisci", en: "Testimonials" })}
             title={textByLocale(locale, {
               sr: "Povratne informacije klijenata",
               en: "Client testimonials",
@@ -259,7 +258,7 @@ export default async function HomePage() {
       <Container>
         <FadeIn className="border-brand-burgundy/20 from-brand-neutral-100 to-brand-neutral-200 rounded-3xl border bg-gradient-to-br p-8 md:p-10">
           <SectionHeading
-            eyebrow="Case Study"
+            eyebrow={textByLocale(locale, { sr: "Studija slučaja", en: "Case study" })}
             title={caseStudy.title}
             description={textByLocale(locale, {
               sr: "Format rada: Problem → Rešenje → Rezultat",
@@ -294,7 +293,7 @@ export default async function HomePage() {
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-brand-gold text-xs tracking-[0.3em] uppercase">
-                Final CTA
+                {textByLocale(locale, { sr: "Sledeći korak", en: "Next step" })}
               </p>
               <h2 className="font-display mt-2 text-4xl">
                 {textByLocale(locale, {

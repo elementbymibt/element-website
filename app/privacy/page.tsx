@@ -5,7 +5,7 @@ import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Privacy Policy",
+  title: "Politika privatnosti",
   description: "Placeholder stranica za politiku privatnosti.",
   path: "/privacy",
 });
@@ -17,8 +17,8 @@ export default async function PrivacyPage() {
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow="Legal"
-          title="Privacy Policy"
+          eyebrow={textByLocale(locale, { sr: "Pravno", en: "Legal" })}
+          title={textByLocale(locale, { sr: "Politika privatnosti", en: "Privacy Policy" })}
           description={textByLocale(locale, {
             sr: "Ovo je placeholder verzija politike privatnosti. Finalni tekst uskladiti sa pravnim timom pre objave.",
             en: "This is a placeholder privacy policy. Align final legal content before launch.",

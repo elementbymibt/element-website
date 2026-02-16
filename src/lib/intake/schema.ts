@@ -314,7 +314,7 @@ function stylesFromQuiz(quizAnswers: Partial<Record<StyleQuizQuestionId, string>
   }
 
   if (unique.length === 0) {
-    return ["warm_luxury", "japandi"] as StyleDiscoveryOption[];
+    return ["japandi"] as StyleDiscoveryOption[];
   }
 
   return unique;
@@ -710,7 +710,24 @@ export function createDefaultIntakeDraft(
   return {
     id,
     status: ensureEnum(input.status, intakeStatusOptions, "draft"),
-    currentStep: Math.max(0, Math.min(12, toPositiveInt(input.currentStep, 0))),
+    currentStep: Math.max(0, Math.min(3, toPositiveInt(input.currentStep, 0))),
+    client: {
+      fullName: sanitizeText((input as IntakeDraft).client?.fullName).slice(0, 120),
+      email: sanitizeText((input as IntakeDraft).client?.email).toLowerCase().slice(0, 180),
+    },
+    agreements: {
+      hasExactMeasurements:
+        typeof (input as IntakeDraft).agreements?.hasExactMeasurements === "boolean"
+          ? (input as IntakeDraft).agreements.hasExactMeasurements
+          : null,
+      understandsConceptConceptualOnly: Boolean(
+        (input as IntakeDraft).agreements?.understandsConceptConceptualOnly,
+      ),
+      understandsTwoRevisionsIncluded: Boolean(
+        (input as IntakeDraft).agreements?.understandsTwoRevisionsIncluded,
+      ),
+      privacyConsent: Boolean((input as IntakeDraft).agreements?.privacyConsent),
+    },
     basics: {
       propertyType,
       city: sanitizeText(input.basics?.city),
@@ -922,7 +939,23 @@ const IntakeAssetSchema = z.object({
 export const IntakeJsonSchema = z.object({
   id: z.string().uuid(),
   status: z.enum(intakeStatusOptions),
-  currentStep: z.number().int().min(0).max(12),
+  currentStep: z.number().int().min(0).max(3),
+  client: z.object({
+    fullName: z.string().min(1),
+    email: z.string().email(),
+  }),
+  agreements: z.object({
+    hasExactMeasurements: z.boolean(),
+    understandsConceptConceptualOnly: z.boolean().refine((value) => value === true, {
+      message: "Concept acknowledgment is required.",
+    }),
+    understandsTwoRevisionsIncluded: z.boolean().refine((value) => value === true, {
+      message: "Revision acknowledgment is required.",
+    }),
+    privacyConsent: z.boolean().refine((value) => value === true, {
+      message: "Privacy consent is required.",
+    }),
+  }),
   basics: z.object({
     propertyType: z.enum(propertyTypeOptions),
     city: z.string(),
@@ -1061,6 +1094,8 @@ export function mergeIntakeDraft(current: IntakeDraft, patch: Partial<IntakeDraf
   const merged: Partial<IntakeDraft> = {
     ...current,
     ...patch,
+    client: { ...current.client, ...patch.client },
+    agreements: { ...current.agreements, ...patch.agreements },
     basics: { ...current.basics, ...patch.basics },
     floorplan: { ...current.floorplan, ...patch.floorplan },
     lifestyle: { ...current.lifestyle, ...patch.lifestyle },

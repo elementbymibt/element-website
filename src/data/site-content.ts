@@ -9,7 +9,6 @@ export type ServicePackage = {
   id: string;
   name: string;
   subtitle: string;
-  priceFrom: string;
   idealFor: string;
   includes: string[];
 };
@@ -19,7 +18,6 @@ export const servicePackages: ServicePackage[] = [
     id: "concept",
     name: "Concept",
     subtitle: "Jasan dizajn pravac i estetika",
-    priceFrom: "od 1.200€",
     idealFor: "Klijente koji žele profesionalan koncept pre izvođenja",
     includes: [
       "Uvodni brief i analiza prostora",
@@ -32,7 +30,6 @@ export const servicePackages: ServicePackage[] = [
     id: "full-design",
     name: "Full Design",
     subtitle: "Kompletna razrada enterijera",
-    priceFrom: "od 3.500€",
     idealFor: "Stanove i kuće gde je potreban celovit projekat",
     includes: [
       "Sve iz Concept paketa",
@@ -45,7 +42,6 @@ export const servicePackages: ServicePackage[] = [
     id: "turn-key",
     name: "Premium Turn-Key",
     subtitle: "Od ideje do finalnog useljenja",
-    priceFrom: "od 6.900€",
     idealFor: "Klijente koji žele full-service bez operativnog opterećenja",
     includes: [
       "Kompletan Full Design scope",
@@ -58,7 +54,6 @@ export const servicePackages: ServicePackage[] = [
     id: "business",
     name: "Business Space",
     subtitle: "Premium poslovni enterijeri",
-    priceFrom: "od 4.800€",
     idealFor: "Boutique kancelarije, ordinacije i concept retail",
     includes: [
       "Brend integracija u prostor",

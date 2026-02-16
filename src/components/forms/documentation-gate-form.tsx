@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
@@ -122,6 +123,25 @@ export function DocumentationGateForm() {
             autoComplete="off"
           />
         </div>
+
+        <label className="text-brand-earth flex items-start gap-3 text-xs leading-relaxed">
+          <input
+            type="checkbox"
+            name="consent"
+            required
+            className="border-brand-neutral-500 mt-0.5 h-4 w-4 rounded accent-[var(--brand-gold)]"
+          />
+          <span>
+            {locale === "en" ? "I agree to the " : "Saglasan/na sam sa "}
+            <Link
+              href="/privacy"
+              className="text-brand-burgundy decoration-brand-gold font-semibold underline underline-offset-4"
+            >
+              {locale === "en" ? "Privacy Policy" : "Politikom privatnosti"}
+            </Link>
+            .
+          </span>
+        </label>
       </form>
 
       {status === "error" ? (

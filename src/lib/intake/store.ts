@@ -158,7 +158,7 @@ class JsonIntakeStore {
     const validated = toValidatedIntakeJson({
       ...current,
       status: "submitted",
-      currentStep: 12,
+      currentStep: 3,
       updatedAt: nowIso(),
     });
 
@@ -427,7 +427,7 @@ class PostgresIntakeStore {
       ...current,
       id,
       status: "submitted",
-      currentStep: 12,
+      currentStep: 3,
       updatedAt: nowIso(),
     });
 
@@ -455,7 +455,7 @@ class PostgresIntakeStore {
         UPDATE intakes
         SET
           status = 'submitted',
-          current_step = 12,
+          current_step = 3,
           draft_json = $2,
           intake_json = $2,
           contradictions = $3,

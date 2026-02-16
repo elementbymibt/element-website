@@ -20,7 +20,7 @@ export default async function DocumentationPage() {
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow="Gated Content"
+          eyebrow={textByLocale(locale, { sr: "Dokumentacija", en: "Documentation" })}
           title={textByLocale(locale, {
             sr: "Primer završne dokumentacije",
             en: "Final documentation sample",
