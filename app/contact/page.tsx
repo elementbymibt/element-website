@@ -85,15 +85,19 @@ export default async function ContactPage() {
           <div className="border-brand-neutral-500/70 mt-8 rounded-2xl border bg-white p-5">
             <p className="text-brand-earth text-sm">
               {textByLocale(locale, {
-                sr: "Za brži početak projekta možete direktno rezervisati termin uvodnih konsultacija.",
-                en: "For a faster start, you can directly reserve an introductory consultation slot.",
+                sr: "Za brži početak izaberite jedan od dva koraka ispod.",
+                en: "For a faster start, choose one of the two options below.",
               })}
             </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <BookingLink className="px-6 py-3 text-sm font-semibold" />
+            <div className="mt-4 space-y-2">
+              <BookingLink
+                className="w-full justify-center px-6 py-3 text-sm font-semibold"
+                trackingLocation="contact_panel"
+              />
               <IntakeLink
                 label={textByLocale(locale, { sr: "Popunite upitnik", en: "Start intake" })}
-                className="px-6 py-3 text-sm font-semibold"
+                className="w-full justify-center px-6 py-3 text-sm font-semibold"
+                trackingLocation="contact_panel"
               />
             </div>
           </div>

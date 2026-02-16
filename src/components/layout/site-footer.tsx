@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { NewsletterForm } from "@/src/components/forms/newsletter-form";
@@ -18,6 +19,8 @@ const legalLinks = [
 
 export function SiteFooter() {
   const { locale } = useLocale();
+  const pathname = usePathname();
+  const showFinalCta = pathname !== "/contact";
 
   const localizedLegalLinks =
     locale === "en"
@@ -32,25 +35,27 @@ export function SiteFooter() {
   return (
     <footer className="border-brand-neutral-500/60 bg-brand-neutral-200 mt-24 border-t pt-16 pb-10">
       <Container>
-        <div className="bg-brand-burgundy mb-12 rounded-3xl p-6 text-white md:p-8">
-          <p className="text-brand-gold text-xs tracking-[0.28em] uppercase">
-            {locale === "en" ? "Next step" : "Sledeći korak"}
-          </p>
-          <h3 className="font-display mt-2 text-4xl">
-            {locale === "en"
-              ? "Ready to find your element?"
-              : "Spremni da pronađemo Vaš element?"}
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm text-white/80">
-            {locale === "en"
-              ? "Book a consultation or complete the intake. We will return with a personalized proposal."
-              : "Zakažite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanom ponudom."}
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <BookingLink trackingLocation="footer_final" className="px-7 py-3 text-sm font-semibold" />
-            <IntakeLink trackingLocation="footer_final" className="px-7 py-3 text-sm font-semibold" />
+        {showFinalCta ? (
+          <div className="bg-brand-burgundy mb-12 rounded-3xl p-6 text-white md:p-8">
+            <p className="text-brand-gold text-xs tracking-[0.28em] uppercase">
+              {locale === "en" ? "Next step" : "Sledeći korak"}
+            </p>
+            <h3 className="font-display mt-2 text-4xl">
+              {locale === "en"
+                ? "Ready to find your element?"
+                : "Spremni da pronađemo Vaš element?"}
+            </h3>
+            <p className="mt-3 max-w-2xl text-sm text-white/80">
+              {locale === "en"
+                ? "Book a consultation or complete the intake. We will return with a personalized proposal."
+                : "Zakažite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanom ponudom."}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <BookingLink trackingLocation="footer_final" className="px-7 py-3 text-sm font-semibold" />
+              <IntakeLink trackingLocation="footer_final" className="px-7 py-3 text-sm font-semibold" />
+            </div>
           </div>
-        </div>
+        ) : null}
 
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
           <div>
