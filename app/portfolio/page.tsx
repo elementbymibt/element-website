@@ -24,7 +24,11 @@ export default async function PortfolioPage() {
         <div className="absolute inset-0 opacity-30">
           <Image
             src="/hero/portfolio-hero.jpg"
-            alt="Luksuzna kuhinja i open space – ÉLÉMENT"
+            alt={textByLocale(locale, {
+              sr: "Luksuzna kuhinja i open space – ÉLÉMENT",
+              en: "Luxury kitchen and open-space interior – ÉLÉMENT",
+              de: "Luxusküche und Open-Space-Interieur – ÉLÉMENT",
+            })}
             fill
             priority
             className="object-cover"
@@ -36,15 +40,16 @@ export default async function PortfolioPage() {
         <Container className="relative py-20 md:py-28">
           <FadeIn className="max-w-3xl">
             <p className="text-brand-gold text-xs tracking-[0.35em] uppercase">
-              {textByLocale(locale, { sr: "Portfolio", en: "Portfolio" })}
+              {textByLocale(locale, { sr: "Portfolio", en: "Portfolio", de: "Portfolio" })}
             </p>
             <h1 className="font-display mt-5 text-5xl leading-tight md:text-7xl">
-              {textByLocale(locale, { sr: "Naši projekti", en: "Selected projects" })}
+              {textByLocale(locale, { sr: "Naši projekti", en: "Selected projects", de: "Ausgewählte Projekte" })}
             </h1>
             <p className="text-brand-neutral-200 mt-6 text-base md:text-lg">
               {textByLocale(locale, {
                 sr: "Rezidencijalni i poslovni enterijeri sa jasnim potpisom: smiren luksuz, disciplinovan detalj i funkcija koja traje.",
                 en: "Residential and business interiors with a clear signature: quiet luxury, disciplined detailing and lasting function.",
+                de: "Wohn- und Geschäftsinterieurs mit klarer Handschrift: ruhiger Luxus, disziplinierte Details und langlebige Funktion.",
               })}
             </p>
           </FadeIn>
@@ -54,11 +59,12 @@ export default async function PortfolioPage() {
       <Container className="py-2">
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Kategorije", en: "Categories" })}
-            title={textByLocale(locale, { sr: "Istražite po tipu prostora", en: "Explore by space type" })}
+            eyebrow={textByLocale(locale, { sr: "Kategorije", en: "Categories", de: "Kategorien" })}
+            title={textByLocale(locale, { sr: "Istražite po tipu prostora", en: "Explore by space type", de: "Nach Raumtyp entdecken" })}
             description={textByLocale(locale, {
               sr: "Filteri su tu da brzo pronađete projekte najbliže vašem obimu i tipu prostora.",
               en: "Use filters to quickly find work closest to your scope and space type.",
+              de: "Nutzen Sie die Filter, um schnell Projekte zu finden, die Ihrem Umfang und Raumtyp am nächsten sind.",
             })}
           />
         </FadeIn>
@@ -70,4 +76,3 @@ export default async function PortfolioPage() {
     </div>
   );
 }
-

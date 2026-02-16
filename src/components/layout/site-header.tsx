@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { LanguageSwitcher } from "@/src/components/i18n/language-switcher";
 import { useLocale } from "@/src/components/i18n/locale-provider";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { cn } from "@/src/lib/utils";
 
 export function SiteHeader() {
@@ -15,26 +16,18 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems =
-    locale === "en"
-      ? [
-          { href: "/", label: "Home" },
-          { href: "/portfolio", label: "Projects" },
-          { href: "/services", label: "Services" },
-          { href: "/process", label: "Process" },
-          { href: "/about", label: "About" },
-          { href: "/promo", label: "Offers" },
-          { href: "/contact", label: "Contact" },
-        ]
-      : [
-          { href: "/", label: "Početna" },
-          { href: "/portfolio", label: "Projekti" },
-          { href: "/services", label: "Usluge" },
-          { href: "/process", label: "Proces" },
-          { href: "/about", label: "O nama" },
-          { href: "/promo", label: "Ponude" },
-          { href: "/contact", label: "Kontakt" },
-        ];
+  const navItems = [
+    { href: "/", label: pickLocaleText(locale, { sr: "Početna", en: "Home", de: "Startseite" }) },
+    {
+      href: "/portfolio",
+      label: pickLocaleText(locale, { sr: "Projekti", en: "Projects", de: "Projekte" }),
+    },
+    { href: "/services", label: pickLocaleText(locale, { sr: "Usluge", en: "Services", de: "Leistungen" }) },
+    { href: "/process", label: pickLocaleText(locale, { sr: "Proces", en: "Process", de: "Ablauf" }) },
+    { href: "/about", label: pickLocaleText(locale, { sr: "O nama", en: "About", de: "Über uns" }) },
+    { href: "/promo", label: pickLocaleText(locale, { sr: "Ponude", en: "Offers", de: "Angebote" }) },
+    { href: "/contact", label: pickLocaleText(locale, { sr: "Kontakt", en: "Contact", de: "Kontakt" }) },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,7 +55,11 @@ export function SiteHeader() {
         <Link
           href="/"
           className="group inline-flex items-center gap-2"
-          aria-label={locale === "en" ? "Homepage" : "Početna stranica"}
+          aria-label={pickLocaleText(locale, {
+            sr: "Početna stranica",
+            en: "Homepage",
+            de: "Startseite",
+          })}
           onClick={() => setMenuOpen(false)}
         >
           <span
@@ -85,7 +82,11 @@ export function SiteHeader() {
 
         <nav
           className="hidden items-center gap-7 lg:flex"
-          aria-label={locale === "en" ? "Main navigation" : "Glavna navigacija"}
+          aria-label={pickLocaleText(locale, {
+            sr: "Glavna navigacija",
+            en: "Main navigation",
+            de: "Hauptnavigation",
+          })}
         >
           {navItems.map((item) => {
             const active = pathname === item.href;
@@ -125,11 +126,15 @@ export function SiteHeader() {
               : "border-brand-earth/30 text-brand-burgundy border",
           )}
           onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label={locale === "en" ? "Open menu" : "Otvori meni"}
+          aria-label={pickLocaleText(locale, {
+            sr: "Otvori meni",
+            en: "Open menu",
+            de: "Menü öffnen",
+          })}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
-          {locale === "en" ? "Menu" : "Meni"}
+          {pickLocaleText(locale, { sr: "Meni", en: "Menu", de: "Menü" })}
         </button>
       </div>
 
@@ -145,7 +150,11 @@ export function SiteHeader() {
           >
             <nav
               className="flex flex-col gap-2"
-              aria-label={locale === "en" ? "Mobile navigation" : "Mobilna navigacija"}
+              aria-label={pickLocaleText(locale, {
+                sr: "Mobilna navigacija",
+                en: "Mobile navigation",
+                de: "Mobile Navigation",
+              })}
             >
               {navItems.map((item) => {
                 const active = pathname === item.href;

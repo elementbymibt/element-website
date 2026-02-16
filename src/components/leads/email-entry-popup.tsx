@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { cn } from "@/src/lib/utils";
 
 type LeadApiResponse = {
@@ -39,17 +40,42 @@ export function EmailEntryPopup({ className }: { className?: string }) {
 
   const t = useMemo(() => {
     return {
-      title: locale === "en" ? "Before we begin…" : "Pre nego što krenemo…",
-      body:
-        locale === "en"
-          ? "Leave your email and we’ll send you a mini guide: How to avoid 7 common mistakes in space planning."
-          : "Ostavite email i poslaćemo vam mini vodič: Kako da izbegnete 7 najčešćih grešaka u uređenju prostora.",
-      emailLabel: locale === "en" ? "Email address" : "Email adresa",
-      emailPlaceholder: locale === "en" ? "Enter your email" : "Unesite email",
-      send: locale === "en" ? "Send" : "Pošalji",
-      skip: locale === "en" ? "Continue without email" : "Nastavi bez unosa",
-      consentPrefix: locale === "en" ? "I agree to the " : "Saglasan/na sam sa ",
-      consentLink: locale === "en" ? "Privacy Policy" : "Politikom privatnosti",
+      title: pickLocaleText(locale, {
+        sr: "Pre nego što krenemo…",
+        en: "Before we begin…",
+        de: "Bevor wir starten…",
+      }),
+      body: pickLocaleText(locale, {
+        sr: "Ostavite email i poslaćemo vam mini vodič: Kako da izbegnete 7 najčešćih grešaka u uređenju prostora.",
+        en: "Leave your email and we’ll send you a mini guide: How to avoid 7 common mistakes in space planning.",
+        de: "Hinterlassen Sie Ihre E-Mail und wir senden Ihnen einen Mini-Guide: So vermeiden Sie die 7 häufigsten Fehler bei der Raumgestaltung.",
+      }),
+      emailLabel: pickLocaleText(locale, {
+        sr: "Email adresa",
+        en: "Email address",
+        de: "E-Mail-Adresse",
+      }),
+      emailPlaceholder: pickLocaleText(locale, {
+        sr: "Unesite email",
+        en: "Enter your email",
+        de: "E-Mail eingeben",
+      }),
+      send: pickLocaleText(locale, { sr: "Pošalji", en: "Send", de: "Senden" }),
+      skip: pickLocaleText(locale, {
+        sr: "Nastavi bez unosa",
+        en: "Continue without email",
+        de: "Ohne Eingabe fortfahren",
+      }),
+      consentPrefix: pickLocaleText(locale, {
+        sr: "Saglasan/na sam sa ",
+        en: "I agree to the ",
+        de: "Ich stimme der ",
+      }),
+      consentLink: pickLocaleText(locale, {
+        sr: "Politikom privatnosti",
+        en: "Privacy Policy",
+        de: "Datenschutzerklärung",
+      }),
       consentSuffix: locale === "en" ? "" : "",
     };
   }, [locale]);
@@ -122,9 +148,11 @@ export function EmailEntryPopup({ className }: { className?: string }) {
         setStatus("error");
         setMessage(
           result.message ||
-            (locale === "en"
-              ? "Something went wrong. Please try again."
-              : "Došlo je do greške. Pokušajte ponovo."),
+            pickLocaleText(locale, {
+              sr: "Došlo je do greške. Pokušajte ponovo.",
+              en: "Something went wrong. Please try again.",
+              de: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+            }),
         );
         return;
       }
@@ -133,9 +161,11 @@ export function EmailEntryPopup({ className }: { className?: string }) {
       setCookie(COOKIE_KEY, "1", COOKIE_MAX_AGE_SECONDS);
       setStatus("success");
       setMessage(
-        locale === "en"
-          ? "Thank you. The guide will arrive shortly."
-          : "Hvala. Vodič stiže uskoro.",
+        pickLocaleText(locale, {
+          sr: "Hvala. Vodič stiže uskoro.",
+          en: "Thank you. The guide will arrive shortly.",
+          de: "Vielen Dank. Der Guide kommt in Kürze.",
+        }),
       );
       form.reset();
 
@@ -143,9 +173,11 @@ export function EmailEntryPopup({ className }: { className?: string }) {
     } catch {
       setStatus("error");
       setMessage(
-        locale === "en"
-          ? "Something went wrong. Please try again."
-          : "Došlo je do greške. Pokušajte ponovo.",
+        pickLocaleText(locale, {
+          sr: "Došlo je do greške. Pokušajte ponovo.",
+          en: "Something went wrong. Please try again.",
+          de: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+        }),
       );
     } finally {
       setPending(false);
@@ -242,7 +274,9 @@ export function EmailEntryPopup({ className }: { className?: string }) {
                   disabled={pending}
                   className="btn-primary inline-flex min-h-11 items-center justify-center rounded-full px-7 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {pending ? (locale === "en" ? "Sending…" : "Slanje…") : t.send}
+                  {pending
+                    ? pickLocaleText(locale, { sr: "Slanje…", en: "Sending…", de: "Wird gesendet…" })
+                    : t.send}
                 </button>
                 <button
                   type="button"
@@ -259,4 +293,3 @@ export function EmailEntryPopup({ className }: { className?: string }) {
     </AnimatePresence>
   );
 }
-

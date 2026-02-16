@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { cn } from "@/src/lib/utils";
 
 type IntakeLinkProps = {
@@ -20,7 +21,13 @@ export function IntakeLink({
   trackingLocation = "cta",
 }: IntakeLinkProps) {
   const { locale } = useLocale();
-  const buttonLabel = label ?? (locale === "en" ? "Start intake" : "Popunite upitnik");
+  const buttonLabel =
+    label ??
+    pickLocaleText(locale, {
+      sr: "Popunite upitnik",
+      en: "Start intake",
+      de: "Fragebogen starten",
+    });
 
   return (
     <Link
@@ -44,11 +51,11 @@ export function IntakeLink({
         }
         trackEvent("intake_start", { location: trackingLocation });
       }}
-      aria-label={
-        locale === "en"
-          ? "Open client intake questionnaire"
-          : "Otvorite klijentski upitnik"
-      }
+      aria-label={pickLocaleText(locale, {
+        sr: "Otvorite klijentski upitnik",
+        en: "Open client intake questionnaire",
+        de: "Kundenfragebogen öffnen",
+      })}
     >
       {buttonLabel}
     </Link>

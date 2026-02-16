@@ -22,11 +22,12 @@ export default async function PromoPage() {
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow={textByLocale(locale, { sr: "Ponude", en: "Offers" })}
-          title={textByLocale(locale, { sr: "Aktuelne ponude", en: "Current offers" })}
+          eyebrow={textByLocale(locale, { sr: "Ponude", en: "Offers", de: "Angebote" })}
+          title={textByLocale(locale, { sr: "Aktuelne ponude", en: "Current offers", de: "Aktuelle Angebote" })}
           description={textByLocale(locale, {
             sr: "Ograničene ponude za klijente koji žele da rezervišu termin u tekućem periodu.",
             en: "Limited offers for clients booking consultation slots in the current period.",
+            de: "Begrenzte Angebote für Kunden, die im aktuellen Zeitraum einen Termin reservieren möchten.",
           })}
         />
       </FadeIn>
@@ -54,7 +55,7 @@ export default async function PromoPage() {
               href="/contact"
               className="text-brand-burgundy decoration-brand-gold mt-6 inline-flex text-xs font-semibold underline underline-offset-4"
             >
-              {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us" })}
+              {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us", de: "Kontaktieren Sie uns" })}
             </Link>
           </FadeIn>
         ))}

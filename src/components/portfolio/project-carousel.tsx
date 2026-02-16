@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { cn } from "@/src/lib/utils";
 
 type ProjectCarouselProps = {
@@ -36,10 +37,11 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
   }, [currentImage, index]);
 
   const imageAlt = useMemo(() => {
-    if (locale === "en") {
-      return `${title} – inspiration ${inspirationLabel}`;
-    }
-    return `${title} – inspiracija ${inspirationLabel}`;
+    return pickLocaleText(locale, {
+      sr: `${title} – inspiracija ${inspirationLabel}`,
+      en: `${title} – inspiration ${inspirationLabel}`,
+      de: `${title} – Inspiration ${inspirationLabel}`,
+    });
   }, [inspirationLabel, locale, title]);
 
   useEffect(() => {
@@ -84,7 +86,11 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
               type="button"
               onClick={() => setLightboxOpen(true)}
               className="absolute inset-0 cursor-zoom-in"
-              aria-label={locale === "en" ? "Open gallery image" : "Otvori uvećan prikaz"}
+              aria-label={pickLocaleText(locale, {
+                sr: "Otvori uvećan prikaz",
+                en: "Open gallery image",
+                de: "Galeriebild öffnen",
+              })}
             >
               <Image
                 src={currentImage}
@@ -103,9 +109,13 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
             type="button"
             className="border-brand-neutral-100/50 bg-brand-burgundy/75 text-brand-neutral-100 rounded-full border px-4 py-2 text-xs tracking-[0.16em] uppercase backdrop-blur"
             onClick={onPrev}
-            aria-label={locale === "en" ? "Previous image" : "Prethodna slika"}
+            aria-label={pickLocaleText(locale, {
+              sr: "Prethodna slika",
+              en: "Previous image",
+              de: "Vorheriges Bild",
+            })}
           >
-            {locale === "en" ? "Previous" : "Prethodna"}
+            {pickLocaleText(locale, { sr: "Prethodna", en: "Previous", de: "Zurück" })}
           </button>
           <span className="border-brand-neutral-100/50 bg-brand-burgundy/75 text-brand-neutral-100 rounded-full border px-3 py-1 text-xs backdrop-blur">
             {index + 1}/{images.length}
@@ -114,9 +124,13 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
             type="button"
             className="border-brand-neutral-100/50 bg-brand-burgundy/75 text-brand-neutral-100 rounded-full border px-4 py-2 text-xs tracking-[0.16em] uppercase backdrop-blur"
             onClick={onNext}
-            aria-label={locale === "en" ? "Next image" : "Sledeća slika"}
+            aria-label={pickLocaleText(locale, {
+              sr: "Sledeća slika",
+              en: "Next image",
+              de: "Nächstes Bild",
+            })}
           >
-            {locale === "en" ? "Next" : "Sledeća"}
+            {pickLocaleText(locale, { sr: "Sledeća", en: "Next", de: "Weiter" })}
           </button>
         </div>
       </div>
@@ -133,15 +147,19 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
                 ? "border-brand-gold"
                 : "border-brand-neutral-500 hover:border-brand-earth",
             )}
-            aria-label={
-              locale === "en"
-                ? `Show image ${imageIndex + 1}`
-                : `Prikaži sliku ${imageIndex + 1}`
-            }
+            aria-label={pickLocaleText(locale, {
+              sr: `Prikaži sliku ${imageIndex + 1}`,
+              en: `Show image ${imageIndex + 1}`,
+              de: `Bild ${imageIndex + 1} anzeigen`,
+            })}
           >
             <Image
               src={image}
-              alt={locale === "en" ? `${title} thumbnail ${imageIndex + 1}` : `${title} sličica ${imageIndex + 1}`}
+              alt={pickLocaleText(locale, {
+                sr: `${title} sličica ${imageIndex + 1}`,
+                en: `${title} thumbnail ${imageIndex + 1}`,
+                de: `${title} Vorschau ${imageIndex + 1}`,
+              })}
               fill
               className="object-cover"
               sizes="20vw"
@@ -159,7 +177,11 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
             exit={{ opacity: 0 }}
             role="dialog"
             aria-modal="true"
-            aria-label={locale === "en" ? "Image preview" : "Pregled slike"}
+            aria-label={pickLocaleText(locale, {
+              sr: "Pregled slike",
+              en: "Image preview",
+              de: "Bildvorschau",
+            })}
             onClick={() => setLightboxOpen(false)}
           >
             <motion.div
@@ -188,7 +210,7 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
                     className="border-white/20 bg-black/40 text-white rounded-full border px-4 py-2 text-xs tracking-[0.16em] uppercase backdrop-blur"
                     onClick={onPrev}
                   >
-                    {locale === "en" ? "Previous" : "Prethodna"}
+                    {pickLocaleText(locale, { sr: "Prethodna", en: "Previous", de: "Zurück" })}
                   </button>
                   <div className="text-white text-xs">
                     {index + 1}/{images.length}
@@ -198,7 +220,7 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
                     className="border-white/20 bg-black/40 text-white rounded-full border px-4 py-2 text-xs tracking-[0.16em] uppercase backdrop-blur"
                     onClick={onNext}
                   >
-                    {locale === "en" ? "Next" : "Sledeća"}
+                    {pickLocaleText(locale, { sr: "Sledeća", en: "Next", de: "Weiter" })}
                   </button>
                 </div>
 
@@ -206,9 +228,13 @@ export function ProjectCarousel({ images, title }: ProjectCarouselProps) {
                   type="button"
                   className="border-white/20 bg-black/40 text-white absolute top-4 right-4 rounded-full border px-4 py-2 text-xs tracking-[0.16em] uppercase backdrop-blur"
                   onClick={() => setLightboxOpen(false)}
-                  aria-label={locale === "en" ? "Close preview" : "Zatvori pregled"}
+                  aria-label={pickLocaleText(locale, {
+                    sr: "Zatvori pregled",
+                    en: "Close preview",
+                    de: "Vorschau schließen",
+                  })}
                 >
-                  {locale === "en" ? "Close" : "Zatvori"}
+                  {pickLocaleText(locale, { sr: "Zatvori", en: "Close", de: "Schließen" })}
                 </button>
               </div>
             </motion.div>

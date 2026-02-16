@@ -34,7 +34,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 opacity-30">
           <Image
             src="/hero/home-hero.jpg"
-            alt="Luksuzni enterijer dnevne zone – ÉLÉMENT"
+            alt={textByLocale(locale, {
+              sr: "Luksuzni enterijer dnevne zone – ÉLÉMENT",
+              en: "Luxury living area interior – ÉLÉMENT",
+              de: "Luxuriöses Wohnzimmer-Interieur – ÉLÉMENT",
+            })}
             fill
             priority
             className="object-cover"
@@ -52,45 +56,49 @@ export default async function HomePage() {
               {textByLocale(locale, {
                 sr: "Postoji jedan element koji čini razliku. Mi ga otkrivamo. Vi ga živite.",
                 en: "There is one element that makes the difference. We reveal it. You live it.",
+                de: "Es gibt ein Element, das den Unterschied macht. Wir entdecken es. Sie leben es.",
               })}
             </h1>
             <p className="text-brand-neutral-200 mt-6 max-w-2xl text-base md:text-lg">
               {textByLocale(locale, {
                 sr: "Element nije detalj. Element je identitet prostora. Onaj nevidljivi sloj koji enterijeru daje ravnotežu, proporciju i funkcionalnost. Mi ne uređujemo prostor. Mi definišemo njegov karakter.",
                 en: "Element is not a detail. Element is the identity of a space: the invisible layer that gives balance, proportion and function. We don’t decorate. We define character.",
+                de: "Element ist kein Detail. Element ist die Identität eines Raums: die unsichtbare Ebene, die Balance, Proportion und Funktion verleiht. Wir dekorieren nicht. Wir definieren Charakter.",
               })}
             </p>
             <p className="text-brand-neutral-200/90 mt-4 max-w-2xl text-sm">
               {textByLocale(locale, {
                 sr: "Dizajn enterijera za rezidencijalne i poslovne prostore u Beogradu i Pančevu.",
                 en: "Interior design for residential and business spaces in Belgrade and Pančevo.",
+                de: "Interior Design für Wohn- und Geschäftsräume in Belgrad und Pančevo.",
               })}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs tracking-[0.22em] uppercase text-white/80">
               <span className="inline-flex items-center gap-2">
                 <span className="bg-brand-gold inline-block h-1.5 w-1.5 rounded-full" />
-                {textByLocale(locale, { sr: "Idejno rešenje", en: "Concept design" })}
+                {textByLocale(locale, { sr: "Idejno rešenje", en: "Concept design", de: "Konzeptdesign" })}
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="bg-brand-gold inline-block h-1.5 w-1.5 rounded-full" />
-                {textByLocale(locale, { sr: "3D vizuelizacija", en: "3D visualization" })}
+                {textByLocale(locale, { sr: "3D vizuelizacija", en: "3D visualization", de: "3D-Visualisierung" })}
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="bg-brand-gold inline-block h-1.5 w-1.5 rounded-full" />
-                {textByLocale(locale, { sr: "Finalni paket smernica", en: "Final guidance package" })}
+                {textByLocale(locale, { sr: "Finalni paket smernica", en: "Final guidance package", de: "Finales Leitfadenpaket" })}
               </span>
             </div>
             <p className="mt-8 text-sm text-white/80">
               {textByLocale(locale, {
                 sr: "Spremni da pronađemo Vaš element?",
                 en: "Ready to find your element?",
+                de: "Bereit, Ihr Element zu finden?",
               })}
             </p>
             <Link
               href="/contact"
               className="text-brand-neutral-100 decoration-brand-gold mt-6 inline-flex text-sm font-semibold underline underline-offset-4"
             >
-              {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us" })}
+              {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us", de: "Kontaktieren Sie uns" })}
             </Link>
           </FadeIn>
         </Container>
@@ -99,11 +107,12 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Odabrani radovi", en: "Selected works" })}
-            title={textByLocale(locale, { sr: "Izdvojeni projekti", en: "Featured projects" })}
+            eyebrow={textByLocale(locale, { sr: "Odabrani radovi", en: "Selected works", de: "Ausgewählte Arbeiten" })}
+            title={textByLocale(locale, { sr: "Izdvojeni projekti", en: "Featured projects", de: "Hervorgehobene Projekte" })}
             description={textByLocale(locale, {
               sr: "Kratak izbor projekata koji prikazuju naš standard razrade, materijala i atmosfere.",
               en: "A concise selection of projects that represents our standard of detailing, materials and atmosphere.",
+              de: "Eine kompakte Auswahl an Projekten, die unseren Standard bei Detail, Material und Atmosphäre zeigt.",
             })}
           />
         </FadeIn>
@@ -114,18 +123,19 @@ export default async function HomePage() {
           href="/portfolio"
           className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
         >
-          {textByLocale(locale, { sr: "Pogledajte sve projekte", en: "View all projects" })}
+          {textByLocale(locale, { sr: "Pogledajte sve projekte", en: "View all projects", de: "Alle Projekte ansehen" })}
         </Link>
       </Container>
 
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Usluge", en: "Services" })}
-            title={textByLocale(locale, { sr: "Kako izgleda saradnja", en: "How collaboration works" })}
+            eyebrow={textByLocale(locale, { sr: "Usluge", en: "Services", de: "Leistungen" })}
+            title={textByLocale(locale, { sr: "Kako izgleda saradnja", en: "How collaboration works", de: "Wie die Zusammenarbeit abläuft" })}
             description={textByLocale(locale, {
               sr: "Tri faze koje donose jasan pravac, sigurnost pre realizacije i finalni set smernica za dosledan rezultat.",
               en: "Three phases that deliver direction, confidence before realization, and a final set of guidance for a consistent result.",
+              de: "Drei Phasen, die klare Richtung, Sicherheit vor der Umsetzung und einen finalen Leitfaden für konsistente Ergebnisse liefern.",
             })}
           />
         </FadeIn>
@@ -160,6 +170,7 @@ export default async function HomePage() {
           {textByLocale(locale, {
             sr: "Saznajte više",
             en: "Learn more",
+            de: "Mehr erfahren",
           })}
         </Link>
       </Container>
@@ -167,11 +178,12 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
-            title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
+            eyebrow={textByLocale(locale, { sr: "Proces", en: "Process", de: "Ablauf" })}
+            title={textByLocale(locale, { sr: "Kako radimo", en: "How we work", de: "Wie wir arbeiten" })}
             description={textByLocale(locale, {
               sr: "Četiri jasna koraka koji smanjuju neizvesnost i drže kvalitet pod kontrolom.",
               en: "Four clear steps that reduce uncertainty and keep quality under control.",
+              de: "Vier klare Schritte, die Unsicherheit reduzieren und Qualität unter Kontrolle halten.",
             })}
           />
         </FadeIn>
@@ -196,26 +208,32 @@ export default async function HomePage() {
           href="/process"
           className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
         >
-          {textByLocale(locale, { sr: "Detaljan proces", en: "Detailed process" })}
+          {textByLocale(locale, { sr: "Detaljan proces", en: "Detailed process", de: "Detaillierter Ablauf" })}
         </Link>
       </Container>
 
       <Container>
         <FadeIn className="border-brand-neutral-500/60 rounded-3xl border bg-white p-8 md:p-10">
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Vodič", en: "Guide" })}
+            eyebrow={textByLocale(locale, { sr: "Vodič", en: "Guide", de: "Guide" })}
             title={textByLocale(locale, {
               sr: "Preuzmite vodič: 10 grešaka u uređenju",
               en: "Download the guide: 10 costly interior mistakes",
+              de: "Guide herunterladen: 10 kostspielige Einrichtungsfehler",
             })}
             description={textByLocale(locale, {
               sr: "Kratak vodič sa ključnim greškama koje najčešće povećavaju trošak i produžavaju rokove.",
               en: "A short guide covering mistakes that most often increase cost and delay timelines.",
+              de: "Ein kurzer Guide mit den häufigsten Fehlern, die Kosten erhöhen und Zeitpläne verzögern.",
             })}
           />
           <NewsletterForm
             source="guide"
-            buttonLabel={locale === "en" ? "Get the guide" : "Preuzmi vodič"}
+            buttonLabel={textByLocale(locale, {
+              sr: "Preuzmi vodič",
+              en: "Get the guide",
+              de: "Guide erhalten",
+            })}
             redirectOnSuccess
             className="mt-6 max-w-xl"
           />
@@ -225,14 +243,16 @@ export default async function HomePage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Utisci", en: "Testimonials" })}
+            eyebrow={textByLocale(locale, { sr: "Utisci", en: "Testimonials", de: "Kundenstimmen" })}
             title={textByLocale(locale, {
               sr: "Povratne informacije klijenata",
               en: "Client testimonials",
+              de: "Feedback unserer Kunden",
             })}
             description={textByLocale(locale, {
               sr: "Diskretna potvrda kvaliteta dolazi iz iskustva onih koji su prošli ceo proces sa nama.",
               en: "The strongest proof of quality comes from clients who completed the full process with us.",
+              de: "Der stärkste Qualitätsbeweis kommt von Kunden, die den gesamten Prozess mit uns durchlaufen haben.",
             })}
           />
         </FadeIn>

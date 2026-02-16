@@ -7,7 +7,7 @@ import { EmailEntryPopup } from "@/src/components/leads/email-entry-popup";
 import { SiteFooter } from "@/src/components/layout/site-footer";
 import { SiteHeader } from "@/src/components/layout/site-header";
 import { StructuredData } from "@/src/components/seo/structured-data";
-import { getCurrentLocale } from "@/src/lib/i18n/server";
+import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { siteConfig } from "@/src/lib/site-config";
 
 import "./globals.css";
@@ -79,7 +79,11 @@ export default async function RootLayout({
             href="#main-content"
             className="focus:bg-brand-burgundy sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:px-4 focus:py-2 focus:text-white"
           >
-            {locale === "en" ? "Skip to content" : "Preskoči na sadržaj"}
+            {textByLocale(locale, {
+              sr: "Preskoči na sadržaj",
+              en: "Skip to content",
+              de: "Zum Inhalt springen",
+            })}
           </a>
           <SiteHeader />
           <main id="main-content" className="pt-20">

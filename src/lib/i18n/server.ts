@@ -1,6 +1,13 @@
 import { cookies } from "next/headers";
 
-import { defaultLocale, isLocale, type SiteLocale, localeCookieName } from "@/src/lib/i18n/config";
+import {
+  defaultLocale,
+  isLocale,
+  localeCookieName,
+  pickLocaleText,
+  type LocalizedText,
+  type SiteLocale,
+} from "@/src/lib/i18n/config";
 
 export async function getCurrentLocale(): Promise<SiteLocale> {
   const cookieStore = await cookies();
@@ -13,6 +20,6 @@ export async function getCurrentLocale(): Promise<SiteLocale> {
   return defaultLocale;
 }
 
-export function textByLocale<T>(locale: SiteLocale, copy: { sr: T; en: T }): T {
-  return locale === "en" ? copy.en : copy.sr;
+export function textByLocale<T>(locale: SiteLocale, copy: LocalizedText<T>): T {
+  return pickLocaleText(locale, copy);
 }

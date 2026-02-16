@@ -22,6 +22,7 @@ import {
 import { adminDefaults } from "@/src/data/admin-settings";
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
+import type { SiteLocale } from "@/src/lib/i18n/config";
 import { cn } from "@/src/lib/utils";
 import {
   budgetAllocationKeys,
@@ -71,48 +72,51 @@ type SaveState = "idle" | "saving" | "saved" | "error";
 
 const priorityLabels: Record<
   (typeof tradeoffKeys)[number],
-  { sr: string; en: string }
+  { sr: string; en: string; de: string }
 > = {
-  aesthetics: { sr: "Estetika", en: "Aesthetics" },
-  functionality: { sr: "Funkcionalnost", en: "Functionality" },
-  budget_control: { sr: "Kontrola budžeta", en: "Budget control" },
-  speed_timeline: { sr: "Brzina", en: "Speed" },
-  durability: { sr: "Trajnost", en: "Durability" },
+  aesthetics: { sr: "Estetika", en: "Aesthetics", de: "Ästhetik" },
+  functionality: { sr: "Funkcionalnost", en: "Functionality", de: "Funktionalität" },
+  budget_control: { sr: "Kontrola budžeta", en: "Budget control", de: "Budgetkontrolle" },
+  speed_timeline: { sr: "Brzina", en: "Speed", de: "Tempo" },
+  durability: { sr: "Trajnost", en: "Durability", de: "Langlebigkeit" },
 };
 
 const allocationLabels: Record<
   (typeof budgetAllocationKeys)[number],
-  { sr: string; en: string }
+  { sr: string; en: string; de: string }
 > = {
-  kitchen: { sr: "Kuhinja", en: "Kitchen" },
-  living: { sr: "Dnevna", en: "Living" },
-  bedrooms: { sr: "Spavaće", en: "Bedrooms" },
-  bathroom: { sr: "Kupatilo", en: "Bathroom" },
-  lighting: { sr: "Rasveta", en: "Lighting" },
-  decor: { sr: "Dekor", en: "Decor" },
-  appliances: { sr: "Tehnika", en: "Appliances" },
-  seating: { sr: "Garniture/sedenje", en: "Seating" },
+  kitchen: { sr: "Kuhinja", en: "Kitchen", de: "Küche" },
+  living: { sr: "Dnevna", en: "Living", de: "Wohnbereich" },
+  bedrooms: { sr: "Spavaće", en: "Bedrooms", de: "Schlafzimmer" },
+  bathroom: { sr: "Kupatilo", en: "Bathroom", de: "Badezimmer" },
+  lighting: { sr: "Rasveta", en: "Lighting", de: "Beleuchtung" },
+  decor: { sr: "Dekor", en: "Decor", de: "Dekor" },
+  appliances: { sr: "Tehnika", en: "Appliances", de: "Technik" },
+  seating: { sr: "Garniture/sedenje", en: "Seating", de: "Sitzmöbel" },
 };
 
 const wallPreferenceLabels = {
-  keep_white: { sr: "Zadrži bele zidove", en: "Keep white walls" },
-  greige_walls: { sr: "Greige zidovi", en: "Greige walls" },
-  accent_wall: { sr: "Jedan akcentni zid", en: "One accent wall" },
-  recommend_for_me: { sr: "Predloži umesto mene", en: "Recommend for me" },
+  keep_white: { sr: "Zadrži bele zidove", en: "Keep white walls", de: "Weiße Wände beibehalten" },
+  greige_walls: { sr: "Greige zidovi", en: "Greige walls", de: "Greige Wände" },
+  accent_wall: { sr: "Jedan akcentni zid", en: "One accent wall", de: "Eine Akzentwand" },
+  recommend_for_me: { sr: "Predloži umesto mene", en: "Recommend for me", de: "Für mich empfehlen" },
 } as const;
 
 const lightingPresetDescriptions = {
   DAY_SOFT: {
     sr: "Meko dnevno svetlo i funkcionalna jasnoća.",
     en: "Soft daylight and practical clarity.",
+    de: "Sanftes Tageslicht und klare Funktionalität.",
   },
   AFTERNOON_WARM: {
     sr: "Balans topline i definicije kroz ceo dan.",
     en: "Balanced warmth and definition throughout the day.",
+    de: "Ausgewogene Wärme und klare Definition über den Tag.",
   },
   EVENING_COZY: {
     sr: "Topla večernja atmosfera i intimnija scena.",
     en: "Warm evening atmosphere with a more intimate mood.",
+    de: "Warme Abendatmosphäre mit intimer Stimmung.",
   },
 } as const;
 
@@ -145,11 +149,11 @@ const propertyTypeLabelsEn: Record<IntakeDraft["basics"]["propertyType"], string
 };
 
 const positionLabels = {
-  north: { sr: "Sever", en: "North" },
-  south: { sr: "Jug", en: "South" },
-  east: { sr: "Istok", en: "East" },
-  west: { sr: "Zapad", en: "West" },
-  unknown: { sr: "Ne znam", en: "Unknown" },
+  north: { sr: "Sever", en: "North", de: "Nord" },
+  south: { sr: "Jug", en: "South", de: "Süd" },
+  east: { sr: "Istok", en: "East", de: "Ost" },
+  west: { sr: "Zapad", en: "West", de: "West" },
+  unknown: { sr: "Ne znam", en: "Unknown", de: "Unbekannt" },
 } as const;
 
 const budgetTierRanges = {
@@ -158,9 +162,9 @@ const budgetTierRanges = {
   premium: { min: 70000, max: 180000 },
 } as const;
 
-function formatDateTime(input: string, locale: "sr" | "en") {
+function formatDateTime(input: string, locale: SiteLocale) {
   try {
-    return new Date(input).toLocaleTimeString(locale === "en" ? "en-GB" : "sr-RS", {
+    return new Date(input).toLocaleTimeString(locale === "sr" ? "sr-RS" : "de-DE", {
       hour: "2-digit",
       minute: "2-digit",
     });
@@ -416,7 +420,7 @@ function suggestLightingPreset(dayNight: "day" | "night" | "balanced", dramaLeve
   return "AFTERNOON_WARM";
 }
 
-function localContradictions(draft: IntakeDraft, locale: "sr" | "en") {
+function localContradictions(draft: IntakeDraft, locale: SiteLocale) {
   const issues: string[] = [];
 
   if (
@@ -424,9 +428,9 @@ function localContradictions(draft: IntakeDraft, locale: "sr" | "en") {
     draft.mood.selectedMoods.includes("bright_airy")
   ) {
     issues.push(
-      locale === "en"
-        ? "Dark base + Bright & Airy may require a visual compromise."
-        : "Tamna baza + Bright & Airy može zahtevati kompromis.",
+      locale === "sr"
+        ? "Tamna baza + Bright & Airy može zahtevati kompromis."
+        : "Dark base + Bright & Airy may require a visual compromise.",
     );
   }
 
@@ -435,9 +439,9 @@ function localContradictions(draft: IntakeDraft, locale: "sr" | "en") {
     draft.roomPreferences.some((room) => room.decorDensity === "rich")
   ) {
     issues.push(
-      locale === "en"
-        ? "Modern Minimal style conflicts with rich decor in one or more rooms."
-        : "Modern Minimal stil + bogat dekor u pojedinim sobama.",
+      locale === "sr"
+        ? "Modern Minimal stil + bogat dekor u pojedinim sobama."
+        : "Modern Minimal style conflicts with rich decor in one or more rooms.",
     );
   }
 
@@ -448,9 +452,9 @@ function localContradictions(draft: IntakeDraft, locale: "sr" | "en") {
     draft.budget.maxTotal < draft.basics.total_m2 * 900
   ) {
     issues.push(
-      locale === "en"
-        ? "Premium requirements are likely above the current budget."
-        : "Premium zahtevi su verovatno iznad trenutno definisanog budžeta.",
+      locale === "sr"
+        ? "Premium zahtevi su verovatno iznad trenutno definisanog budžeta."
+        : "Premium requirements are likely above the current budget.",
     );
   }
 
@@ -673,7 +677,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
   const router = useRouter();
   const { locale } = useLocale();
   const tx = useCallback(
-    (sr: string, en: string) => (locale === "en" ? en : sr),
+    (sr: string, en: string) => (locale === "sr" ? sr : en),
     [locale],
   );
 
@@ -691,38 +695,56 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
   const mountedRef = useRef(false);
 
   const stepTitles = useMemo(() => {
-    if (locale === "en") {
+    if (locale === "sr") {
       return [
-        "Welcome",
-        "Project Basics",
-        "Floorplan & Measurements",
-        "Household & Lifestyle",
-        "Priority Tradeoffs",
-        "Style Discovery",
-        "Mood & Atmosphere",
-        "Color Palette Builder",
-        "Lighting Preferences",
-        "Furniture & Materials",
-        "Budget Planner",
-        "Room-by-room Preferences",
-        "Inspirations & Final Confirmation",
+        "Dobrodošli",
+        "Osnovni podaci projekta",
+        "Tlocrt i mere",
+        "Lifestyle i navike",
+        "Prioriteti",
+        "Otkrivanje stila",
+        "Raspoloženje i atmosfera",
+        "Izbor palete",
+        "Preferencije rasvete",
+        "Nameštaj i materijali",
+        "Budžet planer",
+        "Preferencije po prostoriji",
+        "Inspiracije i finalna potvrda",
+      ] as const;
+    }
+
+    if (locale === "de") {
+      return [
+        "Willkommen",
+        "Projektgrundlagen",
+        "Grundriss & Maße",
+        "Haushalt & Lebensstil",
+        "Prioritäten",
+        "Stilfindung",
+        "Mood & Atmosphäre",
+        "Farbpalette",
+        "Lichtpräferenzen",
+        "Möbel & Materialien",
+        "Budgetplan",
+        "Raumpräferenzen",
+        "Inspirationen & finale Bestätigung",
       ] as const;
     }
 
     return [
-      "Dobrodošli",
-      "Osnovni podaci projekta",
-      "Tlocrt i mere",
-      "Lifestyle i navike",
-      "Prioriteti",
-      "Otkrivanje stila",
-      "Raspoloženje i atmosfera",
-      "Izbor palete",
-      "Preferencije rasvete",
-      "Nameštaj i materijali",
-      "Budžet planer",
-      "Preferencije po prostoriji",
-      "Inspiracije i finalna potvrda",
+      "Welcome",
+      "Project Basics",
+      "Floorplan & Measurements",
+      "Household & Lifestyle",
+      "Priority Tradeoffs",
+      "Style Discovery",
+      "Mood & Atmosphere",
+      "Color Palette Builder",
+      "Lighting Preferences",
+      "Furniture & Materials",
+      "Budget Planner",
+      "Room-by-room Preferences",
+      "Inspirations & Final Confirmation",
     ] as const;
   }, [locale]);
 
@@ -1109,7 +1131,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
                     key={value}
                     active={draft.basics.propertyType === value}
                     label={
-                      locale === "en"
+                      locale !== "sr"
                         ? propertyTypeLabelsEn[value as IntakeDraft["basics"]["propertyType"]]
                         : label
                     }
@@ -1237,7 +1259,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
                             })
                           }
                         />
-                        <span>{locale === "en" ? roomLabelsEn[roomType] : roomLabels[roomType]}</span>
+                        <span>{locale !== "sr" ? roomLabelsEn[roomType] : roomLabels[roomType]}</span>
                       </label>
 
                       {checked ? (
@@ -1408,7 +1430,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
                   <div key={roomType} className="border-brand-neutral-500/60 rounded-2xl border p-4">
                     <div className="mb-3 flex items-center justify-between gap-3">
                       <p className="text-brand-burgundy text-sm font-semibold">
-                        {locale === "en" ? roomLabelsEn[roomType] : roomLabels[roomType]}{" "}
+                        {locale !== "sr" ? roomLabelsEn[roomType] : roomLabels[roomType]}{" "}
                         <span className="text-brand-earth text-xs">x{quantity}</span>
                       </p>
                       <button
@@ -2947,7 +2969,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
                     <p className="mt-1 text-[11px]">
                       {tx("Procena na bazi max budžeta", "Estimated by max budget")}:{" "}
                       {(((draft.budget.maxTotal ?? 0) * draft.budget.allocation[key]) / 100).toLocaleString(
-                        locale === "en" ? "en-GB" : "sr-RS",
+                        locale !== "sr" ? "en-GB" : "sr-RS",
                       )}{" "}
                       EUR
                     </p>
@@ -2965,7 +2987,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
         {step === 11 ? (
           <div className="space-y-8">
             <StepTitle
-              eyebrow={locale === "en" ? "Step 11" : "Korak 11"}
+              eyebrow={locale !== "sr" ? "Step 11" : "Korak 11"}
               title="Room-by-room Preferences"
               description={tx(
                 "Detaljni ali kratki unosi za svaku prostoriju. Cilj je maksimum korisnih informacija bez komplikacija.",
@@ -2984,7 +3006,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
                 return (
                   <div key={roomType} className="rounded-2xl border border-brand-neutral-500/60 p-4">
                     <p className="text-brand-burgundy mb-3 text-sm font-semibold">
-                      {locale === "en" ? roomLabelsEn[roomType] : roomLabels[roomType]} · x
+                      {locale !== "sr" ? roomLabelsEn[roomType] : roomLabels[roomType]} · x
                       {draft.basics.roomQuantities[roomType] ?? 1}
                     </p>
 
@@ -3246,7 +3268,7 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
         {step === 12 ? (
           <div className="space-y-8">
             <StepTitle
-              eyebrow={locale === "en" ? "Step 12" : "Korak 12"}
+              eyebrow={locale !== "sr" ? "Step 12" : "Korak 12"}
               title="Inspirations & Final Confirmation"
               description="Upload inspiracije, tagujte šta vam se dopada i potvrdite finalni preview."
             />
@@ -3395,8 +3417,8 @@ export function IntakeWizard({ initialIntake }: { initialIntake: IntakeDraft }) 
                 <div className="rounded-xl border border-brand-neutral-500/60 bg-white p-3">
                   <p className="text-brand-earth text-xs uppercase">Budget</p>
                   <p className="text-brand-burgundy mt-1 text-sm">
-                    {draft.budget.minTotal?.toLocaleString(locale === "en" ? "en-GB" : "sr-RS")} -{" "}
-                    {draft.budget.maxTotal?.toLocaleString(locale === "en" ? "en-GB" : "sr-RS")} EUR
+                    {draft.budget.minTotal?.toLocaleString(locale !== "sr" ? "en-GB" : "sr-RS")} -{" "}
+                    {draft.budget.maxTotal?.toLocaleString(locale !== "sr" ? "en-GB" : "sr-RS")} EUR
                   </p>
                 </div>
               </div>

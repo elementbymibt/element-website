@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { siteConfig } from "@/src/lib/site-config";
 import { cn } from "@/src/lib/utils";
 
@@ -19,7 +20,13 @@ export function BookingLink({
   trackingLocation = "cta",
 }: BookingLinkProps) {
   const { locale } = useLocale();
-  const buttonLabel = label ?? (locale === "en" ? "Schedule consultation" : "Zakažite konsultacije");
+  const buttonLabel =
+    label ??
+    pickLocaleText(locale, {
+      sr: "Zakažite konsultacije",
+      en: "Schedule consultation",
+      de: "Beratung vereinbaren",
+    });
 
   return (
     <a
@@ -32,7 +39,11 @@ export function BookingLink({
         className,
       )}
       onClick={() => trackEvent("booking_click", { location: trackingLocation })}
-      aria-label={locale === "en" ? "Open external booking link" : "Otvorite eksterni booking link"}
+      aria-label={pickLocaleText(locale, {
+        sr: "Otvorite eksterni booking link",
+        en: "Open external booking link",
+        de: "Externen Buchungslink öffnen",
+      })}
     >
       {buttonLabel}
     </a>

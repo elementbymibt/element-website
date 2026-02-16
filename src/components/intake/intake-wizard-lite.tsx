@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
+import type { SiteLocale } from "@/src/lib/i18n/config";
 import type { IntakeDraft } from "@/src/lib/intake/types";
 import { cn } from "@/src/lib/utils";
 
@@ -172,11 +173,11 @@ const budgetRangeOptions = [
   },
 ] as const;
 
-function formatDateTime(iso: string | undefined, locale: "sr" | "en") {
+function formatDateTime(iso: string | undefined, locale: SiteLocale) {
   if (!iso) return "";
   const date = new Date(iso);
   try {
-    return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "sr-RS", {
+    return new Intl.DateTimeFormat(locale === "sr" ? "sr-RS" : "de-DE", {
       hour: "2-digit",
       minute: "2-digit",
     }).format(date);
@@ -188,7 +189,7 @@ function formatDateTime(iso: string | undefined, locale: "sr" | "en") {
 export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft }) {
   const router = useRouter();
   const { locale } = useLocale();
-  const tx = useCallback((sr: string, en: string) => (locale === "en" ? en : sr), [locale]);
+  const tx = useCallback((sr: string, en: string) => (locale === "sr" ? sr : en), [locale]);
 
   const [draft, setDraft] = useState<IntakeDraft>(initialIntake);
   const [step, setStep] = useState<StepId>(
@@ -464,7 +465,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                         <div key={img.src} className="relative">
                           <Image
                             src={img.src}
-                            alt={locale === "en" ? img.alt.en : img.alt.sr}
+                            alt={locale === "sr" ? img.alt.sr : img.alt.en}
                             fill
                             className="object-cover transition duration-500 group-hover:scale-[1.02]"
                             sizes="(max-width: 768px) 100vw, 50vw"
@@ -478,7 +479,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                             {tx("Stil", "Style")}
                           </p>
                           <p className="font-display text-white mt-1 text-3xl">
-                            {locale === "en" ? card.title.en : card.title.sr}
+                            {locale === "sr" ? card.title.sr : card.title.en}
                           </p>
                         </div>
                         <span
@@ -606,7 +607,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                       )}
                       aria-pressed={active}
                     >
-                      {locale === "en" ? option.en : option.sr}
+                      {locale === "sr" ? option.sr : option.en}
                     </button>
                   );
                 })}
@@ -638,7 +639,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                       )}
                       aria-pressed={active}
                     >
-                      {locale === "en" ? option.en : option.sr}
+                      {locale === "sr" ? option.sr : option.en}
                     </button>
                   );
                 })}
@@ -686,7 +687,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                       )}
                       aria-pressed={active}
                     >
-                      {locale === "en" ? option.en : option.sr}
+                      {locale === "sr" ? option.sr : option.en}
                     </button>
                   );
                 })}
@@ -866,9 +867,9 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                     {tx("Osnove", "Basics")}
                   </p>
                   <p className="text-brand-ink mt-2 text-sm">
-                    {locale === "en"
-                      ? propertyTypeOptions.find((x) => x.id === draft.basics.propertyType)?.en
-                      : propertyTypeOptions.find((x) => x.id === draft.basics.propertyType)?.sr}
+                    {locale === "sr"
+                      ? propertyTypeOptions.find((x) => x.id === draft.basics.propertyType)?.sr
+                      : propertyTypeOptions.find((x) => x.id === draft.basics.propertyType)?.en}
                   </p>
                   <p className="text-brand-earth text-sm">
                     {draft.basics.city || "—"}
@@ -879,9 +880,9 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                   </p>
                   <p className="text-brand-earth text-sm">
                     {tx("Rok:", "Timeline:")}{" "}
-                    {locale === "en"
-                      ? deadlineOptions.find((x) => x.id === draft.basics.deadline)?.en
-                      : deadlineOptions.find((x) => x.id === draft.basics.deadline)?.sr}
+                    {locale === "sr"
+                      ? deadlineOptions.find((x) => x.id === draft.basics.deadline)?.sr
+                      : deadlineOptions.find((x) => x.id === draft.basics.deadline)?.en}
                   </p>
                   <p className="text-brand-earth text-sm">
                     {tx("Budžet:", "Budget:")}{" "}
@@ -903,7 +904,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                       .map((id) => {
                         const found = styleCards.find((card) => card.id === id);
                         if (!found) return id;
-                        return locale === "en" ? found.title.en : found.title.sr;
+                        return locale === "sr" ? found.title.sr : found.title.en;
                       })
                       .join(", ") || "—"}
                   </p>

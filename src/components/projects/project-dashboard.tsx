@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { roomLabels } from "@/src/data/intake-content";
+import type { SiteLocale } from "@/src/lib/i18n/config";
 import type { IntakeDraft, ProjectRecord, RoomScopeOption } from "@/src/lib/intake/types";
 
 type ProjectDashboardProps = {
@@ -31,20 +32,20 @@ const roomLabelsEn: Record<RoomScopeOption, string> = {
   commercial_zone: "Commercial zone",
 };
 
-function formatBudget(min: number | null, max: number | null, locale: "sr" | "en") {
+function formatBudget(min: number | null, max: number | null, locale: SiteLocale) {
   if (!min || !max) {
-    return locale === "en" ? "Not defined" : "Nedefinisano";
+    return locale === "sr" ? "Nedefinisano" : "Not defined";
   }
 
-  return `${min.toLocaleString(locale === "en" ? "en-GB" : "sr-RS")} - ${max.toLocaleString(
-    locale === "en" ? "en-GB" : "sr-RS",
+  return `${min.toLocaleString(locale === "sr" ? "sr-RS" : "de-DE")} - ${max.toLocaleString(
+    locale === "sr" ? "sr-RS" : "de-DE",
   )} EUR`;
 }
 
 export function ProjectDashboard({ intake, project }: ProjectDashboardProps) {
   const summary = project?.summary;
   const { locale } = useLocale();
-  const tx = (sr: string, en: string) => (locale === "en" ? en : sr);
+  const tx = (sr: string, en: string) => (locale === "sr" ? sr : en);
 
   return (
     <div className="space-y-8">
@@ -135,7 +136,7 @@ export function ProjectDashboard({ intake, project }: ProjectDashboardProps) {
                   key={room}
                   className="rounded-full border border-brand-neutral-500 px-3 py-1 text-xs"
                 >
-                  {(locale === "en" ? roomLabelsEn[room] : roomLabels[room])} x
+                  {(locale === "sr" ? roomLabels[room] : roomLabelsEn[room])} x
                   {intake.basics.roomQuantities[room] ?? 1}
                 </span>
               ))}

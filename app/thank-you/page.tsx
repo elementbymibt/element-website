@@ -18,15 +18,16 @@ export default async function ThankYouPage() {
     <Container className="py-24">
       <FadeIn className="border-brand-neutral-500/70 mx-auto max-w-3xl rounded-3xl border bg-white p-10 text-center">
         <p className="text-brand-gold text-xs tracking-[0.3em] uppercase">
-          {textByLocale(locale, { sr: "Hvala", en: "Thank you" })}
+          {textByLocale(locale, { sr: "Hvala", en: "Thank you", de: "Danke" })}
         </p>
         <h1 className="font-display text-brand-burgundy mt-3 text-5xl">
-          {textByLocale(locale, { sr: "Hvala!", en: "Thank you!" })}
+          {textByLocale(locale, { sr: "Hvala!", en: "Thank you!", de: "Vielen Dank!" })}
         </h1>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
             sr: "Analiziraćemo vaše podatke i kontaktirati vas sa personalizovanom ponudom.",
             en: "We’ll review your details and get back with a personalized proposal.",
+            de: "Wir analysieren Ihre Angaben und melden uns mit einem personalisierten Angebot.",
           })}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -34,13 +35,13 @@ export default async function ThankYouPage() {
             href="/contact"
             className="btn-secondary text-brand-burgundy inline-flex rounded-full px-7 py-3 text-sm font-semibold"
           >
-            {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+            {textByLocale(locale, { sr: "Kontakt", en: "Contact", de: "Kontakt" })}
           </Link>
           <Link
             href="/"
             className="btn-secondary text-brand-burgundy inline-flex rounded-full px-7 py-3 text-sm font-semibold"
           >
-            {textByLocale(locale, { sr: "Nazad na početnu", en: "Back to home" })}
+            {textByLocale(locale, { sr: "Nazad na početnu", en: "Back to home", de: "Zurück zur Startseite" })}
           </Link>
         </div>
       </FadeIn>

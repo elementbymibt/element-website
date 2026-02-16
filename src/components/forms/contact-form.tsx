@@ -50,7 +50,7 @@ export function ContactForm() {
         setStatus("error");
         setMessage(
           result.message ||
-            (locale === "en"
+            (locale !== "sr"
               ? "Something went wrong. Please try again."
               : "Došlo je do greške. Pokušajte ponovo."),
         );
@@ -60,7 +60,7 @@ export function ContactForm() {
       setStatus("success");
       setMessage(
         result.message ||
-          (locale === "en"
+          (locale !== "sr"
             ? "Thank you. Your message has been sent."
             : "Hvala. Vaša poruka je uspešno poslata."),
       );
@@ -72,7 +72,7 @@ export function ContactForm() {
     } catch {
       setStatus("error");
       setMessage(
-        locale === "en"
+        locale !== "sr"
           ? "Something went wrong. Please try again."
           : "Došlo je do greške. Pokušajte ponovo.",
       );
@@ -85,7 +85,7 @@ export function ContactForm() {
     <form
       onSubmit={onSubmit}
       className="space-y-5"
-      aria-label={locale === "en" ? "Contact form" : "Kontakt forma"}
+      aria-label={locale !== "sr" ? "Contact form" : "Kontakt forma"}
     >
       <div className="grid gap-4 md:grid-cols-2">
         <div>
@@ -93,7 +93,7 @@ export function ContactForm() {
             htmlFor="name"
             className="text-brand-earth mb-2 block text-sm font-medium"
           >
-            {locale === "en" ? "Full name" : "Ime i prezime"}
+            {locale !== "sr" ? "Full name" : "Ime i prezime"}
           </label>
           <input
             id="name"
@@ -128,7 +128,7 @@ export function ContactForm() {
             htmlFor="phone"
             className="text-brand-earth mb-2 block text-sm font-medium"
           >
-            {locale === "en" ? "Phone" : "Telefon"}
+            {locale !== "sr" ? "Phone" : "Telefon"}
           </label>
           <input
             id="phone"
@@ -146,7 +146,7 @@ export function ContactForm() {
           htmlFor="message"
           className="text-brand-earth mb-2 block text-sm font-medium"
         >
-          {locale === "en" ? "Message" : "Poruka"}
+          {locale !== "sr" ? "Message" : "Poruka"}
         </label>
         <textarea
           id="message"
@@ -155,7 +155,7 @@ export function ContactForm() {
           rows={5}
           className="input-field min-h-36 rounded-3xl"
           placeholder={
-            locale === "en"
+            locale !== "sr"
               ? "Briefly describe what you want to achieve."
               : "Ukratko opišite šta želite da postignete."
           }
@@ -187,12 +187,12 @@ export function ContactForm() {
           className="border-brand-neutral-500 mt-0.5 h-4 w-4 rounded accent-[var(--brand-gold)]"
         />
         <span>
-          {locale === "en" ? "I agree to the " : "Saglasan/na sam sa "}
+          {locale !== "sr" ? "I agree to the " : "Saglasan/na sam sa "}
           <Link
             href="/privacy"
             className="text-brand-burgundy decoration-brand-gold font-semibold underline underline-offset-4"
           >
-            {locale === "en" ? "Privacy Policy" : "Politikom privatnosti"}
+            {locale !== "sr" ? "Privacy Policy" : "Politikom privatnosti"}
           </Link>
           .
         </span>
@@ -204,10 +204,10 @@ export function ContactForm() {
         className="btn-primary inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
       >
         {pending
-          ? locale === "en"
+          ? locale !== "sr"
             ? "Sending..."
             : "Slanje..."
-          : locale === "en"
+          : locale !== "sr"
             ? "Send inquiry"
             : "Pošaljite upit"}
       </button>

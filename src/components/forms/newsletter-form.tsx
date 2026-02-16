@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { trackEvent } from "@/src/lib/analytics";
 import { cn } from "@/src/lib/utils";
 
@@ -32,9 +33,16 @@ export function NewsletterForm({
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
-  const submitLabel = buttonLabel ?? (locale === "en" ? "Subscribe" : "Prijavite se");
+  const submitLabel =
+    buttonLabel ??
+    pickLocaleText(locale, { sr: "Prijavite se", en: "Subscribe", de: "Anmelden" });
   const inputPlaceholder =
-    placeholder ?? (locale === "en" ? "Enter your email" : "Unesite email adresu");
+    placeholder ??
+    pickLocaleText(locale, {
+      sr: "Unesite email adresu",
+      en: "Enter your email",
+      de: "E-Mail-Adresse eingeben",
+    });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -67,9 +75,11 @@ export function NewsletterForm({
         setStatus("error");
         setMessage(
           result.message ||
-            (locale === "en"
-              ? "Something went wrong. Please try again."
-              : "Došlo je do greške. Pokušajte ponovo."),
+            pickLocaleText(locale, {
+              sr: "Došlo je do greške. Pokušajte ponovo.",
+              en: "Something went wrong. Please try again.",
+              de: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+            }),
         );
         return;
       }
@@ -77,9 +87,11 @@ export function NewsletterForm({
       setStatus("success");
       setMessage(
         result.message ||
-          (locale === "en"
-            ? "Thank you. Your subscription has been received."
-            : "Hvala. Vaša prijava je uspešno poslata."),
+          pickLocaleText(locale, {
+            sr: "Hvala. Vaša prijava je uspešno poslata.",
+            en: "Thank you. Your subscription has been received.",
+            de: "Vielen Dank. Ihre Anmeldung wurde erfolgreich gesendet.",
+          }),
       );
       if (source === "newsletter") {
         trackEvent("newsletter_submit", { source });
@@ -96,9 +108,11 @@ export function NewsletterForm({
     } catch {
       setStatus("error");
       setMessage(
-        locale === "en"
-          ? "Something went wrong. Please try again."
-          : "Došlo je do greške. Pokušajte ponovo.",
+        pickLocaleText(locale, {
+          sr: "Došlo je do greške. Pokušajte ponovo.",
+          en: "Something went wrong. Please try again.",
+          de: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+        }),
       );
     } finally {
       setPending(false);
@@ -109,10 +123,18 @@ export function NewsletterForm({
     <form
       onSubmit={onSubmit}
       className={cn("space-y-3", className)}
-      aria-label={locale === "en" ? "Newsletter form" : "Newsletter forma"}
+      aria-label={pickLocaleText(locale, {
+        sr: "Newsletter forma",
+        en: "Newsletter form",
+        de: "Newsletter-Formular",
+      })}
     >
       <label className="sr-only" htmlFor={`${source}-email`}>
-        {locale === "en" ? "Email address" : "Email adresa"}
+        {pickLocaleText(locale, {
+          sr: "Email adresa",
+          en: "Email address",
+          de: "E-Mail-Adresse",
+        })}
       </label>
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
@@ -123,14 +145,20 @@ export function NewsletterForm({
           autoComplete="email"
           placeholder={inputPlaceholder}
           className="border-brand-neutral-500 text-brand-ink placeholder:text-brand-earth/70 focus-visible:ring-brand-gold w-full rounded-full border bg-white px-5 py-3 text-sm transition outline-none focus-visible:ring-2"
-          aria-label={locale === "en" ? "Email address" : "Email adresa"}
+          aria-label={pickLocaleText(locale, {
+            sr: "Email adresa",
+            en: "Email address",
+            de: "E-Mail-Adresse",
+          })}
         />
         <button
           type="submit"
           disabled={pending}
           className="btn-primary inline-flex shrink-0 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {pending ? (locale === "en" ? "Sending..." : "Slanje...") : submitLabel}
+          {pending
+            ? pickLocaleText(locale, { sr: "Slanje...", en: "Sending...", de: "Wird gesendet..." })
+            : submitLabel}
         </button>
       </div>
 
@@ -153,12 +181,20 @@ export function NewsletterForm({
           className="border-brand-neutral-500 mt-0.5 h-4 w-4 rounded accent-[var(--brand-gold)]"
         />
         <span>
-          {locale === "en" ? "I agree to the " : "Saglasan/na sam sa "}
+          {pickLocaleText(locale, {
+            sr: "Saglasan/na sam sa ",
+            en: "I agree to the ",
+            de: "Ich stimme der ",
+          })}
           <Link
             href="/privacy"
             className="text-brand-burgundy decoration-brand-gold font-semibold underline underline-offset-4"
           >
-            {locale === "en" ? "Privacy Policy" : "Politikom privatnosti"}
+            {pickLocaleText(locale, {
+              sr: "Politikom privatnosti",
+              en: "Privacy Policy",
+              de: "Datenschutzerklärung",
+            })}
           </Link>
           .
         </span>

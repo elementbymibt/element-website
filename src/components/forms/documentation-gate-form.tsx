@@ -50,7 +50,7 @@ export function DocumentationGateForm() {
         setStatus("error");
         setMessage(
           result.message ||
-            (locale === "en"
+            (locale !== "sr"
               ? "Something went wrong. Please try again."
               : "Došlo je do greške. Pokušajte ponovo."),
         );
@@ -58,14 +58,14 @@ export function DocumentationGateForm() {
       }
 
       setStatus("success");
-      setMessage(result.message || (locale === "en" ? "Access granted." : "Pristup je odobren."));
+      setMessage(result.message || (locale !== "sr" ? "Access granted." : "Pristup je odobren."));
       setDownloadUrl(result.downloadUrl);
       trackEvent("doc_unlock", { source: "documentation" });
       form.reset();
     } catch {
       setStatus("error");
       setMessage(
-        locale === "en"
+        locale !== "sr"
           ? "Something went wrong. Please try again."
           : "Došlo je do greške. Pokušajte ponovo.",
       );
@@ -79,10 +79,10 @@ export function DocumentationGateForm() {
       <form
         onSubmit={onSubmit}
         className="space-y-3"
-        aria-label={locale === "en" ? "Documentation gate form" : "Forma za dokumentaciju"}
+        aria-label={locale !== "sr" ? "Documentation gate form" : "Forma za dokumentaciju"}
       >
         <label htmlFor="documentation-email" className="text-brand-earth text-sm">
-          {locale === "en" ? "Email address" : "Email adresa"}
+          {locale !== "sr" ? "Email address" : "Email adresa"}
         </label>
         <div className="flex flex-col gap-3 sm:flex-row">
           <input
@@ -92,7 +92,7 @@ export function DocumentationGateForm() {
             required
             autoComplete="email"
             placeholder={
-              locale === "en"
+              locale !== "sr"
                 ? "Enter email to unlock documentation"
                 : "Unesite email za pristup dokumentaciji"
             }
@@ -104,10 +104,10 @@ export function DocumentationGateForm() {
             className="btn-primary inline-flex shrink-0 items-center justify-center rounded-full px-6 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
           >
             {pending
-              ? locale === "en"
+              ? locale !== "sr"
                 ? "Verifying..."
                 : "Provera..."
-              : locale === "en"
+              : locale !== "sr"
                 ? "Unlock access"
                 : "Otključaj pristup"}
           </button>
@@ -132,12 +132,12 @@ export function DocumentationGateForm() {
             className="border-brand-neutral-500 mt-0.5 h-4 w-4 rounded accent-[var(--brand-gold)]"
           />
           <span>
-            {locale === "en" ? "I agree to the " : "Saglasan/na sam sa "}
+            {locale !== "sr" ? "I agree to the " : "Saglasan/na sam sa "}
             <Link
               href="/privacy"
               className="text-brand-burgundy decoration-brand-gold font-semibold underline underline-offset-4"
             >
-              {locale === "en" ? "Privacy Policy" : "Politikom privatnosti"}
+              {locale !== "sr" ? "Privacy Policy" : "Politikom privatnosti"}
             </Link>
             .
           </span>
@@ -158,7 +158,7 @@ export function DocumentationGateForm() {
             className="text-brand-burgundy decoration-brand-gold mt-3 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4"
             onClick={() => trackEvent("doc_download", { file: "sample.pdf" })}
           >
-            {locale === "en"
+            {locale !== "sr"
               ? "Download sample documentation (PDF)"
               : "Preuzmite sample dokumentaciju (PDF)"}
           </a>

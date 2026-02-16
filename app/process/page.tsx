@@ -22,11 +22,12 @@ export default async function ProcessPage() {
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
-          title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
+          eyebrow={textByLocale(locale, { sr: "Proces", en: "Process", de: "Ablauf" })}
+          title={textByLocale(locale, { sr: "Kako radimo", en: "How we work", de: "Wie wir arbeiten" })}
           description={textByLocale(locale, {
             sr: "Proces je linearan i transparentan: od uvodnog razgovora do finalnog paketa smernica za realizaciju, uz jasno definisane faze i odgovornosti.",
             en: "The process is linear and transparent: from brief to final guidance package, with clearly defined phases and responsibilities.",
+            de: "Der Ablauf ist linear und transparent: vom Erstgespräch bis zum finalen Leitfadenpaket mit klar definierten Phasen und Verantwortlichkeiten.",
           })}
         />
       </FadeIn>
@@ -42,6 +43,7 @@ export default async function ProcessPage() {
                     {textByLocale(locale, {
                       sr: `Korak 0${index + 1}`,
                       en: `Step 0${index + 1}`,
+                      de: `Schritt 0${index + 1}`,
                     })}
                   </p>
                   <h2 className="font-display text-brand-burgundy mt-2 text-4xl">
@@ -54,6 +56,7 @@ export default async function ProcessPage() {
                     {textByLocale(locale, {
                       sr: "Šta dobijate u ovom koraku",
                       en: "What you get in this step",
+                      de: "Was Sie in diesem Schritt erhalten",
                     })}
                   </h3>
                   <ul className="text-brand-ink mt-3 space-y-2 text-sm">
@@ -76,13 +79,14 @@ export default async function ProcessPage() {
           {textByLocale(locale, {
             sr: "Usluga je idejna i konsultantska: obuhvata koncept, vizuelizaciju i finalne smernice za realizaciju. Tehnički projekat, izvođenje i stručni nadzor nisu deo ovog opsega.",
             en: "The service is conceptual and consultative: it covers concept, visualization and final implementation guidance. Technical design, contracting and supervision are outside this scope.",
+            de: "Die Leistung ist konzeptionell und beratend: sie umfasst Konzept, Visualisierung und finale Umsetzungsleitlinien. Technische Planung, Ausführung und Bauaufsicht sind nicht Teil dieses Umfangs.",
           })}
         </p>
         <Link
           href="/contact"
           className="text-brand-burgundy decoration-brand-gold mt-5 inline-flex items-center text-sm font-semibold underline underline-offset-4"
         >
-          {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+          {textByLocale(locale, { sr: "Kontakt", en: "Contact", de: "Kontakt" })}
         </Link>
       </FadeIn>
     </Container>

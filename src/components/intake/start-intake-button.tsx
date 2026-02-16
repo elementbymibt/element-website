@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
 import { trackEvent } from "@/src/lib/analytics";
+import { pickLocaleText } from "@/src/lib/i18n/config";
 import { cn } from "@/src/lib/utils";
 
 type StartIntakeButtonProps = {
@@ -38,8 +39,12 @@ export function StartIntakeButton({ className, label }: StartIntakeButtonProps) 
         router.push("/intake/new");
       }}
     >
-      {label ?? (locale === "en" ? "Start intake" : "Započnite upitnik")}
+      {label ??
+        pickLocaleText(locale, {
+          sr: "Započnite upitnik",
+          en: "Start intake",
+          de: "Fragebogen starten",
+        })}
     </button>
   );
 }
-

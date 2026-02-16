@@ -1,3 +1,5 @@
+import type { SiteLocale } from "@/src/lib/i18n/config";
+
 export type ProjectCategory = "Stan" | "Kuća" | "Poslovni prostor";
 
 export type Project = {
@@ -113,3 +115,138 @@ export const featuredProjects = projects.filter((project) => project.featured).s
 export const getProjectBySlug = (slug: string) =>
   projects.find((project) => project.slug === slug);
 
+type LocalizedProjectEntry = {
+  shortDescription: {
+    en: string;
+    de: string;
+  };
+  description: {
+    en: string;
+    de: string;
+  };
+  whatWeDid: {
+    en: string[];
+    de: string[];
+  };
+};
+
+const localizedProjectText: Record<string, LocalizedProjectEntry> = {
+  "dorcol-residence": {
+    shortDescription: {
+      en: "Contemporary city apartment with quiet luxury and warm materials.",
+      de: "Zeitgemäßes Stadtapartment mit stillem Luxus und warmen Materialien.",
+    },
+    description: {
+      en: "The concept focuses on a calm spatial rhythm: a neutral base, warm textures, and precise detailing that delivers editorial quality without excess.",
+      de: "Das Konzept setzt auf einen ruhigen Raumrhythmus: neutrale Basis, warme Texturen und präzise Details, die editoriale Qualität ohne Übermaß schaffen.",
+    },
+    whatWeDid: {
+      en: ["Concept design", "3D visualization", "Final package (concept drawings + lists)"],
+      de: ["Konzeptdesign", "3D-Visualisierung", "Finales Paket (Konzeptzeichnungen + Listen)"],
+    },
+  },
+  "senjak-villa": {
+    shortDescription: {
+      en: "Family villa with clean lines and a warm palette.",
+      de: "Familienvilla mit klaren Linien und warmer Farbpalette.",
+    },
+    description: {
+      en: "The space was organized so daily life flows effortlessly, while materials and light build a calm, luxurious atmosphere throughout the day.",
+      de: "Der Raum wurde so organisiert, dass der Alltag reibungslos funktioniert, während Materialien und Licht den ganzen Tag über eine ruhige, luxuriöse Atmosphäre schaffen.",
+    },
+    whatWeDid: {
+      en: ["Concept design", "3D visualization", "Final package (PDF documentation)"],
+      de: ["Konzeptdesign", "3D-Visualisierung", "Finales Paket (PDF-Dokumentation)"],
+    },
+  },
+  "new-belgrade-penthouse": {
+    shortDescription: {
+      en: "Penthouse with panoramic views and monochrome elegance.",
+      de: "Penthouse mit Panoramablick und monochromer Eleganz.",
+    },
+    description: {
+      en: "A neutral base, carefully dosed accents and layered lighting create a hotel-like comfort in a private home.",
+      de: "Eine neutrale Basis, gezielt eingesetzte Akzente und mehrschichtige Beleuchtung schaffen hotelähnlichen Komfort im privaten Zuhause.",
+    },
+    whatWeDid: {
+      en: ["Concept design", "3D visualization", "Materials and elements list"],
+      de: ["Konzeptdesign", "3D-Visualisierung", "Material- und Elementliste"],
+    },
+  },
+  "zemun-loft-office": {
+    shortDescription: {
+      en: "Office concept with a clear identity and ergonomic focus.",
+      de: "Office-Konzept mit klarer Identität und Ergonomie-Fokus.",
+    },
+    description: {
+      en: "The goal was to make the space representative and operationally efficient: clear zones, controlled acoustics and materials that communicate quality.",
+      de: "Ziel war ein repräsentativer und operativ effizienter Raum: klare Zonen, kontrollierte Akustik und Materialien, die Qualität vermitteln.",
+    },
+    whatWeDid: {
+      en: ["Concept design", "3D visualization", "Documentation and specification lists"],
+      de: ["Konzeptdesign", "3D-Visualisierung", "Dokumentation und Spezifikationslisten"],
+    },
+  },
+  "fruska-gora-retreat": {
+    shortDescription: {
+      en: "Weekend house inspired by nature and quiet rituals.",
+      de: "Wochenendhaus inspiriert von Natur und ruhigen Ritualen.",
+    },
+    description: {
+      en: "Materials were selected for longevity and use: wood, stone and textures that stay relevant, with a contemporary line and discreet elegance.",
+      de: "Die Materialien wurden auf Langlebigkeit und Nutzung abgestimmt: Holz, Stein und Texturen, die zeitlos wirken, mit moderner Linie und diskreter Eleganz.",
+    },
+    whatWeDid: {
+      en: ["Concept design", "3D visualization", "Indicative budget and purchasing priorities"],
+      de: ["Konzeptdesign", "3D-Visualisierung", "Orientierungsbudget und Kaufprioritäten"],
+    },
+  },
+  "vracar-boutique-clinic": {
+    shortDescription: {
+      en: "Boutique clinic with a premium hospitality feel.",
+      de: "Boutique-Klinik mit Premium-Hospitality-Charakter.",
+    },
+    description: {
+      en: "The design reduces user stress and supports staff flow: calm palette, controlled lighting and details that feel premium but understated.",
+      de: "Das Design reduziert Stress bei Nutzern und unterstützt den Ablauf des Teams: ruhige Palette, kontrolliertes Licht und Details, die hochwertig, aber zurückhaltend wirken.",
+    },
+    whatWeDid: {
+      en: ["Concept design", "3D visualization", "Final package (PDF + specifications)"],
+      de: ["Konzeptdesign", "3D-Visualisierung", "Finales Paket (PDF + Spezifikationen)"],
+    },
+  },
+};
+
+export function getLocalizedProjectText(project: Project, locale: SiteLocale) {
+  if (locale === "sr") {
+    return {
+      shortDescription: project.shortDescription,
+      description: project.description,
+      whatWeDid: project.whatWeDid,
+    };
+  }
+
+  const entry = localizedProjectText[project.slug];
+
+  if (!entry) {
+    return {
+      shortDescription: project.shortDescription,
+      description: project.description,
+      whatWeDid: project.whatWeDid,
+    };
+  }
+
+  if (locale === "de") {
+    return {
+      shortDescription: entry.shortDescription.de,
+      description: entry.description.de,
+      whatWeDid: entry.whatWeDid.de,
+    };
+  }
+
+  return {
+    shortDescription: entry.shortDescription.en,
+    description: entry.description.en,
+    whatWeDid: entry.whatWeDid.en,
+  };
+}
