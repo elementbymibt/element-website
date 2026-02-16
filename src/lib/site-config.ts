@@ -1,3 +1,4 @@
+const productionBaseUrl = "https://www.elementbymibt.com";
 const defaultBaseUrl = "https://elementbymibt.com";
 
 function normalizeBaseUrl(input?: string) {
@@ -16,17 +17,29 @@ function normalizeBaseUrl(input?: string) {
 }
 
 const baseUrl = normalizeBaseUrl(process.env.NEXT_PUBLIC_SITE_URL);
+const hasVercelHost = (() => {
+  try {
+    return new URL(baseUrl).hostname.endsWith(".vercel.app");
+  } catch {
+    return false;
+  }
+})();
+
+const resolvedBaseUrl =
+  process.env.NODE_ENV === "production" && hasVercelHost
+    ? productionBaseUrl
+    : baseUrl;
 
 export const siteConfig = {
   name: "ÉLÉMENT",
   legalName: "ÉLÉMENT (by M·I·B·T)",
   description:
     "Premium studio za dizajn enterijera. Projektujemo rezidencijalne i poslovne prostore sa jasnim potpisom elegancije.",
-  baseUrl,
+  baseUrl: resolvedBaseUrl,
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "https://calendly.com",
   email: "studio@element-design.rs",
   phone: "0659080995",
   instagram: "https://www.instagram.com/element_by_mibt/",
-  website: baseUrl,
+  website: resolvedBaseUrl,
   location: "Beograd, Srbija",
 };
