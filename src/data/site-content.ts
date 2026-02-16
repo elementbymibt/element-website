@@ -125,38 +125,38 @@ export const faqItems = [
 export const processSteps = [
   {
     title: "Konsultacije",
-    short: "Razumevanje vašeg načina života i prioriteta.",
+    short: "Razumevanje načina života, prioriteta i budžetskog okvira.",
     deliverables: [
-      "Prioriteti, navike i budžetski okvir",
-      "Kratke smernice i fokus projekta",
-      "Predlog narednih koraka",
+      "Kick-off razgovor i strukturisan brief",
+      "Pregled dostupnih planova i mera prostora",
+      "Definisanje opsega i plana rada po fazama",
     ],
   },
   {
     title: "Koncept",
-    short: "Definisanje identiteta prostora.",
+    short: "Definisanje identiteta prostora i glavnog dizajn pravca.",
     deliverables: [
-      "Konceptualni layout",
-      "Moodboard i materijal board",
-      "Stilski pravac i vizuelni ton",
+      "Funkcionalni raspored i logika korišćenja",
+      "Stil, paleta i moodboard materijala",
+      "Usaglašavanje koncepta pre 3D razrade",
     ],
   },
   {
     title: "Razrada",
-    short: "Vizuelizacija i idejne smernice.",
+    short: "3D vizuelizacija i idejna dokumentacija.",
     deliverables: [
-      "3D + renderi ključnih zona",
-      "Idejne smernice i spiskovi (orijentaciono)",
-      "Budžetski okvir i prioritizacija",
+      "3D model i renderi ključnih zona",
+      "Idejni crteži i pokazne pozicije instalacija",
+      "Orijentacioni spiskovi i budžetski okvir",
     ],
   },
   {
     title: "Realizacija",
-    short: "Strateška konsultantska podrška tokom realizacije.",
+    short: "Konsultantska podrška tokom realizacije.",
     deliverables: [
-      "Konsultacije pri ključnim odlukama",
-      "Usklađivanje predloga sa budžetom i dostupnošću",
-      "Podrška da se koncept dosledno sprovede",
+      "Finalni paket: crteži, spiskovi i fazna realizacija",
+      "Konsultativna koordinacija ključnih odluka",
+      "Završna kontrola usklađenosti sa konceptom (bez tehničkog nadzora)",
     ],
   },
 ];

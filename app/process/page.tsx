@@ -25,8 +25,8 @@ export default async function ProcessPage() {
           eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
           title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
           description={textByLocale(locale, {
-            sr: "Naš metod je linearan, transparentan i vođen kvalitetom. Svaka etapa ima jasne isporuke i jasnu svrhu.",
-            en: "Our method is linear, transparent and quality-driven. Each step has clear deliverables and intent.",
+            sr: "Proces je linearan i transparentan: od brief-a do finalnog paketa smernica za realizaciju, uz jasno definisane faze i odgovornosti.",
+            en: "The process is linear and transparent: from brief to final guidance package, with clearly defined phases and responsibilities.",
           })}
         />
       </FadeIn>
@@ -71,27 +71,19 @@ export default async function ProcessPage() {
         ))}
       </div>
 
-      <FadeIn className="bg-brand-burgundy text-brand-neutral-100 mt-12 rounded-3xl p-8 md:p-10">
-        <h3 className="font-display text-4xl">
+      <FadeIn className="border-brand-neutral-500/70 bg-brand-neutral-100 mt-12 rounded-3xl border p-6 md:p-8">
+        <p className="text-brand-ink text-sm leading-relaxed">
           {textByLocale(locale, {
-            sr: "Spremni da pronađemo Vaš element?",
-            en: "Ready to find your element?",
-          })}
-        </h3>
-        <p className="text-brand-neutral-200 mt-3 max-w-2xl">
-          {textByLocale(locale, {
-            sr: "Pošaljite nam osnovne informacije o projektu i vraćamo se sa jasnim predlogom narednih koraka.",
-            en: "Send us the core project details and we’ll return with a clear next-step proposal.",
+            sr: "Usluga je idejna i konsultantska: obuhvata koncept, vizuelizaciju i finalne smernice za realizaciju. Tehnički projekat, izvođenje i stručni nadzor nisu deo ovog opsega.",
+            en: "The service is conceptual and consultative: it covers concept, visualization and final implementation guidance. Technical design, contracting and supervision are outside this scope.",
           })}
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/contact"
-            className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"
-          >
-            {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
-          </Link>
-        </div>
+        <Link
+          href="/contact"
+          className="text-brand-burgundy decoration-brand-gold mt-5 inline-flex items-center text-sm font-semibold underline underline-offset-4"
+        >
+          {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+        </Link>
       </FadeIn>
     </Container>
   );

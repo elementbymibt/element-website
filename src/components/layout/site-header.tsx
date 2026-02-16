@@ -23,7 +23,6 @@ export function SiteHeader() {
           { href: "/services", label: "Services" },
           { href: "/process", label: "Process" },
           { href: "/about", label: "About" },
-          { href: "/documentation", label: "Documentation" },
           { href: "/promo", label: "Offers" },
           { href: "/contact", label: "Contact" },
         ]
@@ -33,7 +32,6 @@ export function SiteHeader() {
           { href: "/services", label: "Usluge" },
           { href: "/process", label: "Proces" },
           { href: "/about", label: "O nama" },
-          { href: "/documentation", label: "Dokumentacija" },
           { href: "/promo", label: "Ponude" },
           { href: "/contact", label: "Kontakt" },
         ];

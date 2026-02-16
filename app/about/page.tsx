@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
-import { getAboutValues } from "@/src/data/site-content-i18n";
+import { getProcessSteps } from "@/src/data/site-content-i18n";
 import { projects } from "@/src/data/projects";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
@@ -18,7 +18,7 @@ export const metadata = buildMetadata({
 
 export default async function AboutPage() {
   const locale = await getCurrentLocale();
-  const aboutValues = getAboutValues(locale);
+  const processSteps = getProcessSteps(locale);
   const highlights = [
     {
       label: "Residence 01",
@@ -65,12 +65,12 @@ export default async function AboutPage() {
           <SectionHeading
             eyebrow={textByLocale(locale, { sr: "O nama", en: "About" })}
             title={textByLocale(locale, {
-              sr: "Studio koji definiše karakter prostora",
-              en: "A studio that defines a space’s character",
+              sr: "Postoji jedan element koji čini razliku. Mi ga otkrivamo. Vi ga živite.",
+              en: "There is one element that makes the difference. We reveal it. You live it.",
             })}
             description={textByLocale(locale, {
-              sr: "Smirena elegancija, disciplina detalja i proces koji donosi jasnoću.",
-              en: "Calm elegance, detail discipline and a process that brings clarity.",
+              sr: "Element nije detalj. Element je identitet prostora. Onaj nevidljivi sloj koji enterijeru daje identitet, ravnotežu i funkcionalnost.",
+              en: "Element is not a detail. Element is the identity of a space: the layer that gives interior identity, balance and function.",
             })}
           />
         </FadeIn>
@@ -84,14 +84,14 @@ export default async function AboutPage() {
           </p>
           <p className="text-brand-earth mt-4 max-w-4xl text-sm leading-7 md:text-base">
             {textByLocale(locale, {
-              sr: "Ne pratimo trendove po svaku cenu. Ne kreiramo enterijere za fotografiju. Kreiramo enterijere koji traju, funkcionišu i ostaju jednako snažni i nakon godina korišćenja.",
-              en: "We don’t chase trends at any cost. We don’t design for a photo. We design spaces that last, function, and feel equally strong years later.",
+              sr: "Ne pratimo trendove po svaku cenu. Kreiramo enterijere koji traju, funkcionišu i ostaju jednako snažni i nakon godina korišćenja.",
+              en: "We don’t chase trends at any cost. We create interiors that last, function and stay equally strong after years of use.",
             })}
           </p>
           <p className="text-brand-earth mt-4 max-w-4xl text-sm leading-7 md:text-base">
             {textByLocale(locale, {
-              sr: "Svaki projekat razvijamo kroz pažljivo vođen proces — od ideje do jasno definisanog idejnog rešenja koje omogućava sigurnu realizaciju.",
-              en: "Each project is developed through a carefully guided process: from idea to a clearly defined concept that enables confident realization.",
+              sr: "Svaki projekat gradimo kroz pažljivo vođen proces — od ideje do realizacije.",
+              en: "Each project is built through a carefully guided process — from idea to realization.",
             })}
           </p>
 
@@ -134,43 +134,76 @@ export default async function AboutPage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Vrednosti", en: "Values" })}
-            title={textByLocale(locale, { sr: "Principi koji nas vode", en: "Principles we follow" })}
+            eyebrow={textByLocale(locale, { sr: "Naš proces", en: "Our process" })}
+            title={textByLocale(locale, { sr: "Četiri koraka do jasnog rezultata", en: "Four steps to a clear result" })}
             description={textByLocale(locale, {
-              sr: "Svaka odluka u projektu proverava se kroz ova četiri kriterijuma.",
-              en: "Every project decision is checked against these four criteria.",
+              sr: "Proces je strukturisan i transparentan, sa jasnim isporukama u svakoj etapi.",
+              en: "The process is structured and transparent, with clear deliverables in every stage.",
             })}
           />
         </FadeIn>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {aboutValues.map((value, index) => (
+          {processSteps.map((step, index) => (
             <FadeIn
-              key={value}
+              key={step.title}
               delay={index * 0.05}
-              className="border-brand-neutral-500/70 bg-brand-neutral-100 text-brand-ink rounded-2xl border p-5 text-sm"
+              className="border-brand-neutral-500/70 rounded-2xl border bg-white p-5"
             >
-              {value}
+              <p className="text-brand-gold text-xs tracking-[0.2em] uppercase">0{index + 1}</p>
+              <h3 className="font-display text-brand-burgundy mt-2 text-3xl">{step.title}</h3>
+              <p className="text-brand-earth mt-2 text-sm">{step.short}</p>
+              <ul className="text-brand-ink mt-3 space-y-2 text-sm">
+                {step.deliverables.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="bg-brand-gold mt-1 inline-block h-1.5 w-1.5 rounded-full" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </FadeIn>
           ))}
         </div>
       </Container>
 
       <Container>
-        <FadeIn className="bg-brand-burgundy text-brand-neutral-100 rounded-3xl p-8 md:p-10">
-          <h2 className="font-display text-4xl">
-            {textByLocale(locale, { sr: "Spremni da pronađemo Vaš element?", en: "Ready to find your element?" })}
-          </h2>
-          <p className="text-brand-neutral-200 mt-3 max-w-2xl">
-            {textByLocale(locale, {
-              sr: "Pošaljite nam informacije o projektu i vraćamo se sa personalizovanim predlogom saradnje.",
-              en: "Share your project details and we’ll return with a personalized collaboration proposal.",
+        <FadeIn className="border-brand-neutral-500/70 rounded-3xl border bg-white p-8 md:p-10">
+          <SectionHeading
+            eyebrow={textByLocale(locale, { sr: "Tim", en: "Team" })}
+            title={textByLocale(locale, {
+              sr: "Co-founders",
+              en: "Co-founders",
             })}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/contact" className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4">
-              {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
-            </Link>
+            description={textByLocale(locale, {
+              sr: "Studio vodi tim kroz jasnu podelu odgovornosti između dizajna, tehnike i komunikacije.",
+              en: "The studio is led through a clear division of design, technical and communication responsibilities.",
+            })}
+          />
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <article className="border-brand-neutral-500/70 rounded-2xl border bg-brand-neutral-100 p-5">
+              <h3 className="font-display text-brand-burgundy text-3xl">Bojana Dimitrijević</h3>
+              <p className="text-brand-earth mt-2 text-sm">
+                {textByLocale(locale, {
+                  sr: "Co-founder, tehnički direktor i vodeći arhitekta tima.",
+                  en: "Co-founder, technical director and lead architect.",
+                })}
+              </p>
+            </article>
+            <article className="border-brand-neutral-500/70 rounded-2xl border bg-brand-neutral-100 p-5">
+              <h3 className="font-display text-brand-burgundy text-3xl">Tina Živković</h3>
+              <p className="text-brand-earth mt-2 text-sm">
+                {textByLocale(locale, {
+                  sr: "Co-founder i lider marketinškog tima.",
+                  en: "Co-founder and marketing team lead.",
+                })}
+              </p>
+            </article>
           </div>
+          <Link
+            href="/contact"
+            className="text-brand-burgundy decoration-brand-gold mt-6 inline-flex items-center text-sm font-semibold underline underline-offset-4"
+          >
+            {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+          </Link>
         </FadeIn>
       </Container>
     </div>

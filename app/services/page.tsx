@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
-import { getFaqItems, getServicePackages } from "@/src/data/site-content-i18n";
+import { getFaqItems } from "@/src/data/site-content-i18n";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
@@ -51,7 +51,6 @@ const collaborationPhases = [
 export default async function ServicesPage() {
   const locale = await getCurrentLocale();
   const faqItems = getFaqItems(locale);
-  const servicePackages = getServicePackages(locale);
 
   return (
     <div className="space-y-20 pb-10">
@@ -149,41 +148,6 @@ export default async function ServicesPage() {
             })}
           </p>
         </FadeIn>
-      </Container>
-
-      <Container>
-        <FadeIn>
-          <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Paketi podrške", en: "Support packages" })}
-            title={textByLocale(locale, { sr: "Izaberite nivo uključenosti", en: "Choose your level of involvement" })}
-            description={textByLocale(locale, {
-              sr: "Paketi su okvirni: tačan scope definišemo nakon upitnika i uvodnih konsultacija.",
-              en: "Packages are indicative: final scope is defined after intake and an intro call.",
-            })}
-          />
-        </FadeIn>
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {servicePackages.map((item, index) => (
-            <FadeIn
-              key={item.id}
-              delay={index * 0.04}
-              className="border-brand-neutral-500/70 rounded-3xl border bg-white p-7 shadow-[0_18px_40px_rgba(59,13,24,0.06)]"
-            >
-              <p className="text-brand-gold text-xs tracking-[0.2em] uppercase">{item.subtitle}</p>
-              <h2 className="font-display text-brand-burgundy mt-2 text-4xl">{item.name}</h2>
-              <p className="text-brand-earth mt-2 text-sm">{item.idealFor}</p>
-              <ul className="text-brand-ink mt-5 space-y-2 text-sm">
-                {item.includes.map((line) => (
-                  <li key={line} className="flex gap-2">
-                    <span className="bg-brand-gold mt-1 inline-block h-1.5 w-1.5 rounded-full" />
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
-          ))}
-        </div>
       </Container>
 
       <Container>

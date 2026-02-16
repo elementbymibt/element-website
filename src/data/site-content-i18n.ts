@@ -100,38 +100,38 @@ const faqItemsEn: FaqItem[] = [
 const processStepsEn: ProcessStep[] = [
   {
     title: "Consultation",
-    short: "Understanding your lifestyle and priorities.",
+    short: "Understanding your lifestyle, priorities and budget framework.",
     deliverables: [
-      "Priorities, habits and budget framework",
-      "Short guidelines and project focus",
-      "Clear proposal for next steps",
+      "Kick-off call and structured project brief",
+      "Review of available plans and dimensions",
+      "Scope confirmation and phase roadmap",
     ],
   },
   {
     title: "Concept",
-    short: "Defining the identity of the space.",
+    short: "Defining spatial identity, atmosphere and core logic.",
     deliverables: [
-      "Conceptual layout",
-      "Moodboard and material board",
-      "Style direction and visual tone",
+      "Functional layout and movement logic",
+      "Style direction, palette and material moodboard",
+      "Concept alignment before 3D development",
     ],
   },
   {
     title: "Development",
-    short: "Visualization and concept guidelines.",
+    short: "3D visualization and concept documentation.",
     deliverables: [
-      "3D + renders for key zones",
-      "Concept guidelines and lists (indicative)",
-      "Budget framework and priorities",
+      "3D model and renders of key zones",
+      "Concept furniture drawings and install guidance",
+      "Indicative specification list and budget framework",
     ],
   },
   {
     title: "Realization",
-    short: "Strategic consultative support during realization.",
+    short: "Consultative support during implementation.",
     deliverables: [
-      "Consultative support for key decisions",
-      "Alignment with budget and availability",
-      "Support to keep concept consistency",
+      "Final package: concept drawings, lists and phase guide",
+      "Consultative coordination on key implementation decisions",
+      "Final concept-consistency check (without technical supervision)",
     ],
   },
 ];
