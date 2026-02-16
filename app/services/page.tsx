@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { BookingLink } from "@/src/components/ui/booking-link";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
-import { faqItems, servicePackages } from "@/src/data/site-content";
+import { getFaqItems, getServicePackages } from "@/src/data/site-content-i18n";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
@@ -52,6 +50,8 @@ const collaborationPhases = [
 
 export default async function ServicesPage() {
   const locale = await getCurrentLocale();
+  const faqItems = getFaqItems(locale);
+  const servicePackages = getServicePackages(locale);
 
   return (
     <div className="space-y-20 pb-10">
@@ -86,13 +86,17 @@ export default async function ServicesPage() {
               })}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <BookingLink className="rounded-full px-7 py-3 text-sm font-semibold" />
-              <IntakeLink className="rounded-full px-7 py-3 text-sm font-semibold" />
               <Link
                 href="/portfolio"
                 className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"
               >
                 {textByLocale(locale, { sr: "Pogledajte projekte", en: "View projects" })}
+              </Link>
+              <Link
+                href="/contact"
+                className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"
+              >
+                {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us" })}
               </Link>
             </div>
           </FadeIn>
@@ -216,20 +220,18 @@ export default async function ServicesPage() {
               </p>
               <h2 className="font-display mt-2 text-4xl">
                 {textByLocale(locale, {
-                  sr: "Rezervišite konsultacije ili popunite upitnik.",
-                  en: "Book a consultation or complete the intake.",
+                  sr: "Želite ponudu za svoj projekat?",
+                  en: "Need a proposal for your project?",
                 })}
               </h2>
               <p className="text-brand-neutral-200 mt-3 max-w-2xl">
                 {textByLocale(locale, {
-                  sr: "Brz uvodni razgovor definiše obim i pravac, a upitnik nam daje precizne informacije za predlog saradnje.",
-                  en: "A short intro call defines scope and direction, while the intake gives us precise inputs for a proposal.",
+                  sr: "Pošaljite nam osnovne informacije i dobićete jasan predlog narednih koraka.",
+                  en: "Send us your core details and we will return with a clear next-step proposal.",
                 })}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <BookingLink className="rounded-full px-7 py-3 text-sm font-semibold" />
-              <IntakeLink className="rounded-full px-7 py-3 text-sm font-semibold" />
               <Link
                 href="/contact"
                 className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"

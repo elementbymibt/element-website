@@ -1,5 +1,6 @@
+import Link from "next/link";
+
 import { DocumentationGateForm } from "@/src/components/forms/documentation-gate-form";
-import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
@@ -82,11 +83,16 @@ export default async function DocumentationPage() {
           <div className="border-brand-neutral-500/70 bg-brand-neutral-100 mt-6 rounded-2xl border p-5">
             <p className="text-brand-earth text-sm">
               {textByLocale(locale, {
-                sr: "Za dodatna pitanja o dokumentaciji i opsegu isporuka, rezervišite kratke konsultacije.",
-                en: "For extra questions about documentation and deliverables, book a short consultation.",
+                sr: "Za dodatna pitanja o dokumentaciji i opsegu isporuka, kontaktirajte nas direktno.",
+                en: "For additional questions about documentation and deliverables, contact us directly.",
               })}
             </p>
-            <BookingLink className="mt-4 px-6 py-3 text-sm font-semibold" />
+            <Link
+              href="/contact"
+              className="text-brand-burgundy decoration-brand-gold mt-4 inline-flex text-sm font-semibold underline underline-offset-4"
+            >
+              {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+            </Link>
           </div>
         </FadeIn>
       </div>

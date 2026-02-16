@@ -3,9 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ProjectCarousel } from "@/src/components/portfolio/project-carousel";
-import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { getProjectBySlug, projects } from "@/src/data/projects";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
@@ -91,8 +89,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <BookingLink className="px-5 py-2.5 text-xs" />
-            <IntakeLink className="px-5 py-2.5 text-xs font-semibold" />
             <Link
               href="/contact"
               className="btn-secondary text-brand-burgundy inline-flex items-center rounded-full px-5 py-2.5 text-xs font-semibold"

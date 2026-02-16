@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 
 import { LanguageSwitcher } from "@/src/components/i18n/language-switcher";
 import { useLocale } from "@/src/components/i18n/locale-provider";
-import { BookingLink } from "@/src/components/ui/booking-link";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { cn } from "@/src/lib/utils";
 
 export function SiteHeader() {
@@ -16,30 +14,27 @@ export function SiteHeader() {
   const { locale } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const hideCtasOnPage = pathname === "/contact";
 
   const navItems =
     locale === "en"
       ? [
           { href: "/", label: "Home" },
           { href: "/portfolio", label: "Projects" },
-          { href: "/intake/start", label: "Intake" },
           { href: "/services", label: "Services" },
           { href: "/process", label: "Process" },
           { href: "/about", label: "About" },
-          { href: "/documentation", label: "Docs" },
+          { href: "/documentation", label: "Documentation" },
           { href: "/promo", label: "Offers" },
           { href: "/contact", label: "Contact" },
         ]
       : [
           { href: "/", label: "Početna" },
           { href: "/portfolio", label: "Projekti" },
-          { href: "/intake/start", label: "Upitnik" },
           { href: "/services", label: "Usluge" },
           { href: "/process", label: "Proces" },
           { href: "/about", label: "O nama" },
           { href: "/documentation", label: "Dokumentacija" },
-          { href: "/promo", label: "Promo" },
+          { href: "/promo", label: "Ponude" },
           { href: "/contact", label: "Kontakt" },
         ];
 
@@ -121,27 +116,6 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher />
-          {!hideCtasOnPage ? (
-            <>
-              <BookingLink
-                variant="primary"
-                trackingLocation="header"
-                className={cn(
-                  "px-5 py-2.5 text-xs",
-                )}
-              />
-              <IntakeLink
-                label={locale === "en" ? "Client intake" : "Popunite upitnik"}
-                variant="secondary"
-                trackingLocation="header"
-                className={cn(
-                  "px-5 py-2.5 text-xs",
-                  transparentOnTop &&
-                    "border-brand-neutral-100/65 text-brand-neutral-100 hover:bg-brand-neutral-100/10 hover:text-brand-neutral-100",
-                )}
-              />
-            </>
-          ) : null}
         </div>
 
         <button
@@ -196,12 +170,6 @@ export function SiteHeader() {
               })}
             </nav>
             <LanguageSwitcher className="mt-4" />
-            {!hideCtasOnPage ? (
-              <>
-                <BookingLink trackingLocation="mobile_menu" className="mt-4 w-full" />
-                <IntakeLink trackingLocation="mobile_menu" className="mt-4 w-full" />
-              </>
-            ) : null}
           </motion.div>
         ) : null}
       </AnimatePresence>

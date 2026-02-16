@@ -3,8 +3,6 @@
 import Link from "next/link";
 
 import { useLocale } from "@/src/components/i18n/locale-provider";
-import { BookingLink } from "@/src/components/ui/booking-link";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { roomLabels } from "@/src/data/intake-content";
 import type { IntakeDraft, ProjectRecord, RoomScopeOption } from "@/src/lib/intake/types";
 
@@ -63,17 +61,18 @@ export function ProjectDashboard({ intake, project }: ProjectDashboardProps) {
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <IntakeLink
-            label={tx("Novi intake", "New intake")}
-            className="rounded-full px-6 py-2.5 text-sm font-semibold"
-          />
+          <Link
+            href="/contact"
+            className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-6 py-2.5 text-sm font-semibold"
+          >
+            {tx("Kontakt", "Contact")}
+          </Link>
           <button
             type="button"
             className="btn-primary inline-flex rounded-full px-6 py-2.5 text-sm font-semibold"
           >
             {tx("Generiši predlog", "Generate proposal")}
           </button>
-          <BookingLink className="px-6 py-2.5 text-sm font-semibold" />
         </div>
       </section>
 

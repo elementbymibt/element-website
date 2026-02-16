@@ -1,9 +1,7 @@
 import Link from "next/link";
 
-import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
@@ -102,16 +100,17 @@ export default async function TermsPage() {
         </h2>
         <p className="text-brand-neutral-200 mt-3 max-w-2xl">
           {textByLocale(locale, {
-            sr: "Rezervišite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanim predlogom saradnje.",
-            en: "Book a consultation or complete the intake. We’ll return with a personalized collaboration proposal.",
+            sr: "Pošaljite nam informacije o projektu i vraćamo se sa personalizovanim predlogom saradnje.",
+            en: "Share your project details and we’ll return with a personalized collaboration proposal.",
           })}
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <BookingLink trackingLocation="terms_cta" className="px-7 py-3 text-sm font-semibold" />
-          <IntakeLink className="px-7 py-3 text-sm font-semibold" />
-        </div>
+        <Link
+          href="/contact"
+          className="text-brand-neutral-100 decoration-brand-gold mt-6 inline-flex items-center text-sm font-semibold underline underline-offset-4"
+        >
+          {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+        </Link>
       </FadeIn>
     </Container>
   );
 }
-

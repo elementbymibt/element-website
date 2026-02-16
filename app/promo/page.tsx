@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 import { PromoCountdown } from "@/src/components/promo/promo-countdown";
-import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { SectionHeading } from "@/src/components/ui/section-heading";
-import { promoOffers } from "@/src/data/site-content";
+import { getPromoOffers } from "@/src/data/site-content-i18n";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
@@ -15,12 +16,13 @@ export const metadata = buildMetadata({
 
 export default async function PromoPage() {
   const locale = await getCurrentLocale();
+  const promoOffers = getPromoOffers(locale);
 
   return (
     <Container className="py-16 md:py-20">
       <FadeIn>
         <SectionHeading
-          eyebrow="Promo"
+          eyebrow={textByLocale(locale, { sr: "Ponude", en: "Offers" })}
           title={textByLocale(locale, { sr: "Aktuelne ponude", en: "Current offers" })}
           description={textByLocale(locale, {
             sr: "Ograničene ponude za klijente koji žele da rezervišu termin u tekućem periodu.",
@@ -48,10 +50,12 @@ export default async function PromoPage() {
             </h2>
             <p className="text-brand-earth mt-2 text-sm">{offer.subtitle}</p>
             <p className="text-brand-ink mt-4 text-sm">{offer.details}</p>
-            <BookingLink
-              className="mt-6 px-5 py-2.5 text-xs"
-              label={locale === "en" ? "Book a slot" : "Rezervišite termin"}
-            />
+            <Link
+              href="/contact"
+              className="text-brand-burgundy decoration-brand-gold mt-6 inline-flex text-xs font-semibold underline underline-offset-4"
+            >
+              {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us" })}
+            </Link>
           </FadeIn>
         ))}
       </div>

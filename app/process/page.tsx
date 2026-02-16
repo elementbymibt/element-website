@@ -1,11 +1,9 @@
 import Link from "next/link";
 
-import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
-import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
-import { processSteps } from "@/src/data/site-content";
+import { getProcessSteps } from "@/src/data/site-content-i18n";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
@@ -18,6 +16,7 @@ export const metadata = buildMetadata({
 
 export default async function ProcessPage() {
   const locale = await getCurrentLocale();
+  const processSteps = getProcessSteps(locale);
 
   return (
     <Container className="py-16 md:py-20">
@@ -81,13 +80,11 @@ export default async function ProcessPage() {
         </h3>
         <p className="text-brand-neutral-200 mt-3 max-w-2xl">
           {textByLocale(locale, {
-            sr: "Zakažite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanim predlogom narednih koraka.",
-            en: "Book a consultation or complete the intake. We’ll return with a personalized next-step proposal.",
+            sr: "Pošaljite nam osnovne informacije o projektu i vraćamo se sa jasnim predlogom narednih koraka.",
+            en: "Send us the core project details and we’ll return with a clear next-step proposal.",
           })}
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <BookingLink trackingLocation="process_cta" className="px-7 py-3 text-sm font-semibold" />
-          <IntakeLink className="px-7 py-3 text-sm font-semibold" />
           <Link
             href="/contact"
             className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"

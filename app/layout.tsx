@@ -4,7 +4,6 @@ import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { AnalyticsProviders } from "@/src/components/analytics/analytics-providers";
 import { LocaleProvider } from "@/src/components/i18n/locale-provider";
 import { EmailEntryPopup } from "@/src/components/leads/email-entry-popup";
-import { MobileStickyCta } from "@/src/components/layout/mobile-sticky-cta";
 import { SiteFooter } from "@/src/components/layout/site-footer";
 import { SiteHeader } from "@/src/components/layout/site-header";
 import { StructuredData } from "@/src/components/seo/structured-data";
@@ -73,11 +72,10 @@ export default async function RootLayout({
             {locale === "en" ? "Skip to content" : "Preskoči na sadržaj"}
           </a>
           <SiteHeader />
-          <main id="main-content" className="pt-20 pb-28 lg:pb-0">
+          <main id="main-content" className="pt-20">
             {children}
           </main>
           <SiteFooter />
-          <MobileStickyCta />
           <EmailEntryPopup />
           <AnalyticsProviders />
         </LocaleProvider>

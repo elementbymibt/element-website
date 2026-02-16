@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
@@ -31,7 +30,12 @@ export default async function ThankYouPage() {
           })}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <BookingLink className="px-7 py-3 text-sm font-semibold" />
+          <Link
+            href="/contact"
+            className="btn-secondary text-brand-burgundy inline-flex rounded-full px-7 py-3 text-sm font-semibold"
+          >
+            {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
+          </Link>
           <Link
             href="/"
             className="btn-secondary text-brand-burgundy inline-flex rounded-full px-7 py-3 text-sm font-semibold"
