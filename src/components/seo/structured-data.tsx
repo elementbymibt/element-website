@@ -15,7 +15,7 @@ export function StructuredData() {
     },
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "InteriorDesigner",
       "@id": `${baseUrl}#localbusiness`,
       name: siteConfig.legalName,
       url: baseUrl,
@@ -23,6 +23,16 @@ export function StructuredData() {
       email: siteConfig.email,
       image: `${baseUrl}/brand/og-image.jpg`,
       sameAs: [siteConfig.instagram],
+      areaServed: [
+        {
+          "@type": "City",
+          name: "Beograd",
+        },
+        {
+          "@type": "City",
+          name: "Pančevo",
+        },
+      ],
       address: {
         "@type": "PostalAddress",
         addressLocality: "Beograd",

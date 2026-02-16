@@ -11,18 +11,18 @@ import { buildMetadata } from "@/src/lib/seo";
 export const metadata = buildMetadata({
   title: "Usluge",
   description:
-    "Dizajn enterijera kroz jasne faze: concept, vizuelizacija i finalni paket. Idejna i konsultantska usluga studija ÉLÉMENT.",
+    "Dizajn enterijera kroz jasne faze: koncept, vizuelizacija i finalni paket. Idejna i konsultantska usluga studija ÉLÉMENT za Beograd i Pančevo.",
   path: "/services",
 });
 
 const collaborationPhases = [
   {
     id: "concept",
-    title: "FAZA 1 – CONCEPT",
+    title: "FAZA 1 – KONCEPT",
     points: [
-      "Brief i analiza prostora",
-      "Stil, atmosfera i raspored (layout)",
-      "Moodboard i smernice materijala",
+      "Uvodni razgovor i analiza prostora",
+      "Stil, atmosfera i raspored",
+      "Stilska tabla i smernice materijala",
       "Jasan pravac za naredne odluke",
     ],
   },
@@ -153,7 +153,7 @@ export default async function ServicesPage() {
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "FAQ", en: "FAQ" })}
+            eyebrow={textByLocale(locale, { sr: "Pitanja", en: "FAQ" })}
             title={textByLocale(locale, { sr: "Česta pitanja", en: "Frequently asked questions" })}
             description={textByLocale(locale, {
               sr: "Najčešća pitanja pre početka saradnje.",

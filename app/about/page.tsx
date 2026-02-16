@@ -48,11 +48,11 @@ export default async function AboutPage() {
       }),
     },
     {
-      label: "Concept 04",
+      label: "Koncept 04",
       slug: projects[3]?.slug ?? "zemun-loft-office",
       cover: projects[3]?.coverImage ?? "/projects/p04-01.jpg",
       alt: textByLocale(locale, {
-        sr: "Concept 04 – ÉLÉMENT portfolio inspiracija",
+        sr: "Koncept 04 – ÉLÉMENT portfolio inspiracija",
         en: "Concept 04 – ÉLÉMENT portfolio highlight",
       }),
     },
@@ -170,7 +170,7 @@ export default async function AboutPage() {
           <SectionHeading
             eyebrow={textByLocale(locale, { sr: "Tim", en: "Team" })}
             title={textByLocale(locale, {
-              sr: "Co-founders",
+              sr: "Suosnivači",
               en: "Co-founders",
             })}
             description={textByLocale(locale, {
@@ -183,7 +183,7 @@ export default async function AboutPage() {
               <h3 className="font-display text-brand-burgundy text-3xl">Bojana Dimitrijević</h3>
               <p className="text-brand-earth mt-2 text-sm">
                 {textByLocale(locale, {
-                  sr: "Co-founder, tehnički direktor i vodeći arhitekta tima.",
+                  sr: "Suosnivač, tehnički direktor i vodeći arhitekta tima.",
                   en: "Co-founder, technical director and lead architect.",
                 })}
               </p>
@@ -192,7 +192,7 @@ export default async function AboutPage() {
               <h3 className="font-display text-brand-burgundy text-3xl">Tina Živković</h3>
               <p className="text-brand-earth mt-2 text-sm">
                 {textByLocale(locale, {
-                  sr: "Co-founder i lider marketinškog tima.",
+                  sr: "Suosnivač i lider marketinškog tima.",
                   en: "Co-founder and marketing team lead.",
                 })}
               </p>

@@ -23,8 +23,8 @@ export default async function TermsPage() {
           eyebrow={textByLocale(locale, { sr: "Saradnja", en: "Collaboration" })}
           title={textByLocale(locale, { sr: "Uslovi saradnje", en: "Collaboration terms" })}
           description={textByLocale(locale, {
-            sr: "Ovo je sažet, praktičan pregled. Finalne detalje definišemo u ponudi nakon upitnika i uvodnih konsultacija.",
-            en: "A short, practical overview. Final details are defined in a proposal after intake and an intro call.",
+            sr: "Ovo je sažet, praktičan pregled. Finalne detalje definišemo u ponudi nakon uvodnih konsultacija.",
+            en: "A short, practical overview. Final details are defined in a proposal after an intro consultation.",
           })}
         />
       </FadeIn>
@@ -65,8 +65,8 @@ export default async function TermsPage() {
         </h2>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
-            sr: "Rokovi zavise od obima i brzine donošenja odluka. Nakon upitnika i uvodnog razgovora definišemo realan plan po fazama, tako da proces ostane miran, precizan i predvidiv.",
-            en: "Timelines depend on scope and decision speed. After intake and an intro call, we define a realistic phase plan so the process stays calm, precise and predictable.",
+            sr: "Rokovi zavise od obima i brzine donošenja odluka. Nakon uvodnog razgovora definišemo realan plan po fazama, tako da proces ostane miran, precizan i predvidiv.",
+            en: "Timelines depend on scope and decision speed. After an intro call, we define a realistic phase plan so the process stays calm, precise and predictable.",
           })}
         </p>
 

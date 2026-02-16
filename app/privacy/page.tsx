@@ -41,8 +41,8 @@ export default async function PrivacyPage() {
           </li>
           <li>
             {textByLocale(locale, {
-              sr: "Sadržaj poruke i odgovori iz upitnika (ukoliko popunite upitnik).",
-              en: "Your message and intake answers (if you complete the intake).",
+              sr: "Sadržaj poruke koji nam pošaljete kroz kontakt forme.",
+              en: "Your message submitted through contact forms.",
             })}
           </li>
           <li>

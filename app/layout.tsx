@@ -27,12 +27,20 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
   title: {
-    default: `${siteConfig.legalName} | Premium Studio`,
+    default: `${siteConfig.legalName} | Premium studio`,
     template: `%s | ${siteConfig.legalName}`,
   },
   description: siteConfig.description,
+  keywords: [
+    "dizajn enterijera",
+    "arhitektura enterijera",
+    "enterijer Beograd",
+    "enterijer Pančevo",
+    "studio za enterijer",
+    "luksuzni enterijer",
+  ],
   openGraph: {
-    title: `${siteConfig.legalName} | Premium Studio`,
+    title: `${siteConfig.legalName} | Premium studio`,
     description: siteConfig.description,
     type: "website",
     locale: "sr_RS",

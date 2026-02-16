@@ -16,13 +16,13 @@ export type ServicePackage = {
 export const servicePackages: ServicePackage[] = [
   {
     id: "concept",
-    name: "Concept",
+    name: "Koncept",
     subtitle: "FAZA 1",
     idealFor: "Za jasan pravac projekta pre velikih odluka.",
     includes: [
-      "Uvodni brief i analiza prostora",
-      "Koncept layout-a i funkcionalne zone",
-      "Moodboard: materijali, tonalitet, atmosfera",
+      "Uvodni razgovor i analiza prostora",
+      "Koncept rasporeda i funkcionalne zone",
+      "Stilska tabla: materijali, tonalitet, atmosfera",
       "Smernice za dalje odluke",
     ],
   },
@@ -54,7 +54,7 @@ export const servicePackages: ServicePackage[] = [
 
 export const packageComparisonRows = [
   {
-    feature: "Moodboard i koncept",
+    feature: "Stilska tabla i koncept",
     values: ["Da", "Da", "Da", "Da"],
   },
   {
@@ -127,7 +127,7 @@ export const processSteps = [
     title: "Konsultacije",
     short: "Razumevanje načina života, prioriteta i budžetskog okvira.",
     deliverables: [
-      "Kick-off razgovor i strukturisan brief",
+      "Uvodni sastanak i strukturisan razgovor",
       "Pregled dostupnih planova i mera prostora",
       "Definisanje opsega i plana rada po fazama",
     ],
@@ -190,7 +190,7 @@ export const promoOffers = [
     subtitle: "90-min premium sesija + mini koncept",
     details:
       "Za nove klijente: detaljna konsultacija, funkcionalni predlog i lista prioritetnih intervencija.",
-    badge: "Limited",
+    badge: "Ograničeno",
   },
   {
     title: "-10% za rezervacije do 30.04.",
@@ -200,7 +200,7 @@ export const promoOffers = [
     badge: "Aktuelno",
   },
   {
-    title: "Business Space Audit",
+    title: "Audit poslovnog prostora",
     subtitle: "Brza procena potencijala prostora",
     details:
       "Intenzivni audit za kancelarije i retail: dijagnostika prostora + 3 strateške preporuke.",

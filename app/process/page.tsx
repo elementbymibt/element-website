@@ -25,7 +25,7 @@ export default async function ProcessPage() {
           eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
           title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
           description={textByLocale(locale, {
-            sr: "Proces je linearan i transparentan: od brief-a do finalnog paketa smernica za realizaciju, uz jasno definisane faze i odgovornosti.",
+            sr: "Proces je linearan i transparentan: od uvodnog razgovora do finalnog paketa smernica za realizaciju, uz jasno definisane faze i odgovornosti.",
             en: "The process is linear and transparent: from brief to final guidance package, with clearly defined phases and responsibilities.",
           })}
         />

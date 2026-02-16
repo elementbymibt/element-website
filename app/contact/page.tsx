@@ -1,4 +1,3 @@
-import { ContactForm } from "@/src/components/forms/contact-form";
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
@@ -10,15 +9,12 @@ import { siteConfig } from "@/src/lib/site-config";
 export const metadata = buildMetadata({
   title: "Kontakt",
   description:
-    "Kontaktirajte ÉLÉMENT studio i pošaljite detalje projekta. Zakazivanje konsultacija i direktan kontakt telefonom.",
+    "Kontaktirajte ÉLÉMENT studio i zakažite konsultacije. Direktan telefonski kontakt za Beograd i Pančevo.",
   path: "/contact",
 });
 
 export default async function ContactPage() {
   const locale = await getCurrentLocale();
-  const instagramHandle = siteConfig.instagram
-    .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
-    .replace(/\/$/, "");
 
   return (
     <Container className="py-16 md:py-20">
@@ -27,80 +23,42 @@ export default async function ContactPage() {
           eyebrow={textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
           title={textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
           description={textByLocale(locale, {
-            sr: "Pošaljite osnovne informacije o projektu. Vraćamo se sa predlogom narednih koraka.",
-            en: "Share the core project details. We will return with a clear next-step proposal.",
+            sr: "Za najbrži početak, pozovite nas ili odmah zakažite konsultacije.",
+            en: "For the fastest start, call us or schedule a consultation.",
           })}
         />
       </FadeIn>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-        <FadeIn className="border-brand-neutral-500/70 bg-brand-neutral-100 rounded-3xl border p-7">
-          <h2 className="font-display text-brand-burgundy text-3xl">
-            {textByLocale(locale, { sr: "Direktni kanali", en: "Direct channels" })}
-          </h2>
-          <ul className="text-brand-ink mt-5 space-y-3 text-sm">
-            <li>
-              Instagram:{" "}
-              <a
-                href={siteConfig.instagram}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="decoration-brand-gold underline underline-offset-4"
-              >
-                @{instagramHandle}
-              </a>
-            </li>
-            <li>
-              Email:{" "}
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="decoration-brand-gold underline underline-offset-4"
-              >
-                {siteConfig.email}
-              </a>
-            </li>
-            <li>
-              Telefon:{" "}
-              <a
-                href={`tel:${siteConfig.phone}`}
-                className="decoration-brand-gold underline underline-offset-4"
-              >
-                {siteConfig.phone}
-              </a>
-            </li>
-            <li>
-              Website:{" "}
-              <a
-                href={siteConfig.website}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="decoration-brand-gold underline underline-offset-4"
-              >
-                {siteConfig.website.replace(/^https?:\/\//, "")}
-              </a>
-            </li>
-          </ul>
+      <FadeIn className="border-brand-neutral-500/70 bg-brand-neutral-100 mx-auto mt-10 max-w-3xl rounded-3xl border p-8 md:p-10">
+        <h2 className="font-display text-brand-burgundy text-4xl">
+          {textByLocale(locale, { sr: "Direktan kontakt", en: "Direct contact" })}
+        </h2>
+        <p className="text-brand-earth mt-3 text-sm">
+          {textByLocale(locale, {
+            sr: "Dostupni za projekte u Beogradu i Pančevu.",
+            en: "Available for projects in Belgrade and Pančevo.",
+          })}
+        </p>
 
-          <div className="border-brand-neutral-500/70 mt-8 rounded-2xl border bg-white p-5">
-            <p className="text-brand-earth text-sm">
-              {textByLocale(locale, {
-                sr: "Za najbrži početak, zakažite konsultacije ili nas pozovite direktno.",
-                en: "For the fastest start, schedule a consultation or call us directly.",
-              })}
-            </p>
-            <div className="mt-4">
-              <BookingLink
-                className="w-full justify-center px-6 py-3 text-sm font-semibold"
-                trackingLocation="contact_panel"
-              />
-            </div>
-          </div>
-        </FadeIn>
+        <ul className="text-brand-ink mt-6 space-y-3 text-base">
+          <li>
+            {textByLocale(locale, { sr: "Telefon:", en: "Phone:" })}{" "}
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="decoration-brand-gold underline underline-offset-4"
+            >
+              {siteConfig.phone}
+            </a>
+          </li>
+        </ul>
 
-        <FadeIn className="border-brand-neutral-500/70 rounded-3xl border bg-white p-7">
-          <ContactForm />
-        </FadeIn>
-      </div>
+        <div className="mt-8">
+          <BookingLink
+            className="w-full justify-center px-6 py-3 text-sm font-semibold"
+            trackingLocation="contact_page_main"
+          />
+        </div>
+      </FadeIn>
     </Container>
   );
 }

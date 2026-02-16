@@ -10,7 +10,6 @@ import { siteConfig } from "@/src/lib/site-config";
 const legalLinks = [
   { href: "/privacy", label: "Politika privatnosti" },
   { href: "/uslovi-saradnje", label: "Uslovi saradnje" },
-  { href: "/documentation", label: "Dokumentacija" },
   { href: "/contact", label: "Kontakt" },
 ];
 
@@ -22,7 +21,6 @@ export function SiteFooter() {
       ? [
           { href: "/privacy", label: "Privacy Policy" },
           { href: "/uslovi-saradnje", label: "Collaboration terms" },
-          { href: "/documentation", label: "Documentation" },
           { href: "/contact", label: "Contact" },
         ]
       : legalLinks;
