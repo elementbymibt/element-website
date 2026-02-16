@@ -1,10 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
+import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
-import { aboutValues, pressMentions, teamMembers } from "@/src/data/site-content";
+import { aboutValues } from "@/src/data/site-content";
+import { projects } from "@/src/data/projects";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
 import { buildMetadata } from "@/src/lib/seo";
 
@@ -17,6 +20,44 @@ export const metadata = buildMetadata({
 
 export default async function AboutPage() {
   const locale = await getCurrentLocale();
+  const highlights = [
+    {
+      label: "Residence 01",
+      slug: projects[0]?.slug ?? "dorcol-residence",
+      cover: projects[0]?.coverImage ?? "/projects/p01-01.jpg",
+      alt: textByLocale(locale, {
+        sr: "Residence 01 – ÉLÉMENT portfolio inspiracija",
+        en: "Residence 01 – ÉLÉMENT portfolio highlight",
+      }),
+    },
+    {
+      label: "Urban Apartment",
+      slug: projects[2]?.slug ?? "new-belgrade-penthouse",
+      cover: projects[2]?.coverImage ?? "/projects/p03-01.jpg",
+      alt: textByLocale(locale, {
+        sr: "Urban Apartment – ÉLÉMENT portfolio inspiracija",
+        en: "Urban Apartment – ÉLÉMENT portfolio highlight",
+      }),
+    },
+    {
+      label: "Minimal House",
+      slug: projects[1]?.slug ?? "senjak-villa",
+      cover: projects[1]?.coverImage ?? "/projects/p02-01.jpg",
+      alt: textByLocale(locale, {
+        sr: "Minimal House – ÉLÉMENT portfolio inspiracija",
+        en: "Minimal House – ÉLÉMENT portfolio highlight",
+      }),
+    },
+    {
+      label: "Concept 04",
+      slug: projects[3]?.slug ?? "zemun-loft-office",
+      cover: projects[3]?.coverImage ?? "/projects/p04-01.jpg",
+      alt: textByLocale(locale, {
+        sr: "Concept 04 – ÉLÉMENT portfolio inspiracija",
+        en: "Concept 04 – ÉLÉMENT portfolio highlight",
+      }),
+    },
+  ];
 
   return (
     <div className="space-y-20 py-16 md:py-20">
@@ -25,27 +66,67 @@ export default async function AboutPage() {
           <SectionHeading
             eyebrow={textByLocale(locale, { sr: "O nama", en: "About" })}
             title={textByLocale(locale, {
-              sr: "Studio sa jasnim autorskim potpisom",
-              en: "A studio with a clear authorial signature",
+              sr: "Studio koji definiše karakter prostora",
+              en: "A studio that defines a space’s character",
             })}
             description={textByLocale(locale, {
-              sr: "ÉLÉMENT (by M·I·B·T) razvija enterijere koji komuniciraju smiren luksuz, preciznu funkciju i dugotrajnu vrednost.",
-              en: "ÉLÉMENT (by M·I·B·T) creates interiors that communicate calm luxury, precise function and long-term value.",
+              sr: "Smirena elegancija, disciplina detalja i proces koji donosi jasnoću.",
+              en: "Calm elegance, detail discipline and a process that brings clarity.",
             })}
           />
         </FadeIn>
 
         <FadeIn className="border-brand-neutral-500/70 mt-8 rounded-3xl border bg-white p-8 md:p-10">
-          <p className="font-display text-brand-burgundy text-3xl leading-relaxed md:text-4xl">
+          <p className="text-brand-earth max-w-4xl text-sm leading-7 md:text-base">
             {textByLocale(locale, {
-              sr: "Verujemo da vrhunski enterijer ne treba da bude glasan. Treba da bude tačan.",
-              en: "We believe a premium interior should not be loud. It should be precise.",
+              sr: "ÉLÉMENT je studio za dizajn enterijera koji veruje da prostor mora da odražava način života svojih vlasnika.",
+              en: "ÉLÉMENT is an interior design studio that believes a space must reflect the way its owners live.",
             })}
           </p>
-          <p className="text-brand-earth mt-6 max-w-3xl text-sm leading-7">
+          <p className="text-brand-earth mt-4 max-w-4xl text-sm leading-7 md:text-base">
             {textByLocale(locale, {
-              sr: "Naš rad se zasniva na disciplini detalja, promišljenoj upotrebi materijala i procesu koji klijentu vraća sigurnost. Dizajn posmatramo kao stratešku odluku: kako prostor izgleda, kako radi i kakvu emociju ostavlja kroz vreme.",
-              en: "Our work is based on detail discipline, intentional material curation and a process that restores confidence to the client. We view design as a strategic decision: how the space looks, performs and feels over time.",
+              sr: "Ne pratimo trendove po svaku cenu. Ne kreiramo enterijere za fotografiju. Kreiramo enterijere koji traju, funkcionišu i ostaju jednako snažni i nakon godina korišćenja.",
+              en: "We don’t chase trends at any cost. We don’t design for a photo. We design spaces that last, function, and feel equally strong years later.",
+            })}
+          </p>
+          <p className="text-brand-earth mt-4 max-w-4xl text-sm leading-7 md:text-base">
+            {textByLocale(locale, {
+              sr: "Svaki projekat razvijamo kroz pažljivo vođen proces — od ideje do jasno definisanog idejnog rešenja koje omogućava sigurnu realizaciju.",
+              en: "Each project is developed through a carefully guided process: from idea to a clearly defined concept that enables confident realization.",
+            })}
+          </p>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {highlights.map((item, index) => (
+              <FadeIn
+                key={item.label}
+                delay={index * 0.04}
+                className="border-brand-neutral-500/70 group overflow-hidden rounded-2xl border bg-brand-neutral-100"
+              >
+                <Link href={`/portfolio/${item.slug}`} className="block">
+                  <div className="relative aspect-[4/3]">
+                    <Image
+                      src={item.cover}
+                      alt={item.alt}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+                    <div className="absolute left-4 right-4 bottom-4">
+                      <p className="text-white text-xs tracking-[0.26em] uppercase">Portfolio</p>
+                      <p className="font-display mt-1 text-2xl text-white">{item.label}</p>
+                    </div>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+
+          <p className="text-brand-earth mt-6 text-sm">
+            {textByLocale(locale, {
+              sr: "Spremni da pronađemo Vaš element?",
+              en: "Ready to find your element?",
             })}
           </p>
         </FadeIn>
@@ -76,74 +157,21 @@ export default async function AboutPage() {
       </Container>
 
       <Container>
-        <FadeIn>
-          <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Tim", en: "Team" })}
-            title={textByLocale(locale, { sr: "Tim", en: "Team" })}
-            description={textByLocale(locale, {
-              sr: "Multidisciplinarni profil koji kombinuje kreativnu viziju i operativnu pouzdanost.",
-              en: "A multidisciplinary profile combining creative vision and operational reliability.",
-            })}
-          />
-        </FadeIn>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {teamMembers.map((member, index) => (
-            <FadeIn
-              key={member.name}
-              delay={index * 0.04}
-              className="border-brand-neutral-500/70 rounded-3xl border bg-white p-6"
-            >
-              <h3 className="font-display text-brand-burgundy text-3xl">{member.name}</h3>
-              <p className="text-brand-gold mt-1 text-xs tracking-[0.2em] uppercase">
-                {member.role}
-              </p>
-              <p className="text-brand-earth mt-4 text-sm">{member.bio}</p>
-            </FadeIn>
-          ))}
-        </div>
-      </Container>
-
-      <Container>
-        <FadeIn className="border-brand-neutral-500/70 rounded-3xl border bg-white p-8 md:p-10">
-          <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Objave", en: "Press" })}
-            title={textByLocale(locale, { sr: "Objave / Press", en: "Featured / Press" })}
-            description={textByLocale(locale, {
-              sr: "Objave i editorijali u kojima je studio predstavljen.",
-              en: "Features and editorials where the studio has been presented.",
-            })}
-          />
-          <ul className="text-brand-earth mt-6 space-y-3 text-sm">
-            {pressMentions.map((item) => (
-              <li
-                key={item}
-                className="border-brand-neutral-500/70 bg-brand-neutral-100 rounded-xl border p-3"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </FadeIn>
-      </Container>
-
-      <Container>
         <FadeIn className="bg-brand-burgundy text-brand-neutral-100 rounded-3xl p-8 md:p-10">
           <h2 className="font-display text-4xl">
-            {textByLocale(locale, { sr: "Upoznajmo vaš prostor.", en: "Let's review your space." })}
+            {textByLocale(locale, { sr: "Spremni da pronađemo Vaš element?", en: "Ready to find your element?" })}
           </h2>
           <p className="text-brand-neutral-200 mt-3 max-w-2xl">
             {textByLocale(locale, {
-              sr: "Pošaljite osnovne informacije i dobijte predlog odgovarajućeg paketa i toka realizacije.",
-              en: "Share the core details and receive a proposal for the right package and execution flow.",
+              sr: "Zakažite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanim predlogom saradnje.",
+              en: "Book a consultation or complete the intake. We’ll return with a personalized collaboration proposal.",
             })}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <BookingLink className="px-7 py-3 text-sm font-semibold" />
-            <Link
-              href="/contact"
-              className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"
-            >
-              {textByLocale(locale, { sr: "Kontakt forma", en: "Contact form" })}
+            <BookingLink trackingLocation="about_cta" className="px-7 py-3 text-sm font-semibold" />
+            <IntakeLink className="px-7 py-3 text-sm font-semibold" />
+            <Link href="/contact" className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4">
+              {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
             </Link>
           </div>
         </FadeIn>

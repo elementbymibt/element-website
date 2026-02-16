@@ -28,11 +28,24 @@ export function IntakeLink({
         variant === "primary" ? "btn-primary" : "btn-secondary text-brand-burgundy",
         className,
       )}
-      onClick={() => trackEvent("intake_click", { location: "cta" })}
+      onClick={() => {
+        try {
+          const key = "element_intake_start_tracked";
+          if (typeof window !== "undefined") {
+            if (sessionStorage.getItem(key)) {
+              return;
+            }
+            sessionStorage.setItem(key, "1");
+          }
+        } catch {
+          // Best-effort only.
+        }
+        trackEvent("intake_start", { location: "cta" });
+      }}
       aria-label={
         locale === "en"
-          ? "Open client intake wizard"
-          : "Otvorite klijentski intake upitnik"
+          ? "Open client intake questionnaire"
+          : "Otvorite klijentski upitnik"
       }
     >
       {buttonLabel}

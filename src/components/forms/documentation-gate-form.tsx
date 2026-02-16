@@ -60,7 +60,7 @@ export function DocumentationGateForm() {
       setStatus("success");
       setMessage(result.message || (locale === "en" ? "Access granted." : "Pristup je odobren."));
       setDownloadUrl(result.downloadUrl);
-      trackEvent("lead_submit", { source: "documentation" });
+      trackEvent("doc_unlock", { source: "documentation" });
       form.reset();
     } catch {
       setStatus("error");
@@ -156,7 +156,7 @@ export function DocumentationGateForm() {
           <a
             href={downloadUrl}
             className="text-brand-burgundy decoration-brand-gold mt-3 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4"
-            onClick={() => trackEvent("documentation_download", { file: "sample.pdf" })}
+            onClick={() => trackEvent("doc_download", { file: "sample.pdf" })}
           >
             {locale === "en"
               ? "Download sample documentation (PDF)"

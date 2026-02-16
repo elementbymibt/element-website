@@ -35,7 +35,7 @@ const collaborationPhases = [
       "3D model i renderi ključnih prostora",
       "Usklađivanje estetike i funkcije",
       "Fino podešavanje materijala i boja",
-      "2 korekcije uključene u proces",
+      "Dve objedinjene korekcije u okviru faze",
     ],
   },
   {
@@ -159,7 +159,7 @@ export default async function ServicesPage() {
           />
         </FadeIn>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {servicePackages.map((item, index) => (
             <FadeIn
               key={item.id}

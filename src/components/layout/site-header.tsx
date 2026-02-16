@@ -120,7 +120,7 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <IntakeLink
-            label={locale === "en" ? "Intake" : "Upitnik"}
+            label={locale === "en" ? "Client intake" : "Popunite upitnik"}
             variant={transparentOnTop ? "secondary" : "secondary"}
             className={cn(
               "px-5 py-2.5 text-xs",

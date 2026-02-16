@@ -105,8 +105,6 @@ const propertyTypeOptions = [
   { id: "apartment", sr: "Stan", en: "Apartment" },
   { id: "house", sr: "Kuća", en: "House" },
   { id: "business_space", sr: "Poslovni prostor", en: "Business space" },
-  { id: "commercial_space", sr: "Komercijalni prostor", en: "Commercial space" },
-  { id: "single_room", sr: "Jedna prostorija", en: "Single room" },
 ] as const satisfies Array<{
   id: IntakeDraft["basics"]["propertyType"];
   sr: string;
@@ -114,6 +112,65 @@ const propertyTypeOptions = [
 }>;
 
 type StepId = 0 | 1 | 2 | 3;
+
+const deadlineOptions = [
+  { id: "2w", sr: "U naredne 2 nedelje", en: "Within 2 weeks" },
+  { id: "1m", sr: "U narednih 30 dana", en: "Within 30 days" },
+  { id: "3m", sr: "U naredna 3 meseca", en: "Within 3 months" },
+  { id: "6m", sr: "U narednih 6 meseci", en: "Within 6 months" },
+  { id: "flexible", sr: "Fleksibilno", en: "Flexible" },
+] as const satisfies Array<{
+  id: IntakeDraft["basics"]["deadline"];
+  sr: string;
+  en: string;
+}>;
+
+const budgetRangeOptions = [
+  {
+    id: "unknown",
+    sr: "Još ne znam",
+    en: "Not sure yet",
+    apply: () => ({
+      unknownBudget: true,
+      tier: "balanced" as const,
+      minTotal: 30000,
+      maxTotal: 70000,
+    }),
+  },
+  {
+    id: "starter",
+    sr: "Do 30.000€",
+    en: "Up to €30,000",
+    apply: () => ({
+      unknownBudget: false,
+      tier: "starter" as const,
+      minTotal: 12000,
+      maxTotal: 30000,
+    }),
+  },
+  {
+    id: "balanced",
+    sr: "30.000€ – 70.000€",
+    en: "€30,000 – €70,000",
+    apply: () => ({
+      unknownBudget: false,
+      tier: "balanced" as const,
+      minTotal: 30000,
+      maxTotal: 70000,
+    }),
+  },
+  {
+    id: "premium",
+    sr: "70.000€+",
+    en: "€70,000+",
+    apply: () => ({
+      unknownBudget: false,
+      tier: "premium" as const,
+      minTotal: 70000,
+      maxTotal: 180000,
+    }),
+  },
+] as const;
 
 function formatDateTime(iso: string | undefined, locale: "sr" | "en") {
   if (!iso) return "";
@@ -160,15 +217,6 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
   }, [tx]);
 
   const progress = useMemo(() => Math.round(((step + 1) / stepTitles.length) * 100), [step, stepTitles.length]);
-
-  useEffect(() => {
-    const key = `element_intake_started_${draft.id}`;
-    if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(key)) return;
-
-    sessionStorage.setItem(key, "1");
-    trackEvent("intake_start", { id: draft.id, locale });
-  }, [draft.id, locale]);
 
   const updateDraft = useCallback((updater: (prev: IntakeDraft) => IntakeDraft) => {
     setDraft((prev) => ({
@@ -230,12 +278,22 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
       const hasName = Boolean(draft.client.fullName.trim());
       const hasEmail = emailPattern.test(draft.client.email.trim().toLowerCase());
       const hasProperty = Boolean(draft.basics.propertyType);
+      const hasCity = Boolean(draft.basics.city.trim());
       const hasMeasurements = typeof draft.agreements.hasExactMeasurements === "boolean";
       const understandsConcept = draft.agreements.understandsConceptConceptualOnly === true;
       const understandsRevisions = draft.agreements.understandsTwoRevisionsIncluded === true;
       const consent = draft.agreements.privacyConsent === true;
 
-      return hasName && hasEmail && hasProperty && hasMeasurements && understandsConcept && understandsRevisions && consent;
+      return (
+        hasName &&
+        hasEmail &&
+        hasProperty &&
+        hasCity &&
+        hasMeasurements &&
+        understandsConcept &&
+        understandsRevisions &&
+        consent
+      );
     }
 
     return true;
@@ -368,8 +426,8 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
             <div>
               <p className="text-brand-earth text-sm">
                 {tx(
-                  "Izaberite stil koji vam je najbliži. Ako ste između dva, možete označiti oba.",
-                  "Pick the style that feels closest. If you’re between two, you may select both.",
+                  "Izaberite stil koji vam je najbliži. Možete označiti do dva stila.",
+                  "Pick the style that feels closest. You can select up to two.",
                 )}
               </p>
             </div>
@@ -502,6 +560,107 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
               </div>
             </div>
 
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label className="text-brand-earth mb-2 block text-sm font-medium" htmlFor="intake-city">
+                  {tx("Lokacija (grad)", "Location (city)")}
+                </label>
+                <input
+                  id="intake-city"
+                  className="input-field"
+                  value={draft.basics.city}
+                  onChange={(e) =>
+                    updateDraft((prev) => ({
+                      ...prev,
+                      basics: { ...prev.basics, city: e.target.value },
+                    }))
+                  }
+                  autoComplete="address-level2"
+                  required
+                  placeholder={tx("Npr. Beograd", "e.g. Belgrade")}
+                />
+              </div>
+              <div>
+                <p className="text-brand-earth mb-2 text-sm font-medium">
+                  {tx("Kada planirate realizaciju?", "When do you plan to realize it?")}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {deadlineOptions.map((option) => {
+                    const active = draft.basics.deadline === option.id;
+                    return (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() =>
+                          updateDraft((prev) => ({
+                            ...prev,
+                            basics: { ...prev.basics, deadline: option.id },
+                          }))
+                        }
+                        className={cn(
+                          "rounded-full border px-4 py-2 text-sm transition",
+                          active
+                            ? "border-brand-burgundy bg-brand-burgundy text-white"
+                            : "border-brand-neutral-500 text-brand-earth hover:border-brand-gold hover:text-brand-burgundy",
+                        )}
+                        aria-pressed={active}
+                      >
+                        {locale === "en" ? option.en : option.sr}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="border-brand-neutral-500/70 rounded-3xl border bg-brand-neutral-100 p-5">
+              <p className="text-brand-burgundy text-sm font-semibold">
+                {tx("Budžetski okvir (orijentaciono)", "Budget range (indicative)")}
+              </p>
+              <p className="text-brand-earth mt-1 text-sm">
+                {tx(
+                  "Ovo nam pomaže da predlog bude realan u odnosu na ambicije i obim.",
+                  "This helps us keep the proposal realistic versus goals and scope.",
+                )}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {budgetRangeOptions.map((option) => {
+                  const active =
+                    option.id === "unknown"
+                      ? draft.budget.unknownBudget === true
+                      : draft.budget.tier === option.apply().tier && draft.budget.unknownBudget === false;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => {
+                        const applied = option.apply();
+                        updateDraft((prev) => ({
+                          ...prev,
+                          budget: {
+                            ...prev.budget,
+                            unknownBudget: applied.unknownBudget,
+                            tier: applied.tier,
+                            minTotal: applied.minTotal,
+                            maxTotal: applied.maxTotal,
+                          },
+                        }));
+                      }}
+                      className={cn(
+                        "rounded-full border px-4 py-2 text-sm transition",
+                        active
+                          ? "border-brand-burgundy bg-brand-burgundy text-white"
+                          : "border-brand-neutral-500 text-brand-earth hover:border-brand-gold hover:text-brand-burgundy",
+                      )}
+                      aria-pressed={active}
+                    >
+                      {locale === "en" ? option.en : option.sr}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="border-brand-neutral-500/70 rounded-3xl border bg-brand-neutral-100 p-5">
               <p className="text-brand-burgundy text-sm font-semibold">
                 {tx("Da li imate tačne mere prostora?", "Do you have accurate measurements?")}
@@ -591,7 +750,10 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                   className="border-brand-neutral-500 mt-1 h-4 w-4 rounded accent-[var(--brand-gold)]"
                 />
                 <span>
-                  {tx("Razumem da su uključene dve korekcije.", "I understand two revisions are included.")}
+                  {tx(
+                    "Razumem da su uključene dve objedinjene korekcije.",
+                    "I understand two consolidated revision rounds are included.",
+                  )}
                 </span>
               </label>
 
@@ -626,8 +788,8 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
           <div className="space-y-4">
             <p className="text-brand-earth text-sm">
               {tx(
-                "Dodajte sve što smatrate važnim: željeni osećaj prostora, funkcionalne zahteve, rokove ili ograničenja.",
-                "Add anything important: desired feel, functional needs, timeline expectations or constraints.",
+                "Dodajte sve što smatrate važnim: osećaj koji želite, prioritete, ograničenja ili napomene.",
+                "Add anything important: desired feel, priorities, constraints or notes.",
               )}
             </p>
             <textarea
@@ -635,8 +797,8 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
               value={draft.notes}
               onChange={(e) => updateDraft((prev) => ({ ...prev, notes: e.target.value }))}
               placeholder={tx(
-                "Npr. \"Želimo toplu, mirnu atmosferu; prioritet je kuhinja i dnevna zona.\"",
-                "e.g. “Warm, calm mood; priority is kitchen and living zone.”",
+                "Npr. „Želimo toplu, mirnu atmosferu. Prioritet su kuhinja i dnevna zona.”",
+                "e.g. “Warm, calm mood. Priority is kitchen and living zone.”",
               )}
             />
           </div>
@@ -674,8 +836,27 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                       : propertyTypeOptions.find((x) => x.id === draft.basics.propertyType)?.sr}
                   </p>
                   <p className="text-brand-earth text-sm">
+                    {draft.basics.city || "—"}
+                  </p>
+                  <p className="text-brand-earth text-sm">
                     {tx("Tačne mere:", "Accurate measurements:")}{" "}
                     {draft.agreements.hasExactMeasurements ? tx("Da", "Yes") : tx("Ne", "No")}
+                  </p>
+                  <p className="text-brand-earth text-sm">
+                    {tx("Rok:", "Timeline:")}{" "}
+                    {locale === "en"
+                      ? deadlineOptions.find((x) => x.id === draft.basics.deadline)?.en
+                      : deadlineOptions.find((x) => x.id === draft.basics.deadline)?.sr}
+                  </p>
+                  <p className="text-brand-earth text-sm">
+                    {tx("Budžet:", "Budget:")}{" "}
+                    {draft.budget.unknownBudget
+                      ? tx("Još ne znam", "Not sure yet")
+                      : draft.budget.tier === "starter"
+                        ? tx("Do 30.000€", "Up to €30,000")
+                        : draft.budget.tier === "premium"
+                          ? tx("70.000€+", "€70,000+")
+                          : tx("30.000€ – 70.000€", "€30,000 – €70,000")}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-white/60 bg-white p-4 md:col-span-2">

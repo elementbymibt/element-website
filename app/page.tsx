@@ -22,7 +22,7 @@ import { buildMetadata } from "@/src/lib/seo";
 export const metadata = buildMetadata({
   title: "Početna",
   description:
-    "ÉLÉMENT (by M·I·B·T) je premium studio za dizajn enterijera. Kreiramo rezidencijalne i poslovne prostore sa jasnim potpisom elegancije.",
+    "ÉLÉMENT (by M·I·B·T) je studio za dizajn enterijera. Definišemo karakter prostora kroz smirenu eleganciju, proporciju i funkciju.",
   path: "/",
 });
 
@@ -51,35 +51,46 @@ export default async function HomePage() {
             </p>
             <h1 className="font-display text-brand-neutral-100 mt-5 text-5xl leading-tight md:text-7xl">
               {textByLocale(locale, {
-                sr: "Enterijeri koji zrače tihim luksuzom.",
-                en: "Interiors with a quiet luxury signature.",
+                sr: "Postoji jedan element koji čini razliku. Mi ga otkrivamo. Vi ga živite.",
+                en: "There is one element that makes the difference. We reveal it. You live it.",
               })}
             </h1>
             <p className="text-brand-neutral-200 mt-6 max-w-2xl text-base md:text-lg">
               {textByLocale(locale, {
-                sr: "Projektujemo prostore koji izgledaju reprezentativno, funkcionišu precizno i ostaju relevantni kroz vreme.",
-                en: "We design spaces that look representative, perform precisely and stay relevant over time.",
+                sr: "Element nije detalj. Element je identitet prostora. Onaj nevidljivi sloj koji enterijeru daje ravnotežu, proporciju i funkcionalnost. Mi ne uređujemo prostor. Mi definišemo njegov karakter.",
+                en: "Element is not a detail. Element is the identity of a space: the invisible layer that gives balance, proportion and function. We don’t decorate. We define character.",
+              })}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs tracking-[0.22em] uppercase text-white/80">
+              <span className="inline-flex items-center gap-2">
+                <span className="bg-brand-gold inline-block h-1.5 w-1.5 rounded-full" />
+                {textByLocale(locale, { sr: "Idejno rešenje", en: "Concept design" })}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="bg-brand-gold inline-block h-1.5 w-1.5 rounded-full" />
+                {textByLocale(locale, { sr: "3D vizuelizacija", en: "3D visualization" })}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="bg-brand-gold inline-block h-1.5 w-1.5 rounded-full" />
+                {textByLocale(locale, { sr: "Finalni paket smernica", en: "Final guidance package" })}
+              </span>
+            </div>
+            <p className="mt-8 text-sm text-white/80">
+              {textByLocale(locale, {
+                sr: "Spremni da pronađemo Vaš element?",
+                en: "Ready to find your element?",
               })}
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <IntakeLink
-                label={textByLocale(locale, {
-                  sr: "Popunite upitnik",
-                  en: "Start intake",
-                })}
+              <BookingLink
                 variant="primary"
+                trackingLocation="home_hero"
                 className="rounded-full px-7 py-3 text-sm font-semibold"
               />
-              <BookingLink
-                variant="secondary"
-                className="text-brand-neutral-100 hover:text-brand-neutral-100 border-white/50 hover:bg-white/10 rounded-full px-7 py-3 text-sm font-semibold"
+              <IntakeLink
+                label={textByLocale(locale, { sr: "Popunite upitnik", en: "Client intake" })}
+                className="border-white/50 text-brand-neutral-100 hover:bg-white/10 hover:text-brand-neutral-100 rounded-full px-7 py-3 text-sm font-semibold"
               />
-              <Link
-                href="/portfolio"
-                className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"
-              >
-                {textByLocale(locale, { sr: "Pogledajte projekte", en: "View projects" })}
-              </Link>
             </div>
           </FadeIn>
         </Container>
@@ -129,10 +140,10 @@ export default async function HomePage() {
         <FadeIn>
           <SectionHeading
             eyebrow={textByLocale(locale, { sr: "Usluge", en: "Services" })}
-            title={textByLocale(locale, { sr: "Paketi usluga", en: "Service packages" })}
+            title={textByLocale(locale, { sr: "Kako izgleda saradnja", en: "How collaboration works" })}
             description={textByLocale(locale, {
-              sr: "Izaberite nivo podrške u skladu sa obimom projekta i stepenom uključenosti koji želite.",
-              en: "Choose support level according to project scope and your desired involvement.",
+              sr: "Tri faze koje donose jasan pravac, sigurnost pre realizacije i finalni set smernica za dosledan rezultat.",
+              en: "Three phases that deliver direction, confidence before realization, and a final set of guidance for a consistent result.",
             })}
           />
         </FadeIn>
@@ -177,12 +188,12 @@ export default async function HomePage() {
             eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
             title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
             description={textByLocale(locale, {
-              sr: "Proces od pet koraka koji smanjuje neizvesnost i drži kvalitet pod kontrolom.",
-              en: "A five-step process that reduces uncertainty and keeps quality under control.",
+              sr: "Četiri jasna koraka koji smanjuju neizvesnost i drže kvalitet pod kontrolom.",
+              en: "Four clear steps that reduce uncertainty and keep quality under control.",
             })}
           />
         </FadeIn>
-        <div className="mt-8 grid gap-4 md:grid-cols-5">
+        <div className="mt-8 grid gap-4 md:grid-cols-4">
           {processSteps.map((step, index) => (
             <FadeIn
               key={step.title}
@@ -297,23 +308,20 @@ export default async function HomePage() {
               </p>
               <h2 className="font-display mt-2 text-4xl">
                 {textByLocale(locale, {
-                  sr: "Spremni za prostor nove kategorije?",
-                  en: "Ready for a next-category space?",
+                  sr: "Spremni da pronađemo Vaš element?",
+                  en: "Ready to find your element?",
                 })}
               </h2>
               <p className="text-brand-neutral-200 mt-3 max-w-2xl">
                 {textByLocale(locale, {
-                  sr: "Rezervišite uvodne konsultacije ili nam pošaljite upit. Vraćamo se sa jasnim predlogom sledećeg koraka.",
-                  en: "Book an intro consultation or send an inquiry. We return with a clear next-step proposal.",
+                  sr: "Rezervišite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanim predlogom narednih koraka.",
+                  en: "Book a consultation or complete the intake. We will return with a personalized next-step proposal.",
                 })}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <IntakeLink
-                label={textByLocale(locale, { sr: "Krenite kroz upitnik", en: "Go to intake" })}
-                className="rounded-full px-7 py-3 text-sm font-semibold"
-              />
-              <BookingLink className="rounded-full px-7 py-3 text-sm font-semibold" />
+              <BookingLink trackingLocation="home_final" className="rounded-full px-7 py-3 text-sm font-semibold" />
+              <IntakeLink className="rounded-full px-7 py-3 text-sm font-semibold" />
               <Link
                 href="/contact"
                 className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"

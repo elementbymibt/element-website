@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
+import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { processSteps } from "@/src/data/site-content";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
@@ -11,7 +12,7 @@ import { buildMetadata } from "@/src/lib/seo";
 export const metadata = buildMetadata({
   title: "Kako radimo",
   description:
-    "Proces rada studija ÉLÉMENT kroz 5 jasnih faza: brief, koncept, razrada, vizualizacija i dokumentacija.",
+    "Proces rada studija ÉLÉMENT kroz 4 jasna koraka: konsultacije, koncept, razrada i strateška podrška tokom realizacije.",
   path: "/process",
 });
 
@@ -25,8 +26,8 @@ export default async function ProcessPage() {
           eyebrow={textByLocale(locale, { sr: "Proces", en: "Process" })}
           title={textByLocale(locale, { sr: "Kako radimo", en: "How we work" })}
           description={textByLocale(locale, {
-            sr: "Naš metod je linearan, transparentan i vođen kvalitetom. Svaka etapa ima jasne isporuke.",
-            en: "Our method is linear, transparent and quality-driven. Each stage has clear deliverables.",
+            sr: "Naš metod je linearan, transparentan i vođen kvalitetom. Svaka etapa ima jasne isporuke i jasnu svrhu.",
+            en: "Our method is linear, transparent and quality-driven. Each step has clear deliverables and intent.",
           })}
         />
       </FadeIn>
@@ -74,21 +75,22 @@ export default async function ProcessPage() {
       <FadeIn className="bg-brand-burgundy text-brand-neutral-100 mt-12 rounded-3xl p-8 md:p-10">
         <h3 className="font-display text-4xl">
           {textByLocale(locale, {
-            sr: "Želite da prođemo kroz vaš projekat korak po korak?",
-            en: "Want to go through your project step by step?",
+            sr: "Spremni da pronađemo Vaš element?",
+            en: "Ready to find your element?",
           })}
         </h3>
         <p className="text-brand-neutral-200 mt-3 max-w-2xl">
           {textByLocale(locale, {
-            sr: "Rezervišite termin i dobijte jasan predlog procesa, vremenskog okvira i isporuka.",
-            en: "Book a slot and get a clear proposal for process, timeline and deliverables.",
+            sr: "Zakažite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanim predlogom narednih koraka.",
+            en: "Book a consultation or complete the intake. We’ll return with a personalized next-step proposal.",
           })}
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <BookingLink className="px-7 py-3 text-sm font-semibold" />
+          <BookingLink trackingLocation="process_cta" className="px-7 py-3 text-sm font-semibold" />
+          <IntakeLink className="px-7 py-3 text-sm font-semibold" />
           <Link
             href="/contact"
-            className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"
+            className="text-brand-neutral-100 decoration-brand-gold inline-flex items-center text-sm font-semibold underline underline-offset-4"
           >
             {textByLocale(locale, { sr: "Kontakt", en: "Contact" })}
           </Link>

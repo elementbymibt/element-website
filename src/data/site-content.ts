@@ -1,8 +1,8 @@
 export const signaturePoints = [
   "Editorial pristup koji prostoru daje identitet, ne samo dekoraciju.",
-  "Precizna ravnoteža estetike, funkcionalnosti i dugoročne vrednosti.",
-  "Diskretan, ali rigorozan projektni menadžment od ideje do realizacije.",
-  "Kuriran izbor materijala i komada koji stvaraju tih luksuz.",
+  "Ravnoteža proporcije, svetla i materijala, bez vizuelnog šuma.",
+  "Jasno vođen proces koji skraćuje odlučivanje i štiti kvalitet.",
+  "Kurirani predlozi koji ostaju relevantni i nakon godina korišćenja.",
 ];
 
 export type ServicePackage = {
@@ -17,49 +17,37 @@ export const servicePackages: ServicePackage[] = [
   {
     id: "concept",
     name: "Concept",
-    subtitle: "Jasan dizajn pravac i estetika",
-    idealFor: "Klijente koji žele profesionalan koncept pre izvođenja",
+    subtitle: "FAZA 1",
+    idealFor: "Za jasan pravac projekta pre velikih odluka.",
     includes: [
       "Uvodni brief i analiza prostora",
       "Koncept layout-a i funkcionalne zone",
-      "Moodboard + predlog materijala",
-      "Osnovna 3D atmosfera prostora",
+      "Moodboard: materijali, tonalitet, atmosfera",
+      "Smernice za dalje odluke",
     ],
   },
   {
-    id: "full-design",
-    name: "Full Design",
-    subtitle: "Kompletna razrada enterijera",
-    idealFor: "Stanove i kuće gde je potreban celovit projekat",
+    id: "visualization",
+    name: "Vizuelizacija",
+    subtitle: "FAZA 2",
+    idealFor: "Za sigurnost pre realizacije i finalno usklađivanje estetike.",
     includes: [
-      "Sve iz Concept paketa",
-      "Detaljni nacrti po prostorijama",
-      "Rasveta, elektro i nameštaj po meri",
-      "Shopping lista i tehničke specifikacije",
+      "3D model i renderi ključnih prostora",
+      "Usklađivanje materijala, boja i rasvete",
+      "Dve objedinjene korekcije u okviru faze",
+      "Finalna potvrda dizajnerskih odluka",
     ],
   },
   {
-    id: "turn-key",
-    name: "Premium Turn-Key",
-    subtitle: "Od ideje do finalnog useljenja",
-    idealFor: "Klijente koji žele full-service bez operativnog opterećenja",
+    id: "final-package",
+    name: "Finalni paket",
+    subtitle: "FAZA 3",
+    idealFor: "Za jasan idejni set smernica i dokumentaciju za sigurnu realizaciju.",
     includes: [
-      "Kompletan Full Design scope",
-      "Nabavka i koordinacija dobavljača",
-      "Autorski nadzor i kontrola kvaliteta",
-      "Final styling i predaja spremnog prostora",
-    ],
-  },
-  {
-    id: "business",
-    name: "Business Space",
-    subtitle: "Premium poslovni enterijeri",
-    idealFor: "Boutique kancelarije, ordinacije i concept retail",
-    includes: [
-      "Brend integracija u prostor",
-      "UX tok korisnika i zaposlenih",
-      "Tehnička dokumentacija za izvođenje",
-      "Operativne smernice za održavanje standarda",
+      "Idejni crteži i sheme (PDF)",
+      "Spiskovi i specifikacije (orijentaciono)",
+      "Budžetski okvir i prioritizacija kupovine (orijentaciono)",
+      "Predaja i smernice za doslednu realizaciju",
     ],
   },
 ];
@@ -95,12 +83,12 @@ export const faqItems = [
   {
     question: "Koliko traje izrada projekta enterijera?",
     answer:
-      "U zavisnosti od obima, od 2 nedelje za koncept do 8+ nedelja za kompletan premium paket sa dokumentacijom.",
+      "Rok zavisi od obima i brzine donošenja odluka. Nakon upitnika i uvodnih konsultacija dajemo precizan vremenski okvir po fazama.",
   },
   {
     question: "Da li radite projekte van Beograda?",
     answer:
-      "Da. Radimo projekte širom Srbije i regiona, uz kombinaciju online koordinacije i terenskih poseta.",
+      "Da. Saradnja može biti organizovana i van Beograda, uz kombinaciju online koordinacije i dogovorenih obilazaka po potrebi.",
   },
   {
     question: "Da li je moguće angažovati samo konsultacije?",
@@ -110,12 +98,12 @@ export const faqItems = [
   {
     question: "Kako se definiše budžet?",
     answer:
-      "Budžet se formira nakon brief-a, kroz transparentan okvir za građevinske radove, opremanje i dekorativni sloj.",
+      "Budžetski okvir definišemo zajedno na osnovu upitnika i prioriteta. Naš cilj je da predlog bude estetski jak, ali realan u odnosu na budžet.",
   },
   {
-    question: "Da li uključujete izvođače?",
+    question: "Da li pomažete u realizaciji?",
     answer:
-      "Po potrebi uključujemo proverene partnere i koordiniramo komunikaciju kako bi realizacija bila u skladu sa projektom.",
+      "Po potrebi pružamo konsultantsku podršku tokom realizacije kako bi koncept ostao dosledan. Realizacija i ugovaranje izvođenja su van okvira idejne usluge.",
   },
   {
     question: "Šta ako već imam deo nameštaja?",
@@ -136,12 +124,12 @@ export const faqItems = [
 
 export const processSteps = [
   {
-    title: "Brief & Strategija",
-    short: "Razumevanje ciljeva, navika i budžeta.",
+    title: "Konsultacije",
+    short: "Razumevanje vašeg načina života i prioriteta.",
     deliverables: [
-      "Inicijalni upitnik i konsultacije",
-      "Analiza prostora i potencijala",
-      "Projektni okvir i timeline",
+      "Prioriteti, navike i budžetski okvir",
+      "Kratke smernice i fokus projekta",
+      "Predlog narednih koraka",
     ],
   },
   {
@@ -155,29 +143,20 @@ export const processSteps = [
   },
   {
     title: "Razrada",
-    short: "Prevođenje ideje u precizan projekat.",
+    short: "Vizuelizacija i idejne smernice.",
     deliverables: [
-      "Tehnički nacrti",
-      "Rasveta, elektro i nameštaj po meri",
-      "Predmer i specifikacije",
+      "3D + renderi ključnih zona",
+      "Idejne smernice i spiskovi (orijentaciono)",
+      "Budžetski okvir i prioritizacija",
     ],
   },
   {
-    title: "Vizualizacija",
-    short: "Realističan pregled pre realizacije.",
+    title: "Realizacija",
+    short: "Strateška konsultantska podrška tokom realizacije.",
     deliverables: [
-      "3D renderi ključnih zona",
-      "Varijante materijala po potrebi",
-      "Potvrda dizajnerskih odluka",
-    ],
-  },
-  {
-    title: "Dokumentacija & Podrška",
-    short: "Kontrolisana realizacija do finalnog izgleda.",
-    deliverables: [
-      "Završni dokumentacioni paket",
-      "Koordinacija dobavljača i izvođača",
-      "Autorski nadzor i final styling",
+      "Konsultacije pri ključnim odlukama",
+      "Usklađivanje predloga sa budžetom i dostupnošću",
+      "Podrška da se koncept dosledno sprovede",
     ],
   },
 ];
@@ -196,7 +175,7 @@ export const testimonials = [
 ];
 
 export const caseStudy = {
-  title: "Case Study: Vračar Boutique Clinic",
+  title: "Studija slučaja: Vračar Boutique Clinic",
   problem:
     "Klinika je imala neujednačen korisnički tok, visok nivo stresa kod pacijenata i vizuelni identitet koji nije pratio premium uslugu.",
   solution:
@@ -236,26 +215,4 @@ export const aboutValues = [
   "Dizajn koji traje i zadržava vrednost kroz vreme.",
 ];
 
-export const teamMembers = [
-  {
-    name: "Milos B. T.",
-    role: "Creative Director",
-    bio: "Vodi konceptualni pravac i autorski nadzor svakog premium projekta.",
-  },
-  {
-    name: "A. Petrović",
-    role: "Lead Interior Architect",
-    bio: "Specijalizovana za tehničku razradu i kompleksne stambene projekte.",
-  },
-  {
-    name: "N. Jovanović",
-    role: "Project & Procurement Manager",
-    bio: "Koordinacija izvođača, dobavljača i logistike od početka do predaje.",
-  },
-];
-
-export const pressMentions = [
-  "Architectural Living / Editorial feature (placeholder)",
-  "Design Serbia / Studio profile (placeholder)",
-  "Interior Daily / Project spotlight (placeholder)",
-];
+// Team/press sadržaj je namerno izostavljen iz javnog sajta dok ne budu dostupni stvarni podaci.

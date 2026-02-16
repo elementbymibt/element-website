@@ -13,12 +13,13 @@ export type AnalyticsEventName =
   | "email_popup_submit"
   | "email_popup_skip"
   | "booking_click"
-  | "intake_click"
   | "intake_start"
   | "intake_submit"
   | "newsletter_submit"
   | "lead_submit"
   | "contact_submit"
+  | "doc_unlock"
+  | "doc_download"
   | "documentation_download";
 
 export function trackEvent(
