@@ -119,18 +119,18 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <IntakeLink
-            label={locale === "en" ? "Client intake" : "Popunite upitnik"}
-            variant={transparentOnTop ? "secondary" : "secondary"}
-            className={cn(
-              "px-5 py-2.5 text-xs",
-              transparentOnTop &&
-                "border-brand-neutral-100/65 text-brand-neutral-100 hover:bg-brand-neutral-100/10 hover:text-brand-neutral-100",
-            )}
-          />
           <LanguageSwitcher />
           <BookingLink
-            variant={transparentOnTop ? "secondary" : "primary"}
+            variant="primary"
+            trackingLocation="header"
+            className={cn(
+              "px-5 py-2.5 text-xs",
+            )}
+          />
+          <IntakeLink
+            label={locale === "en" ? "Client intake" : "Popunite upitnik"}
+            variant="secondary"
+            trackingLocation="header"
             className={cn(
               "px-5 py-2.5 text-xs",
               transparentOnTop &&
@@ -191,8 +191,8 @@ export function SiteHeader() {
               })}
             </nav>
             <LanguageSwitcher className="mt-4" />
-            <IntakeLink className="mt-4 w-full" />
-            <BookingLink className="mt-4 w-full" />
+            <BookingLink trackingLocation="mobile_menu" className="mt-4 w-full" />
+            <IntakeLink trackingLocation="mobile_menu" className="mt-4 w-full" />
           </motion.div>
         ) : null}
       </AnimatePresence>

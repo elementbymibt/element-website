@@ -73,7 +73,7 @@ export default async function RootLayout({
             {locale === "en" ? "Skip to content" : "Preskoči na sadržaj"}
           </a>
           <SiteHeader />
-          <main id="main-content" className="pt-20 pb-24 lg:pb-0">
+          <main id="main-content" className="pt-20 pb-28 lg:pb-0">
             {children}
           </main>
           <SiteFooter />

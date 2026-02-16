@@ -714,6 +714,7 @@ export function createDefaultIntakeDraft(
     client: {
       fullName: sanitizeText((input as IntakeDraft).client?.fullName).slice(0, 120),
       email: sanitizeText((input as IntakeDraft).client?.email).toLowerCase().slice(0, 180),
+      phone: sanitizeText((input as IntakeDraft).client?.phone).slice(0, 40),
     },
     agreements: {
       hasExactMeasurements:
@@ -943,6 +944,7 @@ export const IntakeJsonSchema = z.object({
   client: z.object({
     fullName: z.string().min(1),
     email: z.string().email(),
+    phone: z.string().max(40),
   }),
   agreements: z.object({
     hasExactMeasurements: z.boolean(),

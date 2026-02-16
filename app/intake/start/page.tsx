@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { StartIntakeButton } from "@/src/components/intake/start-intake-button";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
@@ -37,17 +38,14 @@ export default async function IntakeStartPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/intake/new"
-              className="btn-primary inline-flex min-h-12 items-center justify-center rounded-full px-8 text-sm font-semibold"
-            >
-              {textByLocale(locale, { sr: "Započnite upitnik", en: "Start intake" })}
-            </Link>
+            <StartIntakeButton
+              label={textByLocale(locale, { sr: "Započnite upitnik", en: "Start intake" })}
+            />
             <Link
               href="/portfolio"
-              className="btn-secondary border-white/50 text-white hover:bg-white/10 inline-flex min-h-12 items-center justify-center rounded-full px-8 text-sm font-semibold"
+              className="text-brand-neutral-100 decoration-brand-gold inline-flex min-h-12 items-center justify-center text-sm font-semibold underline underline-offset-4"
             >
-              {textByLocale(locale, { sr: "Pogledaj projekte", en: "View projects" })}
+              {textByLocale(locale, { sr: "Pogledajte projekte", en: "View projects" })}
             </Link>
           </div>
 

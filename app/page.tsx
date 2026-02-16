@@ -10,10 +10,8 @@ import { IntakeLink } from "@/src/components/ui/intake-link";
 import { SectionHeading } from "@/src/components/ui/section-heading";
 import { featuredProjects } from "@/src/data/projects";
 import {
-  caseStudy,
   processSteps,
   servicePackages,
-  signaturePoints,
   testimonials,
 } from "@/src/data/site-content";
 import { getCurrentLocale, textByLocale } from "@/src/lib/i18n/server";
@@ -102,38 +100,20 @@ export default async function HomePage() {
             eyebrow={textByLocale(locale, { sr: "Odabrani radovi", en: "Selected works" })}
             title={textByLocale(locale, { sr: "Izdvojeni projekti", en: "Featured projects" })}
             description={textByLocale(locale, {
-              sr: "Šest prostora koji prikazuju naš standard razrade, materijalne kulture i estetske discipline.",
-              en: "Six spaces that represent our standard of detailing, material culture and aesthetics.",
+              sr: "Kratak izbor projekata koji prikazuju naš standard razrade, materijala i atmosfere.",
+              en: "A concise selection of projects that represents our standard of detailing, materials and atmosphere.",
             })}
           />
         </FadeIn>
         <div className="mt-10">
-          <ProjectGrid projects={featuredProjects} enableFilter={false} />
+          <ProjectGrid projects={featuredProjects.slice(0, 4)} enableFilter={false} />
         </div>
-      </Container>
-
-      <Container>
-        <FadeIn>
-          <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Potpis", en: "Signature" })}
-            title={textByLocale(locale, { sr: "Naš potpis", en: "Our signature" })}
-            description={textByLocale(locale, {
-              sr: "Dizajn odluke donosimo sa istim fokusom na atmosferu, ergonomiju i dugoročnu vrednost prostora.",
-              en: "We make design decisions with equal focus on atmosphere, ergonomics and long-term value.",
-            })}
-          />
-        </FadeIn>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {signaturePoints.map((point, index) => (
-            <FadeIn
-              key={point}
-              delay={index * 0.05}
-              className="border-brand-neutral-500/70 rounded-3xl border bg-white p-6 shadow-[0_14px_30px_rgba(59,13,24,0.06)]"
-            >
-              <p className="text-brand-ink text-sm">{point}</p>
-            </FadeIn>
-          ))}
-        </div>
+        <Link
+          href="/portfolio"
+          className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
+        >
+          {textByLocale(locale, { sr: "Pogledajte sve projekte", en: "View all projects" })}
+        </Link>
       </Container>
 
       <Container>
@@ -176,8 +156,8 @@ export default async function HomePage() {
           className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
         >
           {textByLocale(locale, {
-            sr: "Pogledajte usluge i faze saradnje",
-            en: "Explore services and collaboration phases",
+            sr: "Saznajte više",
+            en: "Learn more",
           })}
         </Link>
       </Container>
@@ -210,6 +190,12 @@ export default async function HomePage() {
             </FadeIn>
           ))}
         </div>
+        <Link
+          href="/process"
+          className="text-brand-burgundy decoration-brand-gold mt-8 inline-flex text-sm font-semibold underline underline-offset-4"
+        >
+          {textByLocale(locale, { sr: "Detaljan proces", en: "Detailed process" })}
+        </Link>
       </Container>
 
       <Container>
@@ -264,73 +250,6 @@ export default async function HomePage() {
             </FadeIn>
           ))}
         </div>
-      </Container>
-
-      <Container>
-        <FadeIn className="border-brand-burgundy/20 from-brand-neutral-100 to-brand-neutral-200 rounded-3xl border bg-gradient-to-br p-8 md:p-10">
-          <SectionHeading
-            eyebrow={textByLocale(locale, { sr: "Studija slučaja", en: "Case study" })}
-            title={caseStudy.title}
-            description={textByLocale(locale, {
-              sr: "Format rada: Problem → Rešenje → Rezultat",
-              en: "Working format: Problem → Solution → Result",
-            })}
-          />
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <article className="border-brand-neutral-500/70 rounded-2xl border bg-white p-5">
-              <p className="text-brand-gold text-xs tracking-[0.2em] uppercase">
-                Problem
-              </p>
-              <p className="text-brand-ink mt-2 text-sm">{caseStudy.problem}</p>
-            </article>
-            <article className="border-brand-neutral-500/70 rounded-2xl border bg-white p-5">
-              <p className="text-brand-gold text-xs tracking-[0.2em] uppercase">
-                Rešenje
-              </p>
-              <p className="text-brand-ink mt-2 text-sm">{caseStudy.solution}</p>
-            </article>
-            <article className="border-brand-neutral-500/70 rounded-2xl border bg-white p-5">
-              <p className="text-brand-gold text-xs tracking-[0.2em] uppercase">
-                Rezultat
-              </p>
-              <p className="text-brand-ink mt-2 text-sm">{caseStudy.result}</p>
-            </article>
-          </div>
-        </FadeIn>
-      </Container>
-
-      <Container>
-        <FadeIn className="bg-brand-burgundy text-brand-neutral-100 rounded-3xl p-10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-brand-gold text-xs tracking-[0.3em] uppercase">
-                {textByLocale(locale, { sr: "Sledeći korak", en: "Next step" })}
-              </p>
-              <h2 className="font-display mt-2 text-4xl">
-                {textByLocale(locale, {
-                  sr: "Spremni da pronađemo Vaš element?",
-                  en: "Ready to find your element?",
-                })}
-              </h2>
-              <p className="text-brand-neutral-200 mt-3 max-w-2xl">
-                {textByLocale(locale, {
-                  sr: "Rezervišite konsultacije ili popunite upitnik. Vraćamo se sa personalizovanim predlogom narednih koraka.",
-                  en: "Book a consultation or complete the intake. We will return with a personalized next-step proposal.",
-                })}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <BookingLink trackingLocation="home_final" className="rounded-full px-7 py-3 text-sm font-semibold" />
-              <IntakeLink className="rounded-full px-7 py-3 text-sm font-semibold" />
-              <Link
-                href="/contact"
-                className="btn-secondary text-brand-neutral-100 inline-flex rounded-full px-7 py-3 text-sm font-semibold"
-              >
-                {textByLocale(locale, { sr: "Kontaktirajte nas", en: "Contact us" })}
-              </Link>
-            </div>
-          </div>
-        </FadeIn>
       </Container>
     </div>
   );

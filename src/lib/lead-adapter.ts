@@ -257,6 +257,36 @@ class ResendAdapter implements LeadAdapter {
       console.error("[resend] lead email failed", details);
       throw new Error(`Resend lead email failed: ${details}`);
     }
+
+    try {
+      const confirmationText = [
+        "Hvala na prijavi.",
+        "Uskoro ćemo vam poslati tražene informacije i sledeće korake.",
+        "",
+        "ÉLÉMENT (by M·I·B·T)",
+      ].join("\n");
+
+      const confirmationResponse = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          from: "ÉLÉMENT Studio <onboarding@resend.dev>",
+          to: payload.email,
+          subject: "Hvala na prijavi — ÉLÉMENT",
+          text: confirmationText,
+        }),
+      });
+
+      if (!confirmationResponse.ok) {
+        const details = await confirmationResponse.text().catch(() => "resend_error");
+        console.error("[resend] lead confirmation email failed", details);
+      }
+    } catch (error) {
+      console.error("[resend] lead confirmation email error", error);
+    }
   }
 
   async saveContact(payload: ContactPayload) {

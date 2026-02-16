@@ -218,6 +218,18 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
 
   const progress = useMemo(() => Math.round(((step + 1) / stepTitles.length) * 100), [step, stepTitles.length]);
 
+  useEffect(() => {
+    try {
+      if (typeof window === "undefined") return;
+      const key = "element_intake_start_tracked";
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+      trackEvent("intake_start", { id: draft.id, location: "intake_wizard", locale });
+    } catch {
+      // Best-effort only.
+    }
+  }, [draft.id, locale]);
+
   const updateDraft = useCallback((updater: (prev: IntakeDraft) => IntakeDraft) => {
     setDraft((prev) => ({
       ...updater(prev),
@@ -528,6 +540,47 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
               </div>
             </div>
 
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label className="text-brand-earth mb-2 block text-sm font-medium" htmlFor="intake-phone">
+                  {tx("Telefon (opciono)", "Phone (optional)")}
+                </label>
+                <input
+                  id="intake-phone"
+                  className="input-field"
+                  type="tel"
+                  value={draft.client.phone ?? ""}
+                  onChange={(e) =>
+                    updateDraft((prev) => ({
+                      ...prev,
+                      client: { ...prev.client, phone: e.target.value },
+                    }))
+                  }
+                  autoComplete="tel"
+                  placeholder={tx("Npr. 0659080995", "e.g. +381659080995")}
+                />
+              </div>
+              <div>
+                <label className="text-brand-earth mb-2 block text-sm font-medium" htmlFor="intake-city">
+                  {tx("Lokacija (grad)", "Location (city)")}
+                </label>
+                <input
+                  id="intake-city"
+                  className="input-field"
+                  value={draft.basics.city}
+                  onChange={(e) =>
+                    updateDraft((prev) => ({
+                      ...prev,
+                      basics: { ...prev.basics, city: e.target.value },
+                    }))
+                  }
+                  autoComplete="address-level2"
+                  required
+                  placeholder={tx("Npr. Beograd", "e.g. Belgrade")}
+                />
+              </div>
+            </div>
+
             <div>
               <p className="text-brand-earth mb-2 text-sm font-medium">
                 {tx("Tip prostora", "Property type")}
@@ -560,56 +613,35 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <label className="text-brand-earth mb-2 block text-sm font-medium" htmlFor="intake-city">
-                  {tx("Lokacija (grad)", "Location (city)")}
-                </label>
-                <input
-                  id="intake-city"
-                  className="input-field"
-                  value={draft.basics.city}
-                  onChange={(e) =>
-                    updateDraft((prev) => ({
-                      ...prev,
-                      basics: { ...prev.basics, city: e.target.value },
-                    }))
-                  }
-                  autoComplete="address-level2"
-                  required
-                  placeholder={tx("Npr. Beograd", "e.g. Belgrade")}
-                />
-              </div>
-              <div>
-                <p className="text-brand-earth mb-2 text-sm font-medium">
-                  {tx("Kada planirate realizaciju?", "When do you plan to realize it?")}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {deadlineOptions.map((option) => {
-                    const active = draft.basics.deadline === option.id;
-                    return (
-                      <button
-                        key={option.id}
-                        type="button"
-                        onClick={() =>
-                          updateDraft((prev) => ({
-                            ...prev,
-                            basics: { ...prev.basics, deadline: option.id },
-                          }))
-                        }
-                        className={cn(
-                          "rounded-full border px-4 py-2 text-sm transition",
-                          active
-                            ? "border-brand-burgundy bg-brand-burgundy text-white"
-                            : "border-brand-neutral-500 text-brand-earth hover:border-brand-gold hover:text-brand-burgundy",
-                        )}
-                        aria-pressed={active}
-                      >
-                        {locale === "en" ? option.en : option.sr}
-                      </button>
-                    );
-                  })}
-                </div>
+            <div>
+              <p className="text-brand-earth mb-2 text-sm font-medium">
+                {tx("Kada planirate realizaciju?", "When do you plan to realize it?")}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {deadlineOptions.map((option) => {
+                  const active = draft.basics.deadline === option.id;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() =>
+                        updateDraft((prev) => ({
+                          ...prev,
+                          basics: { ...prev.basics, deadline: option.id },
+                        }))
+                      }
+                      className={cn(
+                        "rounded-full border px-4 py-2 text-sm transition",
+                        active
+                          ? "border-brand-burgundy bg-brand-burgundy text-white"
+                          : "border-brand-neutral-500 text-brand-earth hover:border-brand-gold hover:text-brand-burgundy",
+                      )}
+                      aria-pressed={active}
+                    >
+                      {locale === "en" ? option.en : option.sr}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -825,6 +857,9 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                     {draft.client.fullName || "—"}
                   </p>
                   <p className="text-brand-earth text-sm">{draft.client.email || "—"}</p>
+                  {draft.client.phone?.trim() ? (
+                    <p className="text-brand-earth text-sm">{draft.client.phone}</p>
+                  ) : null}
                 </div>
                 <div className="rounded-2xl border border-white/60 bg-white p-4">
                   <p className="text-brand-gold text-xs tracking-[0.22em] uppercase">

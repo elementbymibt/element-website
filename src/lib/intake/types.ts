@@ -278,6 +278,7 @@ export type IntakeDraft = {
   client: {
     fullName: string;
     email: string;
+    phone: string;
   };
   agreements: {
     hasExactMeasurements: boolean | null;

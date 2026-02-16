@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { notifyIntakeSubmitted } from "@/src/lib/intake/notify";
+import { submitIntakeNotification } from "@/src/actions/intake";
 import { intakeStore } from "@/src/lib/intake/store";
 import type { IntakeDraft } from "@/src/lib/intake/types";
 
@@ -52,12 +52,15 @@ export async function POST(
 
     // Email notifikacija je best-effort i ne sme da blokira submit flow.
     try {
-      await notifyIntakeSubmitted({
+      const notifyResult = await submitIntakeNotification({
         intake: result.intake,
         projectId,
       });
+      if (notifyResult.status === "error") {
+        console.error("[intake] submitIntakeNotification returned error", notifyResult.message);
+      }
     } catch (error) {
-      console.error("[intake] notifyIntakeSubmitted failed", error);
+      console.error("[intake] submitIntakeNotification failed", error);
     }
 
     return NextResponse.json({

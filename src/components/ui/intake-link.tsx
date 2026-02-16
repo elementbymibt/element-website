@@ -10,12 +10,14 @@ type IntakeLinkProps = {
   label?: string;
   className?: string;
   variant?: "primary" | "secondary";
+  trackingLocation?: string;
 };
 
 export function IntakeLink({
   label,
   className,
   variant = "secondary",
+  trackingLocation = "cta",
 }: IntakeLinkProps) {
   const { locale } = useLocale();
   const buttonLabel = label ?? (locale === "en" ? "Start intake" : "Popunite upitnik");
@@ -40,7 +42,7 @@ export function IntakeLink({
         } catch {
           // Best-effort only.
         }
-        trackEvent("intake_start", { location: "cta" });
+        trackEvent("intake_start", { location: trackingLocation });
       }}
       aria-label={
         locale === "en"
