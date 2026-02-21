@@ -50,6 +50,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   }
 
   const localizedProject = getLocalizedProjectText(project, locale);
+  const descriptionParagraphs = localizedProject.description
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
   const localizedCategory = textByLocale(locale, {
     sr: project.category,
     en:
@@ -93,7 +97,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </p>
           </div>
 
-          <p className="text-brand-ink text-sm">{localizedProject.description}</p>
+          <div className="text-brand-ink space-y-3 text-sm">
+            {descriptionParagraphs.map((paragraph, index) => (
+              <p key={`${project.slug}-paragraph-${index + 1}`}>{paragraph}</p>
+            ))}
+          </div>
 
           <div>
             <h2 className="text-brand-gold text-sm tracking-[0.18em] uppercase">

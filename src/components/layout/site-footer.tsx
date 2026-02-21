@@ -67,8 +67,8 @@ export function SiteFooter() {
                 <li>
                   {pickLocaleText(locale, {
                     sr: siteConfig.location,
-                    en: "Belgrade and Pančevo, Serbia",
-                    de: "Belgrad und Pančevo, Serbien",
+                    en: "Serbia",
+                    de: "Serbien",
                   })}
                 </li>
                 <li>

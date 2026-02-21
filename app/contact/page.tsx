@@ -9,7 +9,7 @@ import { buildMetadata } from "@/src/lib/seo";
 export const metadata = buildMetadata({
   title: "Kontakt",
   description:
-    "Kontaktirajte ÉLÉMENT studio i zakažite konsultacije. Direktan telefonski kontakt za Beograd i Pančevo.",
+    "Kontaktirajte ÉLÉMENT studio i zakažite konsultacije. Direktan telefonski kontakt.",
   path: "/contact",
 });
 
@@ -36,9 +36,9 @@ export default async function ContactPage() {
         </h2>
         <p className="text-brand-earth mt-3 text-sm">
           {textByLocale(locale, {
-            sr: "Dostupni za projekte u Beogradu i Pančevu.",
-            en: "Available for projects in Belgrade and Pančevo.",
-            de: "Verfügbar für Projekte in Belgrad und Pančevo.",
+            sr: "Pozovite nas direktno ili odmah zakažite konsultacije.",
+            en: "Call us directly or schedule a consultation right away.",
+            de: "Rufen Sie uns direkt an oder vereinbaren Sie sofort eine Beratung.",
           })}
         </p>
 

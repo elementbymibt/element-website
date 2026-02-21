@@ -12,7 +12,7 @@ import type { SiteLocale } from "@/src/lib/i18n/config";
 export const metadata = buildMetadata({
   title: "Usluge",
   description:
-    "Dizajn enterijera kroz jasne faze: koncept, vizuelizacija i finalni paket. Idejna i konsultantska usluga studija ÉLÉMENT za Beograd i Pančevo.",
+    "Dizajn enterijera kroz jasne faze: koncept, vizuelizacija i finalni paket. Idejna i konsultantska usluga studija ÉLÉMENT.",
   path: "/services",
 });
 

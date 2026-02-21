@@ -19,93 +19,63 @@ export type Project = {
 export const projectCategories: Array<ProjectCategory | "Sve"> = [
   "Sve",
   "Stan",
-  "Kuća",
-  "Poslovni prostor",
 ];
 
 export const projects: Project[] = [
   {
-    slug: "dorcol-residence",
-    title: "Dorćol Residence",
-    location: "Beograd",
-    year: 2025,
+    slug: "novi-sad-102",
+    title: "Novi Sad – 102 m²",
+    location: "Novi Sad",
+    year: 2026,
     category: "Stan",
-    shortDescription: "Savremen gradski stan sa tihim luksuzom i toplim materijalima.",
+    shortDescription: "Porodični trosoban stan sa bordo akcentima, mermerom i toplim metalnim detaljima.",
     description:
-      "Koncept je fokusiran na smiren ritam prostora: neutralna baza, tople teksture i precizni detalji koji daju utisak editorial kvaliteta bez viška.",
-    whatWeDid: ["Idejno rešenje", "3D vizualizacija", "Finalni paket (idejni crteži + spiskovi)"],
-    coverImage: "/projects/p01-01.jpg",
-    images: ["/projects/p01-01.jpg", "/projects/p01-02.jpg", "/projects/p01-03.jpg"],
+      "Ovaj enterijer razvijen je kao idejno i konsultantsko rešenje u skladu sa definisanim budžetom, funkcionalnim zahtevima i estetskim smernicama klijenta.\n\nSnažna bordo nijansa uvedena je kao centralni akcenat prostora, dok su mermerne površine, tamno drvo i kamen pažljivo balansirani kako bi se postigla harmonija tekstura i materijala. Bronzani detalji u rasveti i opremi dodatno naglašavaju sofisticiran karakter enterijera.\n\nDnevna zona osmišljena je bez televizora, sa fokusom na kamin kao centralnu tačku okupljanja i stvaranja atmosfere. Prostor je koncipiran tako da podstiče komunikaciju, mir i osećaj doma, uz jasno definisane funkcionalne tokove i logiku korišćenja.\n\nKupatilo prati istu estetsku liniju: mermer, bordo elementi i topli metalni akcenti objedinjeni su u kompaktnu, ali luksuznu celinu.\n\nPrikazani renderi predstavljaju vizuelno-idejni prikaz koncepta, dok realizacija zavisi od finalnog izbora materijala, dostupnosti proizvoda i kvaliteta izvođenja radova, u skladu sa ugovorenim obimom usluge.",
+    whatWeDid: ["Idejno rešenje enterijera", "3D vizualizacija ključnih zona", "Konsultantske smernice za realizaciju"],
+    coverImage: "/projects/p1-1.jpg",
+    images: ["/projects/p1-1.jpg", "/projects/p1-2.jpg", "/projects/p1-3.jpg", "/projects/p1-4.jpg"],
     featured: true,
   },
   {
-    slug: "senjak-villa",
-    title: "Senjak Villa",
+    slug: "nis-76",
+    title: "Niš – 76 m²",
+    location: "Niš",
+    year: 2026,
+    category: "Stan",
+    shortDescription: "Porodični trosoban stan oblikovan kroz balans funkcionalnosti, svetlosti i topline.",
+    description:
+      "U ovom projektu akcenat je stavljen na balans funkcionalnosti, svetlosti i svakodnevne udobnosti. Dnevni boravak, trpezarija i kuhinja oblikovani su kao jedinstvena, otvorena celina u kojoj se prirodna svetlost susreće sa toplim drvenim teksturama i mirnim, neutralnim tonovima.\n\nTV zid sa vertikalnim drvenim oblogama i integrisanim policama postaje centralna tačka prostora, dok kamin unosi dodatnu toplinu i atmosferu doma. Rasveta je pažljivo pozicionirana kako bi naglasila zone boravka i omogućila različite scenarije korišćenja tokom dana.\n\nSpavaća soba koncipirana je kao mirna, taktilna oaza: meke teksture, diskretno ambijentalno osvetljenje i svedena paleta boja doprinose osećaju smirenosti i intime. Dečija soba je projektovana tako da prati rast deteta, uz kombinaciju funkcionalnog skladišnog prostora i nežnih, toplih tonova koji stvaraju bezbedan i prijatan ambijent.\n\nUlazni deo stana organizovan je kroz čiste linije, skrivene skladišne kapacitete i jasno definisanu zonu odlaganja, čime se postiže uredan i logičan tok kretanja kroz ceo prostor.\n\nEnterijer je razvijen kao idejno i konsultantsko rešenje, sa jasno definisanom organizacijom prostora, estetikom i budžetskim okvirima, u skladu sa potrebama savremene porodične svakodnevice.",
+    whatWeDid: ["Idejno rešenje enterijera", "3D vizualizacija ključnih zona", "Konsultantske smernice za realizaciju"],
+    coverImage: "/projects/p2-1.jpg",
+    images: ["/projects/p2-1.jpg", "/projects/p2-2.jpg", "/projects/p2-3.jpg", "/projects/p2-4.jpg"],
+    featured: true,
+  },
+  {
+    slug: "beograd-82-master-zona",
+    title: "Beograd – 82 m²",
     location: "Beograd",
-    year: 2024,
-    category: "Kuća",
-    shortDescription: "Porodična vila sa čistim linijama i toplom paletom.",
+    year: 2026,
+    category: "Stan",
+    shortDescription: "Master zona kao sekvenca prostora: spavaća soba, garderober i kupatilo u kontinuitetu.",
     description:
-      "Prostor je organizovan tako da svakodnevni život teče bez trenja, dok materijali i svetlo grade mirnu, luksuznu atmosferu kroz ceo dan.",
-    whatWeDid: ["Idejno rešenje", "3D vizualizacija", "Finalni paket (PDF dokumentacija)"],
-    coverImage: "/projects/p02-01.jpg",
-    images: ["/projects/p02-01.jpg", "/projects/p02-02.jpg", "/projects/p02-03.jpg"],
+      "Za nas, master zona nikada nije samo spavaća soba. To je pažljivo projektovana sekvenca prostora koja prati ritam svakodnevnog života – od prvog jutarnjeg koraka do trenutka potpunog opuštanja uveče.\n\nSpavaća soba oblikovana je kao mirna, taktilna celina u neutralnoj paleti tonova, gde teksture i ambijentalno osvetljenje stvaraju osećaj topline i intime. Zidna obloga iza uzglavlja dodatno naglašava vertikalu prostora, dok rasveta definiše atmosferu bez vizuelnog opterećenja.\n\nWalk-in garderober projektovan je kao prirodan nastavak sobe – transparentne staklene pregrade čuvaju svetlost i otvorenost, a organizacija odlaganja prati realne potrebe korisnika, bez suvišnih elemenata.\n\nKupatilo je koncipirano kao produžetak istog ambijenta. Prirodni materijali, čiste linije i integrisano osvetljenje stvaraju utisak hotelskog komfora, ali sa toplinom domaćeg prostora.\n\nSvaki prelaz između zona osmišljen je tako da nema osećaja prekida – prostor teče logično, mirno i funkcionalno, u skladu sa navikama i životnim stilom korisnika.",
+    whatWeDid: ["Idejno rešenje enterijera", "3D vizualizacija ključnih zona", "Konsultantske smernice za realizaciju"],
+    coverImage: "/projects/p3-1.jpg",
+    images: ["/projects/p3-1.jpg", "/projects/p3-2.jpg", "/projects/p3-3.jpg", "/projects/p3-4.jpg"],
     featured: true,
   },
   {
-    slug: "new-belgrade-penthouse",
-    title: "New Belgrade Penthouse",
+    slug: "novi-beograd-76",
+    title: "Novi Beograd – 76 m²",
     location: "Novi Beograd",
     year: 2026,
     category: "Stan",
-    shortDescription: "Penthouse sa panoramskim pogledom i monohromatskom elegancijom.",
+    shortDescription: "Jednosoban stan sa svetlom bazom, kontrolisanim kontrastima i toplim drvenim tonovima.",
     description:
-      "Neutralna osnova, pažljivo dozirani akcenti i rasveta u slojevima daju osećaj hotelskog komfora u privatnom prostoru.",
-    whatWeDid: ["Idejno rešenje", "3D vizualizacija", "Spisak materijala i elemenata"],
-    coverImage: "/projects/p03-01.jpg",
-    images: ["/projects/p03-01.jpg", "/projects/p03-02.jpg", "/projects/p03-03.jpg"],
-    featured: true,
-  },
-  {
-    slug: "zemun-loft-office",
-    title: "Zemun Loft Office",
-    location: "Zemun",
-    year: 2025,
-    category: "Poslovni prostor",
-    shortDescription: "Office koncept sa jasnim identitetom i fokusom na ergonomiju.",
-    description:
-      "Cilj je bio da prostor bude reprezentativan i operativno efikasan: jasne zone, akustika pod kontrolom i materijali koji komuniciraju kvalitet.",
-    whatWeDid: ["Idejno rešenje", "3D vizualizacija", "Dokumentacija i spiskovi"],
-    coverImage: "/projects/p04-01.jpg",
-    images: ["/projects/p04-01.jpg", "/projects/p04-02.jpg", "/projects/p04-03.jpg"],
-    featured: true,
-  },
-  {
-    slug: "fruska-gora-retreat",
-    title: "Fruška Gora Retreat",
-    location: "Fruška Gora",
-    year: 2023,
-    category: "Kuća",
-    shortDescription: "Vikend kuća inspirisana prirodom i tihim ritualima.",
-    description:
-      "Materijali su birani da izdrže vreme i upotrebu: drvo, kamen i teksture koje ostaju relevantne, uz savremenu liniju i diskretnu eleganciju.",
-    whatWeDid: ["Idejno rešenje", "3D vizualizacija", "Orijentacioni budžet i prioritizacija"],
-    coverImage: "/projects/p05-01.jpg",
-    images: ["/projects/p05-01.jpg", "/projects/p05-02.jpg", "/projects/p05-03.jpg"],
-    featured: true,
-  },
-  {
-    slug: "vracar-boutique-clinic",
-    title: "Vračar Boutique Clinic",
-    location: "Vračar",
-    year: 2026,
-    category: "Poslovni prostor",
-    shortDescription: "Boutique klinika sa premium hospitality osećajem.",
-    description:
-      "Dizajn smanjuje stres korisnika i podržava tok osoblja: mirna paleta, kontrolisano svetlo i detalji koji deluju skupo, ali nenametljivo.",
-    whatWeDid: ["Idejno rešenje", "3D vizualizacija", "Finalni paket (PDF + specifikacije)"],
-    coverImage: "/projects/p06-01.jpg",
-    images: ["/projects/p06-01.jpg", "/projects/p06-02.jpg", "/projects/p06-03.jpg"],
+      "Svetao prostor sa jasnom osnovom i pažljivo kontrolisanim kontrastima. U ovom jednosobnom stanu fokus je bio na ravnoteži između topline i elegancije. Tamni tonovi drveta definišu vertikale i daju dubinu prostoru, dok neutralne nijanse frontova i zidova unose lakoću i svetlost.\n\nKuhinja je organizovana linearno sa ostrvom koje postaje centralna tačka – funkcionalna radna zona, ali i mesto okupljanja. Kombinacija mermerne radne ploče i toplog drveta daje sofisticiran, ali nenametljiv karakter.\n\nDnevni boravak oblikovan je oko ugaone garniture u zelenom tonu koja prostoru daje identitet. Upravo ovakvi akcenti omogućavaju fleksibilnost – boja se u budućnosti može promeniti, dok baza enterijera ostaje bezvremenska i stabilna.\n\nSpavaća soba prati istu logiku materijala – drvene obloge, ambijentalno osvetljenje i mirna paleta stvaraju atmosferu odmora, bez vizuelnog zasićenja.\n\nProjektovan kao kompaktan, ali promišljen sistem, ovaj stan pokazuje kako 76 m² može funkcionisati prostrano kada su proporcije, materijali i osvetljenje u ravnoteži.",
+    whatWeDid: ["Idejno rešenje enterijera", "3D vizualizacija ključnih zona", "Konsultantske smernice za realizaciju"],
+    coverImage: "/projects/p4-1.jpg",
+    images: ["/projects/p4-1.jpg", "/projects/p4-2.jpg", "/projects/p4-3.jpg", "/projects/p4-4.jpg"],
     featured: true,
   },
 ];
@@ -131,88 +101,60 @@ type LocalizedProjectEntry = {
 };
 
 const localizedProjectText: Record<string, LocalizedProjectEntry> = {
-  "dorcol-residence": {
+  "novi-sad-102": {
     shortDescription: {
-      en: "Contemporary city apartment with quiet luxury and warm materials.",
-      de: "Zeitgemäßes Stadtapartment mit stillem Luxus und warmen Materialien.",
+      en: "Three-bedroom family apartment with burgundy accents, marble and warm metal details.",
+      de: "Familienwohnung mit drei Schlafzimmern, bordeauxfarbenen Akzenten, Marmor und warmen Metalldetails.",
     },
     description: {
-      en: "The concept focuses on a calm spatial rhythm: a neutral base, warm textures, and precise detailing that delivers editorial quality without excess.",
-      de: "Das Konzept setzt auf einen ruhigen Raumrhythmus: neutrale Basis, warme Texturen und präzise Details, die editoriale Qualität ohne Übermaß schaffen.",
+      en: "This interior was developed as a concept and consulting solution aligned with budget, functional needs and the client’s aesthetic direction. A strong burgundy tone acts as the main accent, balanced with marble, dark wood and stone. Bronze details in lighting and fittings reinforce the refined character. The living zone was intentionally designed without a TV, centered around the fireplace as the key gathering point. The bathroom follows the same line with marble, burgundy elements and warm metallic accents in a compact yet luxurious composition.",
+      de: "Dieses Interieur wurde als konzeptionelle und beratende Lösung entwickelt, abgestimmt auf Budget, funktionale Anforderungen und die ästhetische Richtung des Kunden. Ein kräftiger Bordeaux-Ton bildet den zentralen Akzent und wird mit Marmor, dunklem Holz und Stein ausbalanciert. Bronze-Details in Beleuchtung und Ausstattung unterstreichen den anspruchsvollen Charakter. Der Wohnbereich wurde bewusst ohne TV gestaltet und um den Kamin als zentralen Treffpunkt organisiert. Das Bad folgt derselben Linie mit Marmor, bordeauxfarbenen Elementen und warmen Metallakzenten in einer kompakten, luxuriösen Komposition.",
     },
     whatWeDid: {
-      en: ["Concept design", "3D visualization", "Final package (concept drawings + lists)"],
-      de: ["Konzeptdesign", "3D-Visualisierung", "Finales Paket (Konzeptzeichnungen + Listen)"],
+      en: ["Concept design", "3D visualization of key zones", "Consulting guidelines for implementation"],
+      de: ["Konzeptdesign", "3D-Visualisierung der Kernbereiche", "Beratungsleitlinien für die Umsetzung"],
     },
   },
-  "senjak-villa": {
+  "nis-76": {
     shortDescription: {
-      en: "Family villa with clean lines and a warm palette.",
-      de: "Familienvilla mit klaren Linien und warmer Farbpalette.",
+      en: "Three-bedroom family apartment shaped by balance between function, light and comfort.",
+      de: "Familienwohnung mit drei Schlafzimmern, geprägt von Balance aus Funktion, Licht und Komfort.",
     },
     description: {
-      en: "The space was organized so daily life flows effortlessly, while materials and light build a calm, luxurious atmosphere throughout the day.",
-      de: "Der Raum wurde so organisiert, dass der Alltag reibungslos funktioniert, während Materialien und Licht den ganzen Tag über eine ruhige, luxuriöse Atmosphäre schaffen.",
+      en: "The project focuses on functional balance, natural light and everyday comfort. The living room, dining area and kitchen form one open composition where warm wood textures meet a calm neutral palette. A custom TV wall with vertical wooden cladding and integrated shelving anchors the space, while the fireplace adds atmosphere. The bedroom is designed as a tactile retreat, and the children’s room supports long-term use with functional storage and soft tones.",
+      de: "Das Projekt fokussiert funktionale Balance, Tageslicht und alltäglichen Komfort. Wohnbereich, Esszone und Küche bilden eine offene Einheit, in der warme Holztexturen auf eine ruhige neutrale Palette treffen. Eine TV-Wand mit vertikaler Holzverkleidung und integrierten Regalen bildet den räumlichen Fokus, während der Kamin zusätzliche Atmosphäre schafft. Das Schlafzimmer ist als taktiler Rückzugsort gestaltet, das Kinderzimmer unterstützt langfristige Nutzung mit funktionalem Stauraum und sanften Tönen.",
     },
     whatWeDid: {
-      en: ["Concept design", "3D visualization", "Final package (PDF documentation)"],
-      de: ["Konzeptdesign", "3D-Visualisierung", "Finales Paket (PDF-Dokumentation)"],
+      en: ["Concept design", "3D visualization of key zones", "Consulting guidelines for implementation"],
+      de: ["Konzeptdesign", "3D-Visualisierung der Kernbereiche", "Beratungsleitlinien für die Umsetzung"],
     },
   },
-  "new-belgrade-penthouse": {
+  "beograd-82-master-zona": {
     shortDescription: {
-      en: "Penthouse with panoramic views and monochrome elegance.",
-      de: "Penthouse mit Panoramablick und monochromer Eleganz.",
+      en: "Master zone conceived as one continuous sequence: bedroom, walk-in closet and bathroom.",
+      de: "Master-Zone als durchgängige Sequenz aus Schlafzimmer, Ankleide und Bad.",
     },
     description: {
-      en: "A neutral base, carefully dosed accents and layered lighting create a hotel-like comfort in a private home.",
-      de: "Eine neutrale Basis, gezielt eingesetzte Akzente und mehrschichtige Beleuchtung schaffen hotelähnlichen Komfort im privaten Zuhause.",
+      en: "For us, a master zone is never just a bedroom. It is a continuous sequence of spaces that follows daily rhythm from first morning steps to evening calm. Neutral tones, layered lighting and tactile materials create warmth without visual noise. The walk-in closet continues naturally from the bedroom, preserving light and openness, while the bathroom extends the same language for a refined hotel-like comfort with domestic warmth.",
+      de: "Für uns ist eine Master-Zone nie nur ein Schlafzimmer. Sie ist eine zusammenhängende Raumsequenz, die den Tagesrhythmus vom ersten Morgenmoment bis zur abendlichen Ruhe begleitet. Neutrale Töne, mehrschichtige Beleuchtung und taktile Materialien schaffen Wärme ohne visuelle Unruhe. Die Ankleide setzt den Raumfluss natürlich fort und bewahrt Licht und Offenheit, während das Bad dieselbe Sprache für anspruchsvollen Hotelkomfort mit Wohnlichkeit aufgreift.",
     },
     whatWeDid: {
-      en: ["Concept design", "3D visualization", "Materials and elements list"],
-      de: ["Konzeptdesign", "3D-Visualisierung", "Material- und Elementliste"],
+      en: ["Concept design", "3D visualization of key zones", "Consulting guidelines for implementation"],
+      de: ["Konzeptdesign", "3D-Visualisierung der Kernbereiche", "Beratungsleitlinien für die Umsetzung"],
     },
   },
-  "zemun-loft-office": {
+  "novi-beograd-76": {
     shortDescription: {
-      en: "Office concept with a clear identity and ergonomic focus.",
-      de: "Office-Konzept mit klarer Identität und Ergonomie-Fokus.",
+      en: "One-bedroom apartment with a bright base, controlled contrasts and warm wood tones.",
+      de: "Einzimmerwohnung mit heller Basis, kontrollierten Kontrasten und warmen Holztönen.",
     },
     description: {
-      en: "The goal was to make the space representative and operationally efficient: clear zones, controlled acoustics and materials that communicate quality.",
-      de: "Ziel war ein repräsentativer und operativ effizienter Raum: klare Zonen, kontrollierte Akustik und Materialien, die Qualität vermitteln.",
+      en: "This compact apartment was developed around balance between elegance and warmth. Dark wood tones define verticals and depth, while neutral fronts and wall tones keep the space bright. The linear kitchen with island works as both an operational core and a social point. The living zone uses a green sectional as the key identity accent, while the bedroom follows the same calm material logic with ambient lighting and restrained tones.",
+      de: "Diese kompakte Wohnung wurde auf der Balance zwischen Eleganz und Wärme aufgebaut. Dunkle Holztöne definieren Vertikalen und Tiefe, während neutrale Fronten und Wandtöne den Raum hell halten. Die lineare Küche mit Insel funktioniert als funktionaler Kern und sozialer Mittelpunkt. Der Wohnbereich nutzt ein grünes Sofa als identitätsstiftenden Akzent, während das Schlafzimmer dieselbe ruhige Materiallogik mit Ambientelicht und reduzierter Farbigkeit fortführt.",
     },
     whatWeDid: {
-      en: ["Concept design", "3D visualization", "Documentation and specification lists"],
-      de: ["Konzeptdesign", "3D-Visualisierung", "Dokumentation und Spezifikationslisten"],
-    },
-  },
-  "fruska-gora-retreat": {
-    shortDescription: {
-      en: "Weekend house inspired by nature and quiet rituals.",
-      de: "Wochenendhaus inspiriert von Natur und ruhigen Ritualen.",
-    },
-    description: {
-      en: "Materials were selected for longevity and use: wood, stone and textures that stay relevant, with a contemporary line and discreet elegance.",
-      de: "Die Materialien wurden auf Langlebigkeit und Nutzung abgestimmt: Holz, Stein und Texturen, die zeitlos wirken, mit moderner Linie und diskreter Eleganz.",
-    },
-    whatWeDid: {
-      en: ["Concept design", "3D visualization", "Indicative budget and purchasing priorities"],
-      de: ["Konzeptdesign", "3D-Visualisierung", "Orientierungsbudget und Kaufprioritäten"],
-    },
-  },
-  "vracar-boutique-clinic": {
-    shortDescription: {
-      en: "Boutique clinic with a premium hospitality feel.",
-      de: "Boutique-Klinik mit Premium-Hospitality-Charakter.",
-    },
-    description: {
-      en: "The design reduces user stress and supports staff flow: calm palette, controlled lighting and details that feel premium but understated.",
-      de: "Das Design reduziert Stress bei Nutzern und unterstützt den Ablauf des Teams: ruhige Palette, kontrolliertes Licht und Details, die hochwertig, aber zurückhaltend wirken.",
-    },
-    whatWeDid: {
-      en: ["Concept design", "3D visualization", "Final package (PDF + specifications)"],
-      de: ["Konzeptdesign", "3D-Visualisierung", "Finales Paket (PDF + Spezifikationen)"],
+      en: ["Concept design", "3D visualization of key zones", "Consulting guidelines for implementation"],
+      de: ["Konzeptdesign", "3D-Visualisierung der Kernbereiche", "Beratungsleitlinien für die Umsetzung"],
     },
   },
 };

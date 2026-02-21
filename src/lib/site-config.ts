@@ -34,12 +34,12 @@ export const siteConfig = {
   name: "ÉLÉMENT",
   legalName: "ÉLÉMENT (by M·I·B·T)",
   description:
-    "Premium studio za dizajn enterijera u Beogradu i Pančevu. Projektujemo rezidencijalne i poslovne prostore sa jasnim potpisom elegancije.",
+    "Premium studio za dizajn enterijera. Projektujemo rezidencijalne i poslovne prostore sa jasnim potpisom elegancije.",
   baseUrl: resolvedBaseUrl,
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "https://calendly.com",
   email: "elemet.by.mibt@gamil.com",
   phone: "0659080995",
   instagram: "https://www.instagram.com/element_by_mibt/",
   website: resolvedBaseUrl,
-  location: "Beograd i Pančevo, Srbija",
+  location: "Srbija",
 };

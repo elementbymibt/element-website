@@ -18,7 +18,7 @@ import { buildMetadata } from "@/src/lib/seo";
 export const metadata = buildMetadata({
   title: "Početna",
   description:
-    "ÉLÉMENT (by M·I·B·T) je studio za dizajn enterijera u Beogradu i Pančevu. Definišemo karakter prostora kroz smirenu eleganciju, proporciju i funkciju.",
+    "ÉLÉMENT (by M·I·B·T) je studio za dizajn enterijera koji definiše karakter prostora kroz smirenu eleganciju, proporciju i funkciju.",
   path: "/",
 });
 
@@ -68,9 +68,9 @@ export default async function HomePage() {
             </p>
             <p className="text-brand-neutral-200/90 mt-4 max-w-2xl text-sm">
               {textByLocale(locale, {
-                sr: "Dizajn enterijera za rezidencijalne i poslovne prostore u Beogradu i Pančevu.",
-                en: "Interior design for residential and business spaces in Belgrade and Pančevo.",
-                de: "Interior Design für Wohn- und Geschäftsräume in Belgrad und Pančevo.",
+                sr: "Dizajn enterijera za rezidencijalne i poslovne prostore sa jasnim autorskim potpisom.",
+                en: "Interior design for residential and business spaces with a clear authored signature.",
+                de: "Interior Design für Wohn- und Geschäftsräume mit klarer gestalterischer Handschrift.",
               })}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs tracking-[0.22em] uppercase text-white/80">
