@@ -26,11 +26,6 @@ const nextConfig: NextConfig = {
         destination: "/contact",
         permanent: true,
       },
-      {
-        source: "/projects/:path*",
-        destination: "/contact",
-        permanent: true,
-      },
     ];
   },
   async headers() {
