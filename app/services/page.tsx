@@ -21,32 +21,32 @@ function getCollaborationPhases(locale: SiteLocale) {
     return [
       {
         id: "concept",
-        title: "PHASE 1 – KONZEPT",
+        title: "PHASE 1 - KONZEPT",
         points: [
-          "Erstgespräch und Raumanalyse",
-          "Stil, Atmosphäre und Raumaufteilung",
-          "Moodboard und Materialleitlinien",
-          "Klare Richtung für die nächsten Entscheidungen",
+          "Kick-off nach vollständigen Eingangsdaten",
+          "Stil, Atmosphäre und funktionale Raumlogik",
+          "Konzeptionelles 2D-Layout und Prioritätszonen",
+          "Phasenfreigabe per E-Mail als Basis für den nächsten Schritt",
         ],
       },
       {
         id: "visualization",
-        title: "PHASE 2 – VISUALISIERUNG",
+        title: "PHASE 2 - VISUALISIERUNG",
         points: [
           "3D-Modell und Renderings der Schlüsselbereiche",
-          "Abgleich von Ästhetik und Funktion",
-          "Feinabstimmung von Materialien und Farben",
-          "Zwei gebündelte Korrekturrunden in dieser Phase",
+          "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
+          "Hinweisender Installationsplan (informativ)",
+          "Freigabe dieser Phase vor dem finalen Paket",
         ],
       },
       {
         id: "final",
-        title: "PHASE 3 – FINALES PAKET",
+        title: "PHASE 3 - FINALES PAKET",
         points: [
-          "Konzeptzeichnungen und Schemata (PDF)",
-          "Listen und Spezifikationen (Materialien/Ausstattung)",
-          "Orientierungsbudget und Kaufpriorisierung",
-          "Übergabe für eine sichere Umsetzung",
+          "Konzeptzeichnungen für Maßmöbel (Abmessungen/Aufteilung)",
+          "Ausstattungs- und Materialliste mit Richtpreisen",
+          "Orientierungsbudget pro Raum und Umsetzungsphasen",
+          "Mini-Umsetzungsleitfaden und finale digitale Übergabe",
         ],
       },
     ];
@@ -56,32 +56,32 @@ function getCollaborationPhases(locale: SiteLocale) {
     return [
       {
         id: "concept",
-        title: "PHASE 1 – CONCEPT",
+        title: "PHASE 1 - CONCEPT",
         points: [
-          "Intro meeting and space analysis",
-          "Style, atmosphere and layout",
-          "Moodboard and material guidelines",
-          "Clear direction for next decisions",
+          "Kick-off once core input data is complete",
+          "Style, atmosphere and functional space logic",
+          "Conceptual 2D layout and priority zones",
+          "Email phase approval before moving forward",
         ],
       },
       {
         id: "visualization",
-        title: "PHASE 2 – VISUALIZATION",
+        title: "PHASE 2 - VISUALIZATION",
         points: [
           "3D model and renders of key spaces",
-          "Alignment of aesthetics and function",
-          "Fine tuning of materials and colors",
-          "Two consolidated revisions in this phase",
+          "Two consolidated revisions within the same concept",
+          "Indicative installation layout (informative only)",
+          "Phase approval before final package",
         ],
       },
       {
         id: "final",
-        title: "PHASE 3 – FINAL PACKAGE",
+        title: "PHASE 3 - FINAL PACKAGE",
         points: [
-          "Concept drawings and schemes (PDF)",
-          "Lists and specifications (materials/equipment)",
-          "Indicative budget and purchase priorities",
-          "Handover for confident realization",
+          "Concept furniture drawings (dimensions/divisions)",
+          "Equipment and materials list with indicative prices",
+          "Budget framework by room and phased realization",
+          "Mini realization guide and final digital handover",
         ],
       },
     ];
@@ -90,32 +90,32 @@ function getCollaborationPhases(locale: SiteLocale) {
   return [
     {
       id: "concept",
-      title: "FAZA 1 – KONCEPT",
+      title: "FAZA 1 - KONCEPT",
       points: [
-        "Uvodni razgovor i analiza prostora",
-        "Stil, atmosfera i raspored",
-        "Stilska tabla i smernice materijala",
-        "Jasan pravac za naredne odluke",
+        "Kick-off nakon kompletnih ulaznih podataka",
+        "Stil, atmosfera i funkcionalna logika prostora",
+        "Idejni 2D raspored i prioritetne zone",
+        "Potvrda faze email-om kao osnova za sledeći korak",
       ],
     },
     {
       id: "visualization",
-      title: "FAZA 2 – VIZUELIZACIJA",
+      title: "FAZA 2 - VIZUELIZACIJA",
       points: [
         "3D model i renderi ključnih prostora",
-        "Usklađivanje estetike i funkcije",
-        "Fino podešavanje materijala i boja",
-        "Dve objedinjene korekcije u okviru faze",
+        "Dve objedinjene korekcije unutar istog koncepta",
+        "Pokazni raspored instalacija (informativno)",
+        "Odobrenje faze pre finalnog paketa",
       ],
     },
     {
       id: "final",
-      title: "FAZA 3 – FINALNI PAKET",
+      title: "FAZA 3 - FINALNI PAKET",
       points: [
-        "Idejni crteži i sheme (PDF)",
-        "Spiskovi i specifikacije (materijali/oprema)",
-        "Orijentacioni budžet i prioritizacija kupovine",
-        "Predaja za sigurnu realizaciju",
+        "Idejni crteži nameštaja po meri (gabariti/podela)",
+        "Spisak opreme i materijala sa orijentacionim cenama",
+        "Budžetski okvir po prostorijama i fazna realizacija",
+        "Mini vodič za realizaciju i finalna digitalna predaja",
       ],
     },
   ];
@@ -230,6 +230,29 @@ export default async function ServicesPage() {
               de: "Diese Leistung ist konzeptionell und beratend und stellt kein technisches oder ausführungsreifes Projekt dar.",
             })}
           </p>
+          <ul className="text-brand-earth mt-4 space-y-2 text-sm">
+            <li>
+              {textByLocale(locale, {
+                sr: "Zvanična komunikacija i odobrenja faza vode se email-om.",
+                en: "Official communication and phase approvals are managed via email.",
+                de: "Offizielle Kommunikation und Phasenfreigaben erfolgen per E-Mail.",
+              })}
+            </li>
+            <li>
+              {textByLocale(locale, {
+                sr: "Povratne informacije po fazi šalju se u roku od 3 radna dana kako bi se rokovi održali.",
+                en: "Phase feedback is submitted within 3 business days to keep timelines stable.",
+                de: "Feedback pro Phase erfolgt innerhalb von 3 Werktagen, um den Zeitplan stabil zu halten.",
+              })}
+            </li>
+            <li>
+              {textByLocale(locale, {
+                sr: "Promene koncepta i dodatni zahtevi van ugovorenog opsega ugovaraju se posebno.",
+                en: "Concept changes and requests beyond scope are agreed as additional work.",
+                de: "Konzeptänderungen und zusätzliche Anforderungen außerhalb des Umfangs werden separat vereinbart.",
+              })}
+            </li>
+          </ul>
         </FadeIn>
       </Container>
 

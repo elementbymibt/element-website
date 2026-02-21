@@ -25,9 +25,9 @@ export default async function ProcessPage() {
           eyebrow={textByLocale(locale, { sr: "Proces", en: "Process", de: "Ablauf" })}
           title={textByLocale(locale, { sr: "Kako radimo", en: "How we work", de: "Wie wir arbeiten" })}
           description={textByLocale(locale, {
-            sr: "Proces je linearan i transparentan: od uvodnog razgovora do finalnog paketa smernica za realizaciju, uz jasno definisane faze i odgovornosti.",
-            en: "The process is linear and transparent: from brief to final guidance package, with clearly defined phases and responsibilities.",
-            de: "Der Ablauf ist linear und transparent: vom Erstgespräch bis zum finalen Leitfadenpaket mit klar definierten Phasen und Verantwortlichkeiten.",
+            sr: "Proces je linearan i transparentan: od uvodnog razgovora do finalnog paketa, uz jasno definisane faze, email odobrenja i realan tok odluka.",
+            en: "The process is linear and transparent: from kick-off to final package, with clear phases, email approvals and a realistic decision flow.",
+            de: "Der Ablauf ist linear und transparent: vom Kick-off bis zum finalen Paket, mit klaren Phasen, E-Mail-Freigaben und realistischem Entscheidungsfluss.",
           })}
         />
       </FadeIn>
@@ -82,6 +82,29 @@ export default async function ProcessPage() {
             de: "Die Leistung ist konzeptionell und beratend: sie umfasst Konzept, Visualisierung und finale Umsetzungsleitlinien. Technische Planung, Ausführung und Bauaufsicht sind nicht Teil dieses Umfangs.",
           })}
         </p>
+        <ul className="text-brand-earth mt-4 space-y-2 text-sm">
+          <li>
+            {textByLocale(locale, {
+              sr: "Povratne informacije po fazi dostavljaju se u roku od 3 radna dana.",
+              en: "Feedback for each phase is submitted within 3 business days.",
+              de: "Feedback pro Phase wird innerhalb von 3 Werktagen übermittelt.",
+            })}
+          </li>
+          <li>
+            {textByLocale(locale, {
+              sr: "Odobrenja faza i ključne izmene važe kroz pismenu (email) komunikaciju.",
+              en: "Phase approvals and key changes are valid through written (email) communication.",
+              de: "Phasenfreigaben und zentrale Änderungen gelten über schriftliche (E-Mail-)Kommunikation.",
+            })}
+          </li>
+          <li>
+            {textByLocale(locale, {
+              sr: "Promena koncepta nakon odobrenja faze tretira se kao dodatni opseg.",
+              en: "A concept change after phase approval is treated as additional scope.",
+              de: "Eine Konzeptänderung nach Phasenfreigabe gilt als zusätzlicher Umfang.",
+            })}
+          </li>
+        </ul>
         <Link
           href="/contact"
           className="text-brand-burgundy decoration-brand-gold mt-5 inline-flex items-center text-sm font-semibold underline underline-offset-4"

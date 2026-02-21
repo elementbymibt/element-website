@@ -98,8 +98,8 @@ export default async function AboutPage() {
           </p>
           <p className="text-brand-earth mt-4 max-w-4xl text-sm leading-7 md:text-base">
             {textByLocale(locale, {
-              sr: "Svaki projekat gradimo kroz pažljivo vođen proces — od ideje do realizacije.",
-              en: "Each project is built through a carefully guided process — from idea to realization.",
+              sr: "Svaki projekat gradimo kroz pažljivo vođen proces - od ideje do realizacije.",
+              en: "Each project is built through a carefully guided process - from idea to realization.",
               de: "Jedes Projekt entsteht in einem sorgfältig geführten Prozess – von der Idee bis zur Umsetzung.",
             })}
           </p>

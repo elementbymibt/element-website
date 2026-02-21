@@ -275,7 +275,7 @@ class ResendAdapter implements LeadAdapter {
         body: JSON.stringify({
           from: "ÉLÉMENT Studio <onboarding@resend.dev>",
           to: payload.email,
-          subject: "Hvala na prijavi — ÉLÉMENT",
+          subject: "Hvala na prijavi - ÉLÉMENT",
           text: confirmationText,
         }),
       });

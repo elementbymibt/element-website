@@ -95,7 +95,7 @@ export async function notifyIntakeSubmitted(input: {
         body: JSON.stringify({
           from: "ÉLÉMENT Studio <onboarding@resend.dev>",
           to: clientEmail,
-          subject: "Hvala na upitniku — ÉLÉMENT",
+          subject: "Hvala na upitniku - ÉLÉMENT",
           text: userText,
         }),
       });

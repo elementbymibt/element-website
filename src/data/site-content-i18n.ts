@@ -21,10 +21,10 @@ const servicePackagesEn: ServicePackage[] = [
     subtitle: "PHASE 1",
     idealFor: "To set a clear project direction before major decisions.",
     includes: [
-      "Intro brief and space analysis",
-      "Concept layout and functional zones",
-      "Moodboard: materials, tones and atmosphere",
-      "Guidelines for next decisions",
+      "Kick-off after complete input data",
+      "Style, atmosphere and functional space logic",
+      "Conceptual 2D layout and priority zones",
+      "Email phase approval as a base for next steps",
     ],
   },
   {
@@ -34,9 +34,9 @@ const servicePackagesEn: ServicePackage[] = [
     idealFor: "To gain confidence before implementation and align the final aesthetic.",
     includes: [
       "3D model and renders of key spaces",
-      "Material, color and lighting alignment",
-      "Two consolidated revision rounds in this phase",
-      "Final validation of design decisions",
+      "Two consolidated revisions within the same concept",
+      "Indicative installation layout (informative only)",
+      "Phase approval before final package",
     ],
   },
   {
@@ -45,10 +45,10 @@ const servicePackagesEn: ServicePackage[] = [
     subtitle: "PHASE 3",
     idealFor: "For a clear concept package and documentation for confident execution.",
     includes: [
-      "Concept drawings and schemes (PDF)",
-      "Lists and specifications (indicative)",
-      "Budget framework and purchase prioritization (indicative)",
-      "Handover and consistency guidelines",
+      "Concept furniture drawings (dimensions/divisions)",
+      "Equipment and materials list (indicative prices)",
+      "Budget framework by room and phased realization",
+      "Mini guide and final digital handover",
     ],
   },
 ];
@@ -99,38 +99,38 @@ const faqItemsEn: FaqItem[] = [
 const processStepsEn: ProcessStep[] = [
   {
     title: "Consultation",
-    short: "Understanding your lifestyle, priorities and budget framework.",
+    short: "Kick-off, input data review and scope definition.",
     deliverables: [
       "Kick-off call and structured project brief",
-      "Review of available plans and dimensions",
+      "Review of plans, dimensions and existing state",
       "Scope confirmation and phase roadmap",
     ],
   },
   {
     title: "Concept",
-    short: "Defining spatial identity, atmosphere and core logic.",
+    short: "Defining spatial identity and functional logic.",
     deliverables: [
-      "Functional layout and movement logic",
+      "Conceptual 2D layout and priority zones",
       "Style direction, palette and material moodboard",
-      "Concept alignment before 3D development",
+      "Email concept approval before 3D development",
     ],
   },
   {
     title: "Development",
-    short: "3D visualization and concept documentation.",
+    short: "3D visualization and concept refinement.",
     deliverables: [
       "3D model and renders of key zones",
-      "Concept furniture drawings and install guidance",
-      "Indicative specification list and budget framework",
+      "Two consolidated revisions within the same concept",
+      "Indicative installation layout (informative only)",
     ],
   },
   {
     title: "Realization",
-    short: "Consultative support during implementation.",
+    short: "Final package and consultative support during realization.",
     deliverables: [
-      "Final package: concept drawings, lists and phase guide",
-      "Consultative coordination on key implementation decisions",
-      "Final concept-consistency check (without technical supervision)",
+      "Final package: concept drawings, lists and budget framework",
+      "Phased realization plan and mini implementation guide",
+      "Consultative support without technical supervision",
     ],
   },
 ];
@@ -186,10 +186,10 @@ const servicePackagesDe: ServicePackage[] = [
     subtitle: "PHASE 1",
     idealFor: "Für eine klare Projektrichtung vor großen Entscheidungen.",
     includes: [
-      "Einführungsbriefing und Raumanalyse",
-      "Konzept-Layout und Funktionszonen",
-      "Moodboard: Materialien, Tonalität und Atmosphäre",
-      "Leitlinien für weitere Entscheidungen",
+      "Kick-off nach vollständigen Eingangsdaten",
+      "Stil, Atmosphäre und funktionale Raumlogik",
+      "Konzeptionelles 2D-Layout und Prioritätszonen",
+      "Phasenfreigabe per E-Mail als Basis für den nächsten Schritt",
     ],
   },
   {
@@ -199,9 +199,9 @@ const servicePackagesDe: ServicePackage[] = [
     idealFor: "Für Sicherheit vor der Umsetzung und abgestimmte finale Ästhetik.",
     includes: [
       "3D-Modell und Renderings der Schlüsselbereiche",
-      "Abstimmung von Materialien, Farben und Licht",
-      "Zwei gebündelte Korrekturrunden in dieser Phase",
-      "Finale Bestätigung der Designentscheidungen",
+      "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
+      "Hinweisender Installationsplan (informativ)",
+      "Phasenfreigabe vor dem finalen Paket",
     ],
   },
   {
@@ -210,10 +210,10 @@ const servicePackagesDe: ServicePackage[] = [
     subtitle: "PHASE 3",
     idealFor: "Für ein klares Konzeptpaket und sichere Umsetzungsdokumentation.",
     includes: [
-      "Konzeptzeichnungen und Schemata (PDF)",
-      "Listen und Spezifikationen (orientierend)",
-      "Budgetrahmen und Einkaufspriorisierung (orientierend)",
-      "Übergabe und Leitlinien für konsistente Umsetzung",
+      "Konzept-Möbelzeichnungen (Abmessungen/Aufteilung)",
+      "Ausstattungs- und Materialliste (Richtpreise)",
+      "Budgetrahmen pro Raum und Umsetzungsphasen",
+      "Mini-Guide und finale digitale Übergabe",
     ],
   },
 ];
@@ -264,38 +264,38 @@ const faqItemsDe: FaqItem[] = [
 const processStepsDe: ProcessStep[] = [
   {
     title: "Konsultation",
-    short: "Verständnis Ihres Lebensstils, Ihrer Prioritäten und Ihres Budgetrahmens.",
+    short: "Kick-off, Eingangsdaten und klare Umfangsdefinition.",
     deliverables: [
       "Kick-off-Gespräch und strukturiertes Projektbriefing",
-      "Review vorhandener Pläne und Maße",
+      "Prüfung von Plänen, Maßen und Bestand",
       "Bestätigung des Umfangs und Phasen-Roadmap",
     ],
   },
   {
     title: "Konzept",
-    short: "Definition der Raumidentität, Atmosphäre und Kernlogik.",
+    short: "Definition von Raumidentität und funktionaler Logik.",
     deliverables: [
-      "Funktionales Layout und Bewegungslogik",
+      "Konzeptionelles 2D-Layout und Prioritätszonen",
       "Stilrichtung, Palette und Material-Moodboard",
-      "Konzeptabstimmung vor der 3D-Ausarbeitung",
+      "E-Mail-Freigabe vor der 3D-Ausarbeitung",
     ],
   },
   {
     title: "Ausarbeitung",
-    short: "3D-Visualisierung und konzeptionelle Dokumentation.",
+    short: "3D-Visualisierung und konzeptionelle Ausarbeitung.",
     deliverables: [
       "3D-Modell und Renderings der Schlüsselzonen",
-      "Konzept-Möbelzeichnungen und Einbauleitlinien",
-      "Orientierende Spezifikationsliste und Budgetrahmen",
+      "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
+      "Hinweisende Installationspositionen (informativ)",
     ],
   },
   {
     title: "Umsetzung",
-    short: "Beratende Unterstützung während der Realisierung.",
+    short: "Finales Paket und beratende Unterstützung in der Umsetzung.",
     deliverables: [
-      "Finales Paket: Konzeptzeichnungen, Listen und Phasenleitfaden",
-      "Strategische Abstimmung zentraler Umsetzungsentscheidungen",
-      "Finaler Konzept-Konsistenzcheck (ohne technische Bauaufsicht)",
+      "Finales Paket: Konzeptzeichnungen, Listen und Budgetrahmen",
+      "Umsetzungsphasen und Mini-Guide für die Realisierung",
+      "Beratende Unterstützung ohne technische Bauaufsicht",
     ],
   },
 ];

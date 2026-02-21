@@ -855,9 +855,9 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                     {tx("Kontakt", "Contact")}
                   </p>
                   <p className="text-brand-ink mt-2 text-sm">
-                    {draft.client.fullName || "—"}
+                    {draft.client.fullName || "-"}
                   </p>
-                  <p className="text-brand-earth text-sm">{draft.client.email || "—"}</p>
+                  <p className="text-brand-earth text-sm">{draft.client.email || "-"}</p>
                   {draft.client.phone?.trim() ? (
                     <p className="text-brand-earth text-sm">{draft.client.phone}</p>
                   ) : null}
@@ -872,7 +872,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                       : propertyTypeOptions.find((x) => x.id === draft.basics.propertyType)?.en}
                   </p>
                   <p className="text-brand-earth text-sm">
-                    {draft.basics.city || "—"}
+                    {draft.basics.city || "-"}
                   </p>
                   <p className="text-brand-earth text-sm">
                     {tx("Tačne mere:", "Accurate measurements:")}{" "}
@@ -906,7 +906,7 @@ export function IntakeWizardLite({ initialIntake }: { initialIntake: IntakeDraft
                         if (!found) return id;
                         return locale === "sr" ? found.title.sr : found.title.en;
                       })
-                      .join(", ") || "—"}
+                      .join(", ") || "-"}
                   </p>
                 </div>
                 {draft.notes?.trim() ? (

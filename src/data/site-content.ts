@@ -20,10 +20,10 @@ export const servicePackages: ServicePackage[] = [
     subtitle: "FAZA 1",
     idealFor: "Za jasan pravac projekta pre velikih odluka.",
     includes: [
-      "Uvodni razgovor i analiza prostora",
-      "Koncept rasporeda i funkcionalne zone",
-      "Stilska tabla: materijali, tonalitet, atmosfera",
-      "Smernice za dalje odluke",
+      "Kick-off nakon kompletnih ulaznih podataka",
+      "Stil, atmosfera i funkcionalna logika prostora",
+      "Idejni 2D raspored i prioritetne zone",
+      "Potvrda faze email-om kao osnova za dalji rad",
     ],
   },
   {
@@ -33,9 +33,9 @@ export const servicePackages: ServicePackage[] = [
     idealFor: "Za sigurnost pre realizacije i finalno usklađivanje estetike.",
     includes: [
       "3D model i renderi ključnih prostora",
-      "Usklađivanje materijala, boja i rasvete",
-      "Dve objedinjene korekcije u okviru faze",
-      "Finalna potvrda dizajnerskih odluka",
+      "Dve objedinjene korekcije unutar istog koncepta",
+      "Pokazni raspored instalacija (informativno)",
+      "Potvrda faze pre finalnog paketa",
     ],
   },
   {
@@ -44,10 +44,10 @@ export const servicePackages: ServicePackage[] = [
     subtitle: "FAZA 3",
     idealFor: "Za jasan idejni set smernica i dokumentaciju za sigurnu realizaciju.",
     includes: [
-      "Idejni crteži i sheme (PDF)",
-      "Spiskovi i specifikacije (orijentaciono)",
-      "Budžetski okvir i prioritizacija kupovine (orijentaciono)",
-      "Predaja i smernice za doslednu realizaciju",
+      "Idejni crteži nameštaja po meri (gabariti/podela)",
+      "Spiskovi opreme i materijala (orijentacione cene)",
+      "Budžetski okvir po prostorijama i fazna realizacija",
+      "Mini vodič i finalna digitalna predaja",
     ],
   },
 ];
@@ -125,38 +125,38 @@ export const faqItems = [
 export const processSteps = [
   {
     title: "Konsultacije",
-    short: "Razumevanje načina života, prioriteta i budžetskog okvira.",
+    short: "Kick-off, ulazni podaci i jasno definisanje opsega.",
     deliverables: [
-      "Uvodni sastanak i strukturisan razgovor",
-      "Pregled dostupnih planova i mera prostora",
+      "Uvodni sastanak i strukturisan brief",
+      "Pregled planova, mera i postojećeg stanja",
       "Definisanje opsega i plana rada po fazama",
     ],
   },
   {
     title: "Koncept",
-    short: "Definisanje identiteta prostora i glavnog dizajn pravca.",
+    short: "Definisanje identiteta prostora i funkcionalne logike.",
     deliverables: [
-      "Funkcionalni raspored i logika korišćenja",
+      "Idejni 2D raspored i prioritetne zone",
       "Stil, paleta i moodboard materijala",
-      "Usaglašavanje koncepta pre 3D razrade",
+      "Email potvrda koncepta pre 3D razrade",
     ],
   },
   {
     title: "Razrada",
-    short: "3D vizuelizacija i idejna dokumentacija.",
+    short: "3D vizuelizacija i idejna razrada ključnih elemenata.",
     deliverables: [
       "3D model i renderi ključnih zona",
-      "Idejni crteži i pokazne pozicije instalacija",
-      "Orijentacioni spiskovi i budžetski okvir",
+      "Dve objedinjene korekcije u istom konceptu",
+      "Pokazne pozicije instalacija (informativno)",
     ],
   },
   {
     title: "Realizacija",
-    short: "Konsultantska podrška tokom realizacije.",
+    short: "Finalni paket i konsultantska podrška tokom realizacije.",
     deliverables: [
-      "Finalni paket: crteži, spiskovi i fazna realizacija",
-      "Konsultativna koordinacija ključnih odluka",
-      "Završna kontrola usklađenosti sa konceptom (bez tehničkog nadzora)",
+      "Finalni paket: idejni crteži, spiskovi i budžetski okvir",
+      "Fazna realizacija i mini vodič za realizaciju",
+      "Konsultantska podrška bez tehničkog nadzora i izvođenja",
     ],
   },
 ];

@@ -36,9 +36,9 @@ export default async function TermsPage() {
         </h2>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
-            sr: "Naša usluga je idejna i konsultantska: definišemo karakter prostora, atmosferu, ključne materijale i smernice koje omogućavaju sigurnu realizaciju.",
-            en: "Our service is conceptual and consultative: we define the space’s character, atmosphere, key materials and guidance that enables confident realization.",
-            de: "Unsere Leistung ist konzeptionell und beratend: wir definieren den Charakter des Raums, die Atmosphäre, zentrale Materialien und Leitlinien für eine sichere Umsetzung.",
+            sr: "Naša usluga je idejna i konsultantska: obuhvata koncept, idejni 2D raspored, 3D vizuelizaciju, pokazni raspored instalacija (informativno), idejne crteže po meri i finalni paket smernica.",
+            en: "Our service is conceptual and consultative: it includes concept direction, conceptual 2D layout, 3D visualization, indicative installation layout, concept furniture drawings and a final guidance package.",
+            de: "Unsere Leistung ist konzeptionell und beratend: sie umfasst Konzeptentwicklung, konzeptionelles 2D-Layout, 3D-Visualisierung, hinweisenden Installationsplan, konzeptionelle Möbelzeichnungen und ein finales Leitfadenpaket.",
           })}
         </p>
 
@@ -47,9 +47,9 @@ export default async function TermsPage() {
         </h2>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
-            sr: "U okviru standardnog procesa uključene su dve objedinjene korekcije po fazi (kada je korekcija dogovorena kao deo isporuke). Cilj je da svaka korekcija bude jasna, fokusirana i da stvarno unapredi rezultat.",
-            en: "The standard process includes two consolidated revision rounds per phase (when revisions are part of the agreed deliverable). The goal is clarity, focus and real improvement.",
-            de: "Im Standardprozess sind zwei gebündelte Korrekturrunden pro Phase enthalten (wenn Korrekturen Teil der vereinbarten Lieferung sind). Ziel ist Klarheit, Fokus und echte Verbesserung.",
+            sr: "U okviru standardnog procesa uključene su dve objedinjene korekcije unutar istog koncepta. Promena koncepta (stil, pravac ili logika rešenja) nakon odobrene faze tretira se kao dodatni opseg.",
+            en: "The standard process includes two consolidated revision rounds within the same concept. A concept change (style, direction or core logic) after phase approval is treated as additional scope.",
+            de: "Im Standardprozess sind zwei gebündelte Korrekturrunden innerhalb desselben Konzepts enthalten. Eine Konzeptänderung (Stil, Richtung oder Kernlogik) nach Phasenfreigabe gilt als zusätzlicher Umfang.",
           })}
         </p>
 
@@ -58,9 +58,20 @@ export default async function TermsPage() {
         </h2>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
-            sr: "Sve što je van dogovorenog opsega (dodatne prostorije, varijante, iteracije ili proširenja dokumentacije) definiše se unapred i ugovara posebno, uz jasan okvir isporuka.",
-            en: "Anything outside the agreed scope (additional rooms, variants, iterations or expanded documentation) is defined upfront and agreed separately with clear deliverables.",
-            de: "Alles außerhalb des vereinbarten Umfangs (zusätzliche Räume, Varianten, Iterationen oder erweiterte Dokumentation) wird vorab definiert und separat mit klaren Lieferpunkten vereinbart.",
+            sr: "Sve što je van dogovorenog opsega (dodatne prostorije, dodatni renderi, dodatne iteracije, dodatni izlazak na teren, dodatna dokumentacija) definiše se unapred i ugovara posebno.",
+            en: "Anything outside the agreed scope (additional rooms, extra renders, extra iterations, additional site visits, expanded documentation) is defined upfront and agreed separately.",
+            de: "Alles außerhalb des vereinbarten Umfangs (zusätzliche Räume, zusätzliche Renderings, zusätzliche Iterationen, weitere Vor-Ort-Termine, erweiterte Dokumentation) wird vorab definiert und separat vereinbart.",
+          })}
+        </p>
+
+        <h2 className="font-display text-brand-burgundy mt-10 text-3xl">
+          {textByLocale(locale, { sr: "Vizuelizacije i realizacija", en: "Visuals and realization", de: "Visualisierung und Umsetzung" })}
+        </h2>
+        <p className="text-brand-earth mt-4">
+          {textByLocale(locale, {
+            sr: "Renderi predstavljaju vizuelno-idejni prikaz. Finalni izgled realizacije može odstupati u odnosu na render zbog realnog osvetljenja, serije materijala, dostupnosti proizvoda i kvaliteta izvođenja.",
+            en: "Renders represent a visual-concept interpretation. The final realized result may vary due to real lighting, material batches, product availability and execution quality.",
+            de: "Renderings sind eine visuell-konzeptionelle Darstellung. Das finale umgesetzte Ergebnis kann aufgrund von realem Licht, Materialchargen, Produktverfügbarkeit und Ausführungsqualität abweichen.",
           })}
         </p>
 
@@ -69,9 +80,9 @@ export default async function TermsPage() {
         </h2>
         <p className="text-brand-earth mt-4">
           {textByLocale(locale, {
-            sr: "Rokovi zavise od obima i brzine donošenja odluka. Nakon uvodnog razgovora definišemo realan plan po fazama, tako da proces ostane miran, precizan i predvidiv.",
-            en: "Timelines depend on scope and decision speed. After an intro call, we define a realistic phase plan so the process stays calm, precise and predictable.",
-            de: "Zeitpläne hängen von Umfang und Entscheidungsgeschwindigkeit ab. Nach dem Erstgespräch definieren wir einen realistischen Phasenplan, damit der Prozess ruhig, präzise und planbar bleibt.",
+            sr: "Zvanična komunikacija i odobrenja faza vode se email-om. Povratne informacije po fazi dostavljaju se u roku od 3 radna dana kako bi rokovi ostali stabilni i predvidivi.",
+            en: "Official communication and phase approvals are managed via email. Phase feedback is delivered within 3 business days to keep timelines stable and predictable.",
+            de: "Offizielle Kommunikation und Phasenfreigaben erfolgen per E-Mail. Feedback pro Phase wird innerhalb von 3 Werktagen übermittelt, damit der Zeitplan stabil und planbar bleibt.",
           })}
         </p>
 
