@@ -144,7 +144,7 @@ export const processSteps = [
   },
   {
     title: "Razrada",
-    short: "3D vizuelizacija i idejna razrada ključnih elemenata.",
+    short: "3D modeliranje i idejna razrada ključnih elemenata.",
     deliverables: [
       "3D model ključnih zona",
       "Dve objedinjene korekcije u istom konceptu",
@@ -188,25 +188,11 @@ export const caseStudy = {
 
 export const promoOffers = [
   {
-    title: "Prolećni paket konsultacija",
-    subtitle: "90-min premium sesija + mini koncept",
+    title: "15 minuta besplatne konsultacije",
+    subtitle: "Kratak uvodni razgovor bez obaveze",
     details:
-      "Za nove klijente: detaljna konsultacija, funkcionalni predlog i lista prioritetnih intervencija.",
-    badge: "Ograničeno",
-  },
-  {
-    title: "-10% za rezervacije do 30.04.",
-    subtitle: "Za Full Design i Premium Turn-Key",
-    details:
-      "Popust se odnosi na ugovore zaključene do navedenog datuma, uz standardne faze i uslove realizacije.",
+      "Rezervišite termin i dobićete jasan predlog sledećih koraka za vaš projekat.",
     badge: "Aktuelno",
-  },
-  {
-    title: "Audit poslovnog prostora",
-    subtitle: "Brza procena potencijala prostora",
-    details:
-      "Intenzivni audit za kancelarije i retail: dijagnostika prostora + 3 strateške preporuke.",
-    badge: "Novo",
   },
 ];
 

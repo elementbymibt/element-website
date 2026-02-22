@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { BookingLink } from "@/src/components/ui/booking-link";
 import { Container } from "@/src/components/ui/container";
 import { FadeIn } from "@/src/components/ui/fade-in";
@@ -61,17 +59,6 @@ export default async function PromoPage() {
               className="px-7 py-3 text-sm"
             />
           </div>
-
-          <Link
-            href="/contact"
-            className="text-brand-burgundy decoration-brand-gold mt-4 inline-flex text-xs font-semibold underline underline-offset-4"
-          >
-            {textByLocale(locale, {
-              sr: "Imate pitanje pre rezervacije?",
-              en: "Have a question before booking?",
-              de: "Frage vor der Buchung?",
-            })}
-          </Link>
         </article>
       </FadeIn>
     </Container>

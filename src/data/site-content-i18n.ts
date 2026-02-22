@@ -118,7 +118,7 @@ const processStepsEn: ProcessStep[] = [
   },
   {
     title: "Development",
-    short: "3D visualization and concept refinement.",
+    short: "3D modeling and concept refinement.",
     deliverables: [
       "3D model of key zones",
       "Two consolidated revisions within the same concept",
@@ -152,25 +152,11 @@ const testimonialsEn: Testimonial[] = [
 
 const promoOffersEn: PromoOffer[] = [
   {
-    title: "Spring consultation package",
-    subtitle: "90-minute premium session + mini concept",
+    title: "15-minute free consultation",
+    subtitle: "Short intro call with no obligation",
     details:
-      "For new clients: a detailed consultation, functional direction and a priority intervention list.",
-    badge: "Limited",
-  },
-  {
-    title: "-10% for bookings by 30.04.",
-    subtitle: "For Full Design and Premium Turn-Key",
-    details:
-      "The discount applies to agreements confirmed by the listed date, under standard phases and collaboration terms.",
+      "Book your slot and get a clear proposal for the next steps of your project.",
     badge: "Active",
-  },
-  {
-    title: "Business Space Audit",
-    subtitle: "Fast potential assessment",
-    details:
-      "Intensive audit for offices and retail: space diagnosis plus 3 strategic recommendations.",
-    badge: "New",
   },
 ];
 
@@ -285,7 +271,7 @@ const processStepsDe: ProcessStep[] = [
   },
   {
     title: "Ausarbeitung",
-    short: "3D-Visualisierung und konzeptionelle Ausarbeitung.",
+    short: "3D-Modellierung und konzeptionelle Ausarbeitung.",
     deliverables: [
       "3D-Modell der Schlüsselzonen",
       "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
@@ -319,25 +305,11 @@ const testimonialsDe: Testimonial[] = [
 
 const promoOffersDe: PromoOffer[] = [
   {
-    title: "Frühlingspaket für Beratungen",
-    subtitle: "90-Minuten-Premium-Session + Mini-Konzept",
+    title: "15 Minuten kostenlose Beratung",
+    subtitle: "Kurzes Erstgespräch ohne Verpflichtung",
     details:
-      "Für neue Kunden: detaillierte Beratung, funktionale Richtung und Prioritätenliste für Eingriffe.",
-    badge: "Limitiert",
-  },
-  {
-    title: "-10% für Buchungen bis 30.04.",
-    subtitle: "Für Full Design und Premium Turn-Key",
-    details:
-      "Der Rabatt gilt für bestätigte Vereinbarungen bis zum genannten Datum unter Standardphasen und Zusammenarbeitsbedingungen.",
+      "Buchen Sie einen Termin und erhalten Sie einen klaren Vorschlag für die nächsten Projektschritte.",
     badge: "Aktiv",
-  },
-  {
-    title: "Business Space Audit",
-    subtitle: "Schnelle Potenzialanalyse",
-    details:
-      "Intensiver Audit für Büros und Retail: Raumdiagnose plus 3 strategische Empfehlungen.",
-    badge: "Neu",
   },
 ];
 
