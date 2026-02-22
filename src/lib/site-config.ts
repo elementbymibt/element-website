@@ -37,7 +37,7 @@ export const siteConfig = {
     "Premium studio za dizajn enterijera. Projektujemo rezidencijalne i poslovne prostore sa jasnim potpisom elegancije.",
   baseUrl: resolvedBaseUrl,
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "https://calendly.com",
-  email: "elemet.by.mibt@gamil.com",
+  email: "element.by.mibt@gmail.com",
   phone: "0659080995",
   instagram: "https://www.instagram.com/element_by_mibt/",
   website: resolvedBaseUrl,

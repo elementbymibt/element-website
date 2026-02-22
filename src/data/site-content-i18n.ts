@@ -33,7 +33,7 @@ const servicePackagesEn: ServicePackage[] = [
     subtitle: "PHASE 2",
     idealFor: "To gain confidence before implementation and align the final aesthetic.",
     includes: [
-      "3D model and renders of key spaces",
+      "3D model of key spaces",
       "Two consolidated revisions within the same concept",
       "Indicative installation layout (informative only)",
       "Phase approval before final package",
@@ -45,6 +45,7 @@ const servicePackagesEn: ServicePackage[] = [
     subtitle: "PHASE 3",
     idealFor: "For a clear concept package and documentation for confident execution.",
     includes: [
+      "Final 3D renders of key scenes",
       "Concept furniture drawings (dimensions/divisions)",
       "Equipment and materials list (indicative prices)",
       "Budget framework by room and phased realization",
@@ -119,7 +120,7 @@ const processStepsEn: ProcessStep[] = [
     title: "Development",
     short: "3D visualization and concept refinement.",
     deliverables: [
-      "3D model and renders of key zones",
+      "3D model of key zones",
       "Two consolidated revisions within the same concept",
       "Indicative installation layout (informative only)",
     ],
@@ -128,6 +129,7 @@ const processStepsEn: ProcessStep[] = [
     title: "Realization",
     short: "Final package and consultative support during realization.",
     deliverables: [
+      "Final 3D renders with closing documentation",
       "Final package: concept drawings, lists and budget framework",
       "Phased realization plan and mini implementation guide",
       "Consultative support without technical supervision",
@@ -198,7 +200,7 @@ const servicePackagesDe: ServicePackage[] = [
     subtitle: "PHASE 2",
     idealFor: "Für Sicherheit vor der Umsetzung und abgestimmte finale Ästhetik.",
     includes: [
-      "3D-Modell und Renderings der Schlüsselbereiche",
+      "3D-Modell der Schlüsselbereiche",
       "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
       "Hinweisender Installationsplan (informativ)",
       "Phasenfreigabe vor dem finalen Paket",
@@ -210,6 +212,7 @@ const servicePackagesDe: ServicePackage[] = [
     subtitle: "PHASE 3",
     idealFor: "Für ein klares Konzeptpaket und sichere Umsetzungsdokumentation.",
     includes: [
+      "Finale 3D-Renderings der wichtigsten Szenen",
       "Konzept-Möbelzeichnungen (Abmessungen/Aufteilung)",
       "Ausstattungs- und Materialliste (Richtpreise)",
       "Budgetrahmen pro Raum und Umsetzungsphasen",
@@ -284,7 +287,7 @@ const processStepsDe: ProcessStep[] = [
     title: "Ausarbeitung",
     short: "3D-Visualisierung und konzeptionelle Ausarbeitung.",
     deliverables: [
-      "3D-Modell und Renderings der Schlüsselzonen",
+      "3D-Modell der Schlüsselzonen",
       "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
       "Hinweisende Installationspositionen (informativ)",
     ],
@@ -293,6 +296,7 @@ const processStepsDe: ProcessStep[] = [
     title: "Umsetzung",
     short: "Finales Paket und beratende Unterstützung in der Umsetzung.",
     deliverables: [
+      "Finale 3D-Renderings mit Abschlussdokumentation",
       "Finales Paket: Konzeptzeichnungen, Listen und Budgetrahmen",
       "Umsetzungsphasen und Mini-Guide für die Realisierung",
       "Beratende Unterstützung ohne technische Bauaufsicht",

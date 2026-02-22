@@ -33,7 +33,7 @@ function getCollaborationPhases(locale: SiteLocale) {
         id: "visualization",
         title: "PHASE 2 - VISUALISIERUNG",
         points: [
-          "3D-Modell und Renderings der Schlüsselbereiche",
+          "3D-Modell der Schlüsselbereiche",
           "Zwei gebündelte Korrekturen innerhalb desselben Konzepts",
           "Hinweisender Installationsplan (informativ)",
           "Freigabe dieser Phase vor dem finalen Paket",
@@ -43,6 +43,7 @@ function getCollaborationPhases(locale: SiteLocale) {
         id: "final",
         title: "PHASE 3 - FINALES PAKET",
         points: [
+          "Finale 3D-Renderings der wichtigsten Ansichten",
           "Konzeptzeichnungen für Maßmöbel (Abmessungen/Aufteilung)",
           "Ausstattungs- und Materialliste mit Richtpreisen",
           "Orientierungsbudget pro Raum und Umsetzungsphasen",
@@ -68,7 +69,7 @@ function getCollaborationPhases(locale: SiteLocale) {
         id: "visualization",
         title: "PHASE 2 - VISUALIZATION",
         points: [
-          "3D model and renders of key spaces",
+          "3D model of key spaces",
           "Two consolidated revisions within the same concept",
           "Indicative installation layout (informative only)",
           "Phase approval before final package",
@@ -78,6 +79,7 @@ function getCollaborationPhases(locale: SiteLocale) {
         id: "final",
         title: "PHASE 3 - FINAL PACKAGE",
         points: [
+          "Final 3D renders of key scenes",
           "Concept furniture drawings (dimensions/divisions)",
           "Equipment and materials list with indicative prices",
           "Budget framework by room and phased realization",
@@ -102,7 +104,7 @@ function getCollaborationPhases(locale: SiteLocale) {
       id: "visualization",
       title: "FAZA 2 - VIZUELIZACIJA",
       points: [
-        "3D model i renderi ključnih prostora",
+        "3D model ključnih prostora",
         "Dve objedinjene korekcije unutar istog koncepta",
         "Pokazni raspored instalacija (informativno)",
         "Odobrenje faze pre finalnog paketa",
@@ -112,6 +114,7 @@ function getCollaborationPhases(locale: SiteLocale) {
       id: "final",
       title: "FAZA 3 - FINALNI PAKET",
       points: [
+        "Finalni 3D renderi ključnih kadrova",
         "Idejni crteži nameštaja po meri (gabariti/podela)",
         "Spisak opreme i materijala sa orijentacionim cenama",
         "Budžetski okvir po prostorijama i fazna realizacija",

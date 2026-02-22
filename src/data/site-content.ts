@@ -32,7 +32,7 @@ export const servicePackages: ServicePackage[] = [
     subtitle: "FAZA 2",
     idealFor: "Za sigurnost pre realizacije i finalno usklađivanje estetike.",
     includes: [
-      "3D model i renderi ključnih prostora",
+      "3D model ključnih prostora",
       "Dve objedinjene korekcije unutar istog koncepta",
       "Pokazni raspored instalacija (informativno)",
       "Potvrda faze pre finalnog paketa",
@@ -44,6 +44,7 @@ export const servicePackages: ServicePackage[] = [
     subtitle: "FAZA 3",
     idealFor: "Za jasan idejni set smernica i dokumentaciju za sigurnu realizaciju.",
     includes: [
+      "Finalni 3D renderi ključnih kadrova",
       "Idejni crteži nameštaja po meri (gabariti/podela)",
       "Spiskovi opreme i materijala (orijentacione cene)",
       "Budžetski okvir po prostorijama i fazna realizacija",
@@ -145,7 +146,7 @@ export const processSteps = [
     title: "Razrada",
     short: "3D vizuelizacija i idejna razrada ključnih elemenata.",
     deliverables: [
-      "3D model i renderi ključnih zona",
+      "3D model ključnih zona",
       "Dve objedinjene korekcije u istom konceptu",
       "Pokazne pozicije instalacija (informativno)",
     ],
@@ -154,6 +155,7 @@ export const processSteps = [
     title: "Realizacija",
     short: "Finalni paket i konsultantska podrška tokom realizacije.",
     deliverables: [
+      "Finalni 3D renderi uz završnu dokumentaciju",
       "Finalni paket: idejni crteži, spiskovi i budžetski okvir",
       "Fazna realizacija i mini vodič za realizaciju",
       "Konsultantska podrška bez tehničkog nadzora i izvođenja",
